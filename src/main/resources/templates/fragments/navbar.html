@@ -2,25 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-    <header th:fragment="navbar" class="site-header">
-        <a class="brand" th:href="@{/}">
-            <span class="brand-mark">K</span>
-            <span>
+<header th:fragment="navbar" class="navbar">
+    <div class="navbar__inner">
+        <a class="navbar__brand" th:href="@{/}">
+            <span class="navbar__logo-mark">KƯV</span>
+            <span class="navbar__brand-text">
                 <strong>Ký Ức Vàng</strong>
-                <small>Golden Memories</small>
+                <small>Lưu giữ câu chuyện gia đình</small>
             </span>
         </a>
-        <nav class="site-nav">
-            <a th:href="@{/about}">About</a>
-            <a th:href="@{/product}">Product</a>
-            <a th:href="@{/process}">Process</a>
-            <a th:href="@{/contact}">Contact</a>
-            <!-- Show Dashboard link when logged in, Login button when not -->
-            <a sec:authorize="isAuthenticated()"
-               class="nav-cta" th:href="@{/dashboard}">Dashboard</a>
-            <a sec:authorize="isAnonymous()"
-               class="nav-cta" th:href="@{/login}">Login</a>
+        <nav class="navbar__nav">
+            <a th:href="@{/product}">Dịch vụ</a>
+            <a th:href="@{/process}">Quy trình</a>
+            <a th:href="@{/about}">Về chúng tôi</a>
+            <a th:href="@{/contact}">Liên hệ</a>
         </nav>
-    </header>
+        <div class="navbar__actions">
+            <a sec:authorize="isAuthenticated()"
+               class="btn btn-gold btn-sm" th:href="@{/dashboard}">Bảng điều khiển</a>
+            <a sec:authorize="isAnonymous()"
+               class="btn btn-outline-nav btn-sm" th:href="@{/login}">Đăng nhập</a>
+            <a sec:authorize="isAnonymous()"
+               class="btn btn-gold btn-sm" th:href="@{/contact}">Tư vấn miễn phí</a>
+        </div>
+    </div>
+</header>
 </body>
 </html>

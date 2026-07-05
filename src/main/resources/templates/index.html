@@ -1,72 +1,207 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Ký Ức Vàng | Home')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Ký Ức Vàng | Lưu Giữ Câu Chuyện Của Bố Mẹ')}"></head>
 <body>
-<div class="page-shell">
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main>
-        <section class="hero">
-            <div class="hero-copy">
-                <p class="eyebrow">Hybrid memoir platform</p>
-                <h1>Preserve family stories through a guided digital and printed experience.</h1>
-                <p class="lead">A Spring Boot MVC website for the Ký Ức Vàng product, combining parent storytelling, AI transcription, photo restoration, secure archives, and final book publishing.</p>
-                <div class="hero-actions">
-                    <a class="button button-primary" th:href="@{/register}">Start a project</a>
-                    <a class="button button-secondary" th:href="@{/process}">See the flow</a>
-                </div>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
+<section class="hero-v2">
+    <div class="hero-v2__overlay"></div>
+    <div class="hero-v2__content">
+        <div class="hero-v2__text">
+            <p class="hero-eyebrow">Nền tảng hồi ký gia đình</p>
+            <h1 class="hero-v2__title">
+                Câu chuyện cuộc đời<br>
+                <span class="hero-v2__title--gold">của Bố &amp; Mẹ</span>
+            </h1>
+            <p class="hero-v2__sub">
+                Ký Ức Vàng giúp bạn lưu giữ giọng nói, hình ảnh và ký ức của cha mẹ thành một cuốn hồi ký in đẹp —
+                trước khi thời gian cuốn trôi tất cả.
+            </p>
+            <div class="hero-v2__actions">
+                <a class="btn btn-gold" th:href="@{/contact}">Tư vấn miễn phí</a>
+                <a class="btn btn-outline" th:href="@{/process}">Xem quy trình</a>
             </div>
-            <div class="hero-card glass-card">
-                <h2>Product stack</h2>
-                <ul class="check-list">
-                    <li>Child-facing dashboard and approval flow</li>
-                    <li>Parent storytelling via Zalo-based prompts</li>
-                    <li>AI voice transcription and image restoration</li>
-                    <li>Cloud archive, QR security, and printed memoir output</li>
+        </div>
+        <div class="hero-v2__cta-card">
+            <p class="cta-card__eyebrow">Nhận tư vấn miễn phí</p>
+            <h2 class="cta-card__title">Bắt đầu hành trình hồi ký</h2>
+            <p class="cta-card__sub">Chuyên viên sẽ liên hệ với bạn sớm nhất.</p>
+            <form th:action="@{/contact}" method="get" class="cta-card__form">
+                <input type="text" name="fullName" placeholder="Họ và tên" />
+                <input type="text" name="phone" placeholder="Số điện thoại" />
+                <input type="email" name="email" placeholder="Email (nếu có)" />
+                <button class="btn btn-gold" type="submit">Nhận tư vấn miễn phí →</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ── SOCIAL PROOF BAR ───────────────────────────────────────────────────── -->
+<section class="trust-bar">
+    <div class="trust-bar__inner">
+        <div class="trust-item">
+            <span class="trust-num">500+</span>
+            <span class="trust-label">Gia đình tin tưởng</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-num">4.9★</span>
+            <span class="trust-label">Đánh giá trung bình</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-num">3 gói</span>
+            <span class="trust-label">Phù hợp mọi nhu cầu</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+            <span class="trust-num">AI</span>
+            <span class="trust-label">Chuyển giọng nói thành văn bản</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────────────────────── -->
+<section class="section-pad bg-cream">
+    <div class="container">
+        <div class="section-label">
+            <p class="eyebrow-dark">Quy trình</p>
+            <h2 class="section-title">Từ câu chuyện đến cuốn sách — chỉ 4 bước</h2>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <h3>Đăng ký &amp; kết nối</h3>
+                <p>Con cái đăng ký dịch vụ, nhập thông tin bố mẹ và kết nối tài khoản Zalo của bố mẹ với hệ thống.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <h3>Bố mẹ kể chuyện qua Zalo</h3>
+                <p>Hệ thống tự động gửi câu hỏi gợi nhớ qua Zalo. Bố mẹ chỉ cần nhấn nút mic và kể — không cần gõ phím.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <h3>AI xử lý &amp; biên tập</h3>
+                <p>Giọng nói được chuyển thành văn bản, ảnh cũ được phục hồi. Biên tập viên chỉnh sửa và gửi bản thảo để bạn duyệt.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <h3>Nhận sách &amp; lưu trữ đám mây</h3>
+                <p>Cuốn hồi ký bìa cứng thêu gấm được giao tận nhà. Toàn bộ giọng nói gốc được lưu trên đám mây bảo mật.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────────────────────────── -->
+<section class="section-pad">
+    <div class="container">
+        <div class="section-label">
+            <p class="eyebrow-dark">Tính năng nổi bật</p>
+            <h2 class="section-title">Công nghệ phục vụ ký ức gia đình</h2>
+        </div>
+        <div class="features-grid">
+            <article class="feature-card" th:each="feature : ${features}">
+                <div class="feature-icon">✦</div>
+                <h3 th:text="${feature.title()}">Tính năng</h3>
+                <p th:text="${feature.description()}">Mô tả</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ── PACKAGES ───────────────────────────────────────────────────────────── -->
+<section class="section-pad bg-cream">
+    <div class="container">
+        <div class="section-label">
+            <p class="eyebrow-dark">Gói dịch vụ</p>
+            <h2 class="section-title">Chọn hành trình phù hợp với gia đình bạn</h2>
+        </div>
+        <div class="packages-grid">
+            <div class="pkg-card">
+                <p class="pkg-tag">Gói Khởi Đầu</p>
+                <h3 class="pkg-name">Express</h3>
+                <p class="pkg-duration">15 ngày</p>
+                <p class="pkg-price">999.000 ₫</p>
+                <ul class="pkg-features">
+                    <li>50–70 câu hỏi qua Zalo</li>
+                    <li>100 trang in màu</li>
+                    <li>Phục hồi tối đa 5 ảnh cũ</li>
                 </ul>
+                <a class="btn btn-outline-dark" th:href="@{/contact}">Đăng ký ngay</a>
             </div>
-        </section>
+            <div class="pkg-card pkg-card--featured">
+                <p class="pkg-tag pkg-tag--gold">Phổ biến nhất</p>
+                <h3 class="pkg-name">Bonding</h3>
+                <p class="pkg-duration">1 tháng</p>
+                <p class="pkg-price">3.000.000 ₫</p>
+                <ul class="pkg-features">
+                    <li>100–150 câu hỏi</li>
+                    <li>200 trang bìa cứng thêu gấm</li>
+                    <li>Phục hồi tối đa 5 ảnh cũ</li>
+                    <li>File âm thanh gốc</li>
+                    <li>Mã QR bảo mật ẩn</li>
+                </ul>
+                <a class="btn btn-gold" th:href="@{/contact}">Đăng ký ngay</a>
+            </div>
+            <div class="pkg-card">
+                <p class="pkg-tag">Gói Trọn Đời</p>
+                <h3 class="pkg-name">Companion</h3>
+                <p class="pkg-duration">1 năm</p>
+                <p class="pkg-price">36.500.000 ₫</p>
+                <ul class="pkg-features">
+                    <li>Câu hỏi không giới hạn</li>
+                    <li>Trang sách không giới hạn</li>
+                    <li>Phục hồi 20–25 ảnh cũ</li>
+                    <li>Toàn bộ file âm thanh gốc</li>
+                    <li>Bảo tàng ký ức số trên đám mây</li>
+                </ul>
+                <a class="btn btn-outline-dark" th:href="@{/contact}">Đăng ký ngay</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <section class="section">
-            <div class="section-heading">
-                <p class="eyebrow">Core features</p>
-                <h2>Built for the technical flow the project requires</h2>
+<!-- ── USE CASES / ROLES ──────────────────────────────────────────────────── -->
+<section class="section-pad">
+    <div class="container split-section">
+        <div class="split-text">
+            <p class="eyebrow-dark">Dành cho ai?</p>
+            <h2 class="section-title">Mỗi thành viên một vai trò</h2>
+            <div class="roles-stack">
+                <div class="role-item" th:each="useCase : ${useCases}">
+                    <h4 th:text="${useCase.actor()}">Vai trò</h4>
+                    <p th:text="${useCase.description()}">Mô tả</p>
+                </div>
             </div>
-            <div class="card-grid">
-                <article class="info-card" th:each="feature : ${features}">
-                    <h3 th:text="${feature.title()}">Feature</h3>
-                    <p th:text="${feature.description()}">Description</p>
-                </article>
-            </div>
-        </section>
+        </div>
+        <div class="split-card glass-card-v2">
+            <p class="eyebrow-dark">Hành trình</p>
+            <h2>Từ trang đầu đến trang cuối</h2>
+            <ol class="journey-list">
+                <li th:each="step : ${flowSteps}">
+                    <strong th:text="${step.title()}">Bước</strong>
+                    <span th:text="${step.description()}">Mô tả</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
 
-        <section class="section split">
-            <div>
-                <div class="section-heading">
-                    <p class="eyebrow">Use cases</p>
-                    <h2>Role-driven interactions</h2>
-                </div>
-                <div class="stack">
-                    <article class="stack-card" th:each="useCase : ${useCases}">
-                        <h3 th:text="${useCase.actor()}">Actor</h3>
-                        <p th:text="${useCase.description()}">Description</p>
-                    </article>
-                </div>
-            </div>
-            <div class="timeline-panel glass-card">
-                <div class="section-heading compact">
-                    <p class="eyebrow">Screen flow</p>
-                    <h2>From landing to publishing</h2>
-                </div>
-                <ol class="timeline">
-                    <li th:each="step : ${flowSteps}">
-                        <strong th:text="${step.title()}">Step</strong>
-                        <span th:text="${step.description()}">Description</span>
-                    </li>
-                </ol>
-            </div>
-        </section>
-    </main>
-    <div th:replace="~{fragments/footer :: footer}"></div>
-</div>
+<!-- ── CTA BANNER ─────────────────────────────────────────────────────────── -->
+<section class="cta-banner">
+    <div class="container cta-banner__inner">
+        <div>
+            <h2>Đừng để thời gian cuốn trôi những câu chuyện của bố mẹ.</h2>
+            <p>Bắt đầu ngay hôm nay — miễn phí tư vấn, không ràng buộc.</p>
+        </div>
+        <a class="btn btn-gold btn-lg" th:href="@{/register}">Tạo dự án ngay</a>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

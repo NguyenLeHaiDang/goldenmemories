@@ -1,8 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <footer th:fragment="footer" class="site-footer">
-        <p>Built on Spring Boot, Thymeleaf, and MVC for the Ký Ức Vàng product experience.</p>
-    </footer>
+<footer th:fragment="footer" class="site-footer-v2">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <span class="navbar__logo-mark">KƯV</span>
+            <p><strong>Ký Ức Vàng</strong></p>
+            <p class="footer-tagline">Câu chuyện cuộc đời của Bố &amp; Mẹ</p>
+        </div>
+        <div class="footer-links">
+            <p class="footer-heading">Dịch vụ</p>
+            <a th:href="@{/product}">Gói dịch vụ</a>
+            <a th:href="@{/process}">Quy trình làm việc</a>
+            <a th:href="@{/about}">Về chúng tôi</a>
+        </div>
+        <div class="footer-links">
+            <p class="footer-heading">Tài khoản</p>
+            <a th:href="@{/register}">Đăng ký</a>
+            <a th:href="@{/login}">Đăng nhập</a>
+            <a th:href="@{/contact}">Liên hệ tư vấn</a>
+        </div>
+        <div class="footer-contact">
+            <p class="footer-heading">Liên hệ</p>
+            <p>Email: info@kyucvang.vn</p>
+            <p>Zalo: 0912 345 678</p>
+            <p>FPT University, Hà Nội</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Ký Ức Vàng. Nền tảng hồi ký gia đình được xây dựng trên Spring Boot &amp; Thymeleaf.</p>
+    </div>
+</footer>
 </body>
 </html>
