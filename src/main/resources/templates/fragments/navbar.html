@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+    <header th:fragment="navbar" class="site-header">
+        <a class="brand" th:href="@{/}">
+            <span class="brand-mark">K</span>
+            <span>
+                <strong>Ký Ức Vàng</strong>
+                <small>Golden Memories</small>
+            </span>
+        </a>
+        <nav class="site-nav">
+            <a th:href="@{/about}">About</a>
+            <a th:href="@{/product}">Product</a>
+            <a th:href="@{/process}">Process</a>
+            <a th:href="@{/contact}">Contact</a>
+            <!-- Show Dashboard link when logged in, Login button when not -->
+            <a sec:authorize="isAuthenticated()"
+               class="nav-cta" th:href="@{/dashboard}">Dashboard</a>
+            <a sec:authorize="isAnonymous()"
+               class="nav-cta" th:href="@{/login}">Login</a>
+        </nav>
+    </header>
+</body>
+</html>

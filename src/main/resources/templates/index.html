@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Ký Ức Vàng | Home')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main>
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Hybrid memoir platform</p>
+                <h1>Preserve family stories through a guided digital and printed experience.</h1>
+                <p class="lead">A Spring Boot MVC website for the Ký Ức Vàng product, combining parent storytelling, AI transcription, photo restoration, secure archives, and final book publishing.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" th:href="@{/register}">Start a project</a>
+                    <a class="button button-secondary" th:href="@{/process}">See the flow</a>
+                </div>
+            </div>
+            <div class="hero-card glass-card">
+                <h2>Product stack</h2>
+                <ul class="check-list">
+                    <li>Child-facing dashboard and approval flow</li>
+                    <li>Parent storytelling via Zalo-based prompts</li>
+                    <li>AI voice transcription and image restoration</li>
+                    <li>Cloud archive, QR security, and printed memoir output</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Core features</p>
+                <h2>Built for the technical flow the project requires</h2>
+            </div>
+            <div class="card-grid">
+                <article class="info-card" th:each="feature : ${features}">
+                    <h3 th:text="${feature.title()}">Feature</h3>
+                    <p th:text="${feature.description()}">Description</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section split">
+            <div>
+                <div class="section-heading">
+                    <p class="eyebrow">Use cases</p>
+                    <h2>Role-driven interactions</h2>
+                </div>
+                <div class="stack">
+                    <article class="stack-card" th:each="useCase : ${useCases}">
+                        <h3 th:text="${useCase.actor()}">Actor</h3>
+                        <p th:text="${useCase.description()}">Description</p>
+                    </article>
+                </div>
+            </div>
+            <div class="timeline-panel glass-card">
+                <div class="section-heading compact">
+                    <p class="eyebrow">Screen flow</p>
+                    <h2>From landing to publishing</h2>
+                </div>
+                <ol class="timeline">
+                    <li th:each="step : ${flowSteps}">
+                        <strong th:text="${step.title()}">Step</strong>
+                        <span th:text="${step.description()}">Description</span>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

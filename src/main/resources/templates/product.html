@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Product | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+        <section class="content-hero">
+            <p class="eyebrow">Product scope</p>
+            <h1>The website product is a guided memoir service platform</h1>
+            <p class="lead">It coordinates the family project, not just a brochure site. Adult children manage the journey, parents provide stories, and the system handles transcription, restoration, security, and publishing.</p>
+        </section>
+        <section class="two-col">
+            <article class="prose-card">
+                <h2>Primary modules</h2>
+                <ul class="check-list">
+                    <li>Registration and parent connection</li>
+                    <li>Progress dashboard</li>
+                    <li>Media vault and chapter sorting</li>
+                    <li>Transcript review and editing</li>
+                    <li>Security panel for private memories</li>
+                    <li>Draft approval and publishing</li>
+                </ul>
+            </article>
+            <article class="prose-card accent">
+                <h2>Integration points</h2>
+                <ul class="check-list">
+                    <li>Google login</li>
+                    <li>Facebook login</li>
+                    <li>SMTP OTP mail</li>
+                    <li>AI transcription service</li>
+                    <li>Image restoration service</li>
+                    <li>Cloud storage and QR generation</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Verify Email | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="auth-layout">
+        <section class="auth-card">
+            <p class="eyebrow">Verify email</p>
+            <h1>Enter your code</h1>
+
+            <!-- Success banner after resend -->
+            <div class="alert alert-success" th:if="${otpResent}">
+                A new code has been sent to your email.
+            </div>
+            <!-- Info banner after registration -->
+            <div class="alert alert-info" th:if="${otpSent}">
+                We sent a 6-digit code to
+                <strong th:text="${otpForm?.email}">your email</strong>.
+                It expires in 10 minutes.
+            </div>
+
+            <form th:action="@{/otp}" method="post" th:object="${otpForm}" class="form-stack">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <label>
+                    Email
+                    <input type="email" th:field="*{email}" placeholder="you@example.com"
+                           th:classappend="${#fields.hasErrors('email')} ? 'input-error'" />
+                    <span class="field-error" th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}"></span>
+                </label>
+
+                <label>
+                    Verification code
+                    <input type="text" th:field="*{code}" placeholder="6-digit code"
+                           maxlength="6" autocomplete="one-time-code"
+                           th:classappend="${#fields.hasErrors('code')} ? 'input-error'" />
+                    <span class="field-error" th:if="${#fields.hasErrors('code')}"
+                          th:errors="*{code}"></span>
+                </label>
+
+                <button class="button button-primary" type="submit">Verify &amp; continue</button>
+            </form>
+
+            <form th:action="@{/otp/resend}" method="post" class="resend-form">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" class="link-button">Resend code</button>
+            </form>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

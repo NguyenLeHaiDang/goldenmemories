@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Project | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+
+        <!-- Header -->
+        <section class="content-hero dashboard-hero">
+            <div>
+                <p class="eyebrow">
+                    <a th:href="@{/dashboard}">Dashboard</a> &rsaquo; Project
+                </p>
+                <h1 th:text="${project.title}">Project title</h1>
+                <p class="lead">
+                    Package:
+                    <strong th:text="${project.selectedPackage}">STANDARD</strong>
+                    &nbsp;·&nbsp; Phase:
+                    <strong th:text="${project.currentPhase.name().replace('_',' ')}">ONBOARDING</strong>
+                    &nbsp;·&nbsp; Created:
+                    <strong th:text="${project.createdAt}">date</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Flash -->
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+        <!-- Two-col content -->
+        <div class="two-col" style="align-items: start; gap: 24px;">
+
+            <!-- Stories -->
+            <section>
+                <div class="section-heading">
+                    <p class="eyebrow">Stories</p>
+                    <h2>Collected memories</h2>
+                </div>
+                <div th:if="${#lists.isEmpty(stories)}" class="prose-card">
+                    <p>No stories collected yet. Stories will appear here once the parent begins answering prompts.</p>
+                </div>
+                <div class="stack" th:unless="${#lists.isEmpty(stories)}">
+                    <article class="stack-card" th:each="story : ${stories}">
+                        <h3 th:text="${story.promptQuestion}">Prompt</h3>
+                        <p>
+                            <span class="badge" th:text="${story.lifeStage}">STAGE</span>
+                            <span class="badge" th:text="${story.status}">STATUS</span>
+                        </p>
+                        <p th:if="${story.editedContent != null}"
+                           th:text="${#strings.abbreviate(story.editedContent, 160)}">excerpt</p>
+                        <p th:if="${story.editedContent == null and story.rawTranscript != null}"
+                           class="muted-text"
+                           th:text="${#strings.abbreviate(story.rawTranscript, 160)}">transcript</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Photos + Approvals -->
+            <div class="stack">
+
+                <!-- Photos -->
+                <section>
+                    <div class="section-heading">
+                        <p class="eyebrow">Photos</p>
+                        <h2>Media vault</h2>
+                    </div>
+                    <div class="prose-card" th:if="${#lists.isEmpty(photos)}">
+                        <p>No photos uploaded yet.</p>
+                    </div>
+                    <div class="stack" th:unless="${#lists.isEmpty(photos)}">
+                        <article class="stack-card" th:each="photo : ${photos}">
+                            <h3 th:text="${photo.originalFilename}">filename</h3>
+                            <p>
+                                <span class="badge" th:text="${photo.restorationStatus}">ORIGINAL</span>
+                                <span th:if="${photo.chapterTag}" class="badge"
+                                      th:text="${photo.chapterTag}">chapter</span>
+                            </p>
+                            <p th:if="${photo.caption}" th:text="${photo.caption}" class="muted-text">caption</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Approvals -->
+                <section>
+                    <div class="section-heading">
+                        <p class="eyebrow">Draft review</p>
+                        <h2>Approval history</h2>
+                    </div>
+                    <div class="prose-card" th:if="${#lists.isEmpty(approvals)}">
+                        <p>No draft submissions yet.</p>
+                    </div>
+                    <div class="stack" th:unless="${#lists.isEmpty(approvals)}">
+                        <article class="stack-card" th:each="approval : ${approvals}">
+                            <h3>Draft <span th:text="${approval.draftVersion}">v1</span></h3>
+                            <p><span class="badge" th:text="${approval.decision}">PENDING</span></p>
+                            <p th:if="${approval.comments}" th:text="${approval.comments}" class="muted-text">comments</p>
+                        </article>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

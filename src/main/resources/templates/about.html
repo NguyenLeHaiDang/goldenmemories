@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('About | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+        <section class="content-hero">
+            <p class="eyebrow">About the build</p>
+            <h1>MVC foundation for a legacy-preservation platform</h1>
+            <p class="lead">This site is scaffolded to support the product architecture you outlined: a family onboarding experience, parent storytelling flow, AI services, cloud security, and publishing.</p>
+        </section>
+        <section class="prose-card">
+            <h2>Architecture</h2>
+            <p>The site follows the MVC pattern with controllers for page routing, simple model records for page content, Thymeleaf views for rendering, and static CSS/JS for the client experience.</p>
+            <p>The next natural step is to connect persistence, user accounts, OAuth sign-in, and OTP mail delivery to live infrastructure once your keys are ready.</p>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

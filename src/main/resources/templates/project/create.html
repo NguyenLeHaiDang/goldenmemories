@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('New Project | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="auth-layout">
+        <section class="auth-card wide">
+            <p class="eyebrow">Start a memoir</p>
+            <h1>Create a project</h1>
+
+            <form th:action="@{/project/new}" method="post"
+                  th:object="${projectForm}" class="form-stack">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <label>
+                    Project title
+                    <input type="text" th:field="*{title}"
+                           placeholder="e.g. Mẹ's Life Story"
+                           th:classappend="${#fields.hasErrors('title')} ? 'input-error'" />
+                    <span class="field-error" th:if="${#fields.hasErrors('title')}"
+                          th:errors="*{title}"></span>
+                </label>
+
+                <fieldset class="package-fieldset">
+                    <legend>Choose a package</legend>
+                    <div class="package-grid">
+                        <label th:each="pkg : ${packages}"
+                               class="package-option"
+                               th:classappend="${pkg.name() == 'STANDARD'} ? 'package-option--featured'">
+                            <input type="radio" th:field="*{selectedPackage}" th:value="${pkg}" />
+                            <span class="package-name" th:text="${pkg.name()}">PACKAGE</span>
+                            <span class="package-desc" th:switch="${pkg.name()}">
+                                <span th:case="'BASIC'">Core story collection and a softcover memoir.</span>
+                                <span th:case="'STANDARD'">Full editing, photo restoration, and hardcover print.</span>
+                                <span th:case="'PREMIUM'">Everything plus QR archive and priority delivery.</span>
+                            </span>
+                        </label>
+                    </div>
+                    <span class="field-error" th:if="${#fields.hasErrors('selectedPackage')}"
+                          th:errors="*{selectedPackage}"></span>
+                </fieldset>
+
+                <button class="button button-primary" type="submit">Create project</button>
+            </form>
+
+            <div class="auth-links">
+                <a th:href="@{/dashboard}">Back to dashboard</a>
+            </div>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

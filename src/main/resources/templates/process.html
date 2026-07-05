@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Process | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+        <section class="content-hero">
+            <p class="eyebrow">Screen flow</p>
+            <h1>Landing page to publishing workflow</h1>
+            <p class="lead">This page documents the intended MVC product flow so we can build the backend and the front-end screens around the same journey.</p>
+        </section>
+        <section class="flow-grid">
+            <article class="flow-card">
+                <h2>1. Discovery</h2>
+                <p>Users land on the site, learn the value of the service, and request a consultation or choose a package.</p>
+            </article>
+            <article class="flow-card">
+                <h2>2. Account setup</h2>
+                <p>The purchaser creates an account, connects parent details, and receives OTP verification through email.</p>
+            </article>
+            <article class="flow-card">
+                <h2>3. Project workspace</h2>
+                <p>The dashboard hosts progress tracking, media upload, transcription review, security controls, and draft approval.</p>
+            </article>
+            <article class="flow-card">
+                <h2>4. Delivery</h2>
+                <p>When the memoir is approved, the system supports print output, secure cloud archive, and QR-based access.</p>
+            </article>
+        </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

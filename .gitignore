@@ -1,0 +1,19 @@
+target/
+*.class
+*.jar
+*.war
+
+.idea/
+.vscode/
+*.iml
+
+*.log
+*.tmp
+
+# Secrets – never commit these
+.env
+application-local.properties
+
+# OS
+.DS_Store
+Thumbs.db
