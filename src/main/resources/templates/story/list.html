@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Stories | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+
+        <section class="content-hero dashboard-hero">
+            <div>
+                <p class="eyebrow">
+                    <a th:href="@{/dashboard}">Dashboard</a> &rsaquo;
+                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo;
+                    Stories
+                </p>
+                <h1 th:text="${project.title}">Project</h1>
+                <p class="lead">Manage story prompts, transcripts, and editorial review.</p>
+            </div>
+            <a class="button button-secondary"
+               th:href="@{/project/__${project.id}__/approval/submit}">Submit draft</a>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+        <!-- Add prompt form -->
+        <section class="prose-card" style="margin-bottom: 24px;">
+            <h2>Add a story prompt</h2>
+            <form th:action="@{/project/__${project.id}__/story/prompt}" method="post"
+                  th:object="${storyPromptForm}" class="form-stack">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="two-col" style="gap: 14px; align-items: start;">
+                    <label>
+                        Prompt question
+                        <input type="text" th:field="*{promptQuestion}"
+                               placeholder="e.g. What is your earliest childhood memory?"
+                               th:classappend="${#fields.hasErrors('promptQuestion')} ? 'input-error'" />
+                        <span class="field-error" th:if="${#fields.hasErrors('promptQuestion')}"
+                              th:errors="*{promptQuestion}"></span>
+                    </label>
+                    <label>
+                        Life stage
+                        <select th:field="*{lifeStage}"
+                                th:classappend="${#fields.hasErrors('lifeStage')} ? 'input-error'">
+                            <option value="">— Select —</option>
+                            <option th:each="stage : ${lifeStages}"
+                                    th:value="${stage}"
+                                    th:text="${stage.name().replace('_',' ')}">STAGE</option>
+                        </select>
+                        <span class="field-error" th:if="${#fields.hasErrors('lifeStage')}"
+                              th:errors="*{lifeStage}"></span>
+                    </label>
+                </div>
+                <div>
+                    <button class="button button-primary" type="submit">Add prompt</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Story list -->
+        <div th:if="${#lists.isEmpty(stories)}" class="prose-card">
+            <p>No prompts yet. Add the first one above to start the story collection.</p>
+        </div>
+
+        <div class="story-table" th:unless="${#lists.isEmpty(stories)}">
+            <div class="story-row story-row--header">
+                <span>Prompt</span>
+                <span>Stage</span>
+                <span>Status</span>
+                <span>Actions</span>
+            </div>
+            <div class="story-row" th:each="story : ${stories}">
+                <span class="story-prompt" th:text="${story.promptQuestion}">Prompt</span>
+                <span>
+                    <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
+                </span>
+                <span>
+                    <span th:class="'badge badge-status-' + ${story.status.name().toLowerCase()}"
+                          th:text="${story.status}">STATUS</span>
+                </span>
+                <span class="story-actions">
+                    <!-- Transcript: show for PENDING or RECEIVED -->
+                    <a th:if="${story.status.name() == 'PENDING' or story.status.name() == 'RECEIVED'}"
+                       class="button button-secondary btn-sm"
+                       th:href="@{/project/__${project.id}__/story/__${story.id}__/transcript}">
+                        Transcript
+                    </a>
+                    <!-- Edit: show for TRANSCRIBED or EDITED -->
+                    <a th:if="${story.status.name() == 'TRANSCRIBED' or story.status.name() == 'EDITED'}"
+                       class="button button-secondary btn-sm"
+                       th:href="@{/project/__${project.id}__/story/__${story.id}__/edit}">
+                        Edit
+                    </a>
+                    <!-- Approve: show for EDITED -->
+                    <form th:if="${story.status.name() == 'EDITED'}" style="display:inline;"
+                          th:action="@{/project/__${project.id}__/story/__${story.id}__/approve}"
+                          method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="button button-primary btn-sm" type="submit">Approve</button>
+                    </form>
+                    <!-- Revise: show for EDITED or APPROVED -->
+                    <form th:if="${story.status.name() == 'EDITED' or story.status.name() == 'APPROVED'}"
+                          style="display:inline;"
+                          th:action="@{/project/__${project.id}__/story/__${story.id}__/revise}"
+                          method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="button button-secondary btn-sm" type="submit">Revise</button>
+                    </form>
+                </span>
+            </div>
+        </div>
+
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

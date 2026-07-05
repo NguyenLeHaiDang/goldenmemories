@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Edit Story | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+
+        <section class="content-hero">
+            <p class="eyebrow">
+                <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Edit
+            </p>
+            <h1>Edit story</h1>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+        <!-- Prompt info + raw transcript side-by-side with the edit form -->
+        <div class="two-col" style="align-items: start; gap: 24px;">
+
+            <!-- Left: source material -->
+            <div class="stack">
+                <div class="prose-card">
+                    <h2>Prompt</h2>
+                    <p th:text="${story.promptQuestion}">question</p>
+                    <p>
+                        <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
+                        <span th:class="'badge badge-status-' + ${story.status.name().toLowerCase()}"
+                              th:text="${story.status}">STATUS</span>
+                    </p>
+                </div>
+                <div class="prose-card" th:if="${story.rawTranscript != null}">
+                    <h2>Raw transcript</h2>
+                    <p class="muted-text" style="white-space: pre-wrap;"
+                       th:text="${story.rawTranscript}">transcript</p>
+                </div>
+            </div>
+
+            <!-- Right: edit form -->
+            <section class="prose-card">
+                <h2>Edited version</h2>
+                <form th:action="@{/project/__${project.id}__/story/__${story.id}__/edit}"
+                      method="post" th:object="${storyEditForm}" class="form-stack">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                    <label>
+                        Polished content
+                        <textarea th:field="*{editedContent}" rows="14"
+                                  placeholder="Edit and polish the story here..."
+                                  th:classappend="${#fields.hasErrors('editedContent')} ? 'input-error'"></textarea>
+                        <span class="field-error" th:if="${#fields.hasErrors('editedContent')}"
+                              th:errors="*{editedContent}"></span>
+                    </label>
+
+                    <label>
+                        Editor notes <span class="muted-text">(internal only)</span>
+                        <textarea th:field="*{editorNotes}" rows="3"
+                                  placeholder="Notes for internal review..."></textarea>
+                    </label>
+
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button class="button button-primary" type="submit">Save edit</button>
+                        <a class="button button-secondary"
+                           th:href="@{/project/__${project.id}__/story}">Cancel</a>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

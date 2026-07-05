@@ -79,6 +79,12 @@
                 </a>
 
                 <a class="info-card info-card--link"
+                   th:href="@{/project/__${summary.project().id()}__/story}">
+                    <h3>Story timeline</h3>
+                    <p>Manage prompts, review transcripts, edit memoir content, and approve stories.</p>
+                </a>
+
+                <a class="info-card info-card--link"
                    th:href="@{/parent/profile}"
                    th:classappend="${!summary.parentProfileSet()} ? 'info-card--warn'">
                     <h3>Parent profile
@@ -94,19 +100,20 @@
                 </div>
 
                 <div class="info-card info-card--muted">
-                    <h3>Story timeline <span class="badge badge-soon">Phase 3</span></h3>
-                    <p>Review collected memories organized by life stage.</p>
-                </div>
-
-                <div class="info-card info-card--muted">
-                    <h3>Security panel <span class="badge badge-soon">Phase 4</span></h3>
-                    <p>Protect sensitive content and generate QR access controls.</p>
-                </div>
-
-                <div class="info-card info-card--muted">
                     <h3>Draft approval <span class="badge badge-soon">Phase 3</span></h3>
                     <p>Review manuscript drafts before print publishing.</p>
                 </div>
+
+                <a class="info-card info-card--link" th:href="@{/editor/queue}">
+                    <h3>Editor queue</h3>
+                    <p>Cross-project view of all stories needing transcription, editing, or approval.</p>
+                </a>
+
+                <a class="info-card info-card--link"
+                   th:href="@{/project/__${summary.project().id()}__/approval/review}">
+                    <h3>Draft approval</h3>
+                    <p>Submit and review memoir drafts. Record decisions and track revision history.</p>
+                </a>
 
             </section>
         </div>

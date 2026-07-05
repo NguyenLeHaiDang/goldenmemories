@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Editor Queue | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="content-page">
+
+        <section class="content-hero">
+            <p class="eyebrow">Editor workspace</p>
+            <h1>Story queue</h1>
+            <p class="lead">All stories across projects that need transcription, editing, or approval.</p>
+        </section>
+
+        <!-- Needs transcription -->
+        <section style="margin-bottom: 32px;">
+            <div class="section-heading">
+                <p class="eyebrow">Step 1</p>
+                <h2>Needs transcription
+                    <span class="badge badge-warn" th:text="${#lists.size(needsTranscription)}">0</span>
+                </h2>
+            </div>
+            <div class="prose-card" th:if="${#lists.isEmpty(needsTranscription)}">
+                <p>No stories waiting for transcription.</p>
+            </div>
+            <div class="story-table" th:unless="${#lists.isEmpty(needsTranscription)}">
+                <div class="story-row story-row--header">
+                    <span>Project</span><span>Prompt</span><span>Stage</span><span>Action</span>
+                </div>
+                <div class="story-row" th:each="story : ${needsTranscription}">
+                    <span th:text="${story.project.title}">Project</span>
+                    <span class="story-prompt" th:text="${story.promptQuestion}">Prompt</span>
+                    <span><span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span></span>
+                    <span>
+                        <a class="button button-secondary btn-sm"
+                           th:href="@{/project/__${story.project.id}__/story/__${story.id}__/transcript}">
+                            Transcribe
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Needs editing -->
+        <section style="margin-bottom: 32px;">
+            <div class="section-heading">
+                <p class="eyebrow">Step 2</p>
+                <h2>Needs editing
+                    <span class="badge badge-warn" th:text="${#lists.size(needsEditing)}">0</span>
+                </h2>
+            </div>
+            <div class="prose-card" th:if="${#lists.isEmpty(needsEditing)}">
+                <p>No stories waiting for editing.</p>
+            </div>
+            <div class="story-table" th:unless="${#lists.isEmpty(needsEditing)}">
+                <div class="story-row story-row--header">
+                    <span>Project</span><span>Prompt</span><span>Stage</span><span>Action</span>
+                </div>
+                <div class="story-row" th:each="story : ${needsEditing}">
+                    <span th:text="${story.project.title}">Project</span>
+                    <span class="story-prompt" th:text="${story.promptQuestion}">Prompt</span>
+                    <span><span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span></span>
+                    <span>
+                        <a class="button button-secondary btn-sm"
+                           th:href="@{/project/__${story.project.id}__/story/__${story.id}__/edit}">
+                            Edit
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awaiting approval -->
+        <section>
+            <div class="section-heading">
+                <p class="eyebrow">Step 3</p>
+                <h2>Awaiting approval
+                    <span class="badge" th:text="${#lists.size(awaitingApproval)}">0</span>
+                </h2>
+            </div>
+            <div class="prose-card" th:if="${#lists.isEmpty(awaitingApproval)}">
+                <p>No stories waiting for approval.</p>
+            </div>
+            <div class="story-table" th:unless="${#lists.isEmpty(awaitingApproval)}">
+                <div class="story-row story-row--header">
+                    <span>Project</span><span>Prompt</span><span>Stage</span><span>Action</span>
+                </div>
+                <div class="story-row" th:each="story : ${awaitingApproval}">
+                    <span th:text="${story.project.title}">Project</span>
+                    <span class="story-prompt" th:text="${story.promptQuestion}">Prompt</span>
+                    <span><span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span></span>
+                    <span>
+                        <a class="button button-secondary btn-sm"
+                           th:href="@{/project/__${story.project.id}__/story/__${story.id}__/edit}">
+                            Review
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

@@ -766,3 +766,119 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* ── Story table ────────────────────────────────────────────────────────────*/
+.story-table {
+    display: grid;
+    gap: 2px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.story-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 14px 18px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.72);
+    font-size: 0.92rem;
+}
+
+.story-row--header {
+    background: var(--accent-soft);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+}
+
+.story-row:not(.story-row--header):hover {
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.story-prompt {
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.story-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* ── Small button variant ───────────────────────────────────────────────────*/
+.btn-sm {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.82rem;
+}
+
+/* ── Status-specific badge colours ─────────────────────────────────────────*/
+.badge-status-pending    { background: rgba(100,100,100,0.1); color: #555; border-color: rgba(100,100,100,0.2); }
+.badge-status-received   { background: rgba(35,74,107,0.1);  color: var(--accent-2); border-color: rgba(35,74,107,0.22); }
+.badge-status-transcribed{ background: rgba(156,95,36,0.1);  color: var(--accent); border-color: rgba(156,95,36,0.22); }
+.badge-status-edited     { background: rgba(80,130,80,0.12); color: #2d6e2d; border-color: rgba(80,130,80,0.25); }
+.badge-status-approved   { background: rgba(34,139,34,0.12); color: #1a5c1a; border-color: rgba(34,139,34,0.28); }
+
+/* ── Decision badge colours ─────────────────────────────────────────────────*/
+.badge-decision-pending            { background: rgba(100,100,100,0.1); color: #555; }
+.badge-decision-approved           { background: rgba(34,139,34,0.12);  color: #1a5c1a; border-color: rgba(34,139,34,0.28); }
+.badge-decision-rejected           { background: rgba(180,40,40,0.1);   color: #7a1a1a; border-color: rgba(180,40,40,0.22); }
+.badge-decision-revision_requested { background: rgba(200,120,0,0.1);   color: #7a4800; border-color: rgba(200,120,0,0.22); }
+
+/* ── Decision radio options ─────────────────────────────────────────────────*/
+.decision-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.6);
+    font-weight: normal;
+}
+
+.decision-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.decision-option input[type="radio"] {
+    width: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    accent-color: var(--accent);
+}
+
+/* ── Form select ────────────────────────────────────────────────────────────*/
+.form-stack select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    font: inherit;
+    background: rgba(255,255,255,0.9);
+    color: var(--text);
+    appearance: auto;
+}
+
+.form-stack select:focus {
+    outline: 2px solid rgba(156,95,36,0.22);
+    border-color: rgba(156,95,36,0.35);
+}
+
+@media (max-width: 960px) {
+    .story-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .story-row--header {
+        display: none;
+    }
+}

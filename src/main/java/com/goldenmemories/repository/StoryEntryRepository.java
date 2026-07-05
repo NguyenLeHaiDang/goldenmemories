@@ -11,6 +11,12 @@ public interface StoryEntryRepository extends JpaRepository<StoryEntry, Long> {
 
     List<StoryEntry> findByProjectOrderByCreatedAtAsc(Project project);
 
+    /** Editor queue: all stories with a given status, oldest-first. */
+    List<StoryEntry> findByStatusOrderByUpdatedAtAsc(Status status);
+
+    /** Stories for a project filtered by status. */
+    List<StoryEntry> findByProjectAndStatusOrderByCreatedAtAsc(Project project, Status status);
+
     long countByProjectAndStatus(Project project, Status status);
 
     long countByProject(Project project);
