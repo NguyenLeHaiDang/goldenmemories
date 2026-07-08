@@ -4,16 +4,28 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="auth-layout">
-        <section class="auth-card">
+    <main class="auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Verify email</p>
+            <h1>Confirm the account and continue.</h1>
+            <p class="hero-lead">
+                We send a 6-digit code to the email address used during registration so the project
+                stays tied to the right family account.
+            </p>
+            <ul class="auth-copy-list">
+                <li>OTP is the fallback path when social login is not used.</li>
+                <li>Verification unlocks the protected dashboard and onboarding flow.</li>
+                <li>You can resend the code if it expires before you finish.</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel" data-reveal>
             <p class="eyebrow">Verify email</p>
             <h1>Enter your code</h1>
 
-            <!-- Success banner after resend -->
             <div class="alert alert-success" th:if="${otpResent}">
                 A new code has been sent to your email.
             </div>
-            <!-- Info banner after registration -->
             <div class="alert alert-info" th:if="${otpSent}">
                 We sent a 6-digit code to
                 <strong th:text="${otpForm?.email}">your email</strong>.

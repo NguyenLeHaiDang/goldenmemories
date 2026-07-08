@@ -4,10 +4,23 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="auth-layout">
-        <section class="auth-card">
-            <p class="eyebrow">Start a project</p>
-            <h1>Create account</h1>
+    <main class="auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Start a project</p>
+            <h1>Create the family account.</h1>
+            <p class="hero-lead">
+                Sign up once, verify by email, then move directly into parent setup and the project dashboard.
+            </p>
+            <ul class="auth-copy-list">
+                <li>Adult children manage the account and project progress.</li>
+                <li>Email verification keeps the onboarding trail clear and secure.</li>
+                <li>The next step after signup is the OTP screen, then the workspace.</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel" data-reveal>
+            <p class="eyebrow">Create account</p>
+            <h1>Register</h1>
 
             <form th:action="@{/register}" method="post" th:object="${registerForm}" class="form-stack">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

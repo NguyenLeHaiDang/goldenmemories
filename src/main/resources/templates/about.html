@@ -4,18 +4,45 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
+
     <main class="content-page">
         <section class="content-hero">
-            <p class="eyebrow">About the build</p>
-            <h1>MVC foundation for a legacy-preservation platform</h1>
-            <p class="lead">This site is scaffolded to support the product architecture you outlined: a family onboarding experience, parent storytelling flow, AI services, cloud security, and publishing.</p>
+            <p class="eyebrow-dark">About the build</p>
+            <h1>Built as an MVC family-memory platform.</h1>
+            <p class="lead">
+                The technical plan focuses on identity, project state, story collection, editing, and
+                publishing. Business storytelling stays out of the implementation path.
+            </p>
         </section>
-        <section class="prose-card">
-            <h2>Architecture</h2>
-            <p>The site follows the MVC pattern with controllers for page routing, simple model records for page content, Thymeleaf views for rendering, and static CSS/JS for the client experience.</p>
-            <p>The next natural step is to connect persistence, user accounts, OAuth sign-in, and OTP mail delivery to live infrastructure once your keys are ready.</p>
+
+        <section class="two-col">
+            <article class="prose-card">
+                <p class="section-kicker">Architecture</p>
+                <h2>How the app is structured</h2>
+                <p>
+                    Spring Boot controllers route each screen, service layers manage project state,
+                    Thymeleaf renders the views, and static CSS/JS controls the user experience.
+                </p>
+                <p>
+                    That keeps the project easy to reason about as we add persistence, authentication,
+                    workflow, and publishing screens in sequence.
+                </p>
+            </article>
+
+            <article class="prose-card accent">
+                <p class="section-kicker">Implementation phases</p>
+                <h2>What comes next in the roadmap</h2>
+                <ul class="check-list">
+                    <li>Identity and onboarding</li>
+                    <li>Core entities and dashboard state</li>
+                    <li>Story editor and approval workflow</li>
+                    <li>Publishing handoff and archive stubs</li>
+                    <li>Enhancements like AI and reminders later</li>
+                </ul>
+            </article>
         </section>
     </main>
+
     <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>

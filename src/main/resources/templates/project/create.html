@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('New Project | Ký Ức Vàng')}"></head>
+<head th:replace="~{fragments/head :: head('New Project | Ky Uc Vang')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="auth-layout">
-        <section class="auth-card wide">
-            <p class="eyebrow">Start a memoir</p>
+    <main class="auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Start a memoir</p>
+            <h1>Create the workspace for one family story.</h1>
+            <p class="hero-lead">
+                Choose a package, add the project title, and open the full memoir flow from onboarding to final review.
+            </p>
+            <ul class="auth-copy-list">
+                <li>The project becomes the container for prompts, transcripts, edits, and approvals.</li>
+                <li>Standard is the default recommended path for a complete printed memoir.</li>
+                <li>You can expand the archive later with photos and additional story branches.</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel wide" data-reveal>
+            <p class="eyebrow-dark">Project setup</p>
             <h1>Create a project</h1>
 
             <form th:action="@{/project/new}" method="post"
@@ -16,7 +29,7 @@
                 <label>
                     Project title
                     <input type="text" th:field="*{title}"
-                           placeholder="e.g. Mẹ's Life Story"
+                           placeholder="e.g. Mother's Life Story"
                            th:classappend="${#fields.hasErrors('title')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('title')}"
                           th:errors="*{title}"></span>

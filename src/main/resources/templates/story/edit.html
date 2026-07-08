@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Edit Story | Ký Ức Vàng')}"></head>
+<head th:replace="~{fragments/head :: head('Edit Story | Ky Uc Vang')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="content-page">
 
-        <section class="content-hero">
-            <p class="eyebrow">
+        <section class="content-hero" data-reveal>
+            <p class="eyebrow-dark">
                 <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Edit
             </p>
             <h1>Edit story</h1>
+            <p class="lead">Polish the transcript into a clean narrative while keeping the parent's voice intact.</p>
         </section>
 
         <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
-        <!-- Prompt info + raw transcript side-by-side with the edit form -->
-        <div class="two-col" style="align-items: start; gap: 24px;">
-
-            <!-- Left: source material -->
-            <div class="stack">
-                <div class="prose-card">
-                    <h2>Prompt</h2>
-                    <p th:text="${story.promptQuestion}">question</p>
+        <div class="two-col story-editor-grid" style="align-items: start;">
+            <div class="stack" data-reveal>
+                <section class="prose-card">
+                    <p class="eyebrow-dark">Source</p>
+                    <h2 th:text="${story.promptQuestion}">Prompt</h2>
                     <p>
                         <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
-                        <span th:class="'badge badge-status-' + ${story.status.name().toLowerCase()}"
-                              th:text="${story.status}">STATUS</span>
+                        <span class="badge" th:text="${story.status}">STATUS</span>
                     </p>
-                </div>
-                <div class="prose-card" th:if="${story.rawTranscript != null}">
-                    <h2>Raw transcript</h2>
-                    <p class="muted-text" style="white-space: pre-wrap;"
-                       th:text="${story.rawTranscript}">transcript</p>
-                </div>
+                    <p class="muted-text">
+                        Use the transcript below as your source and trim repetition, while preserving the emotional truth.
+                    </p>
+                </section>
+
+                <section class="prose-card" th:if="${story.rawTranscript != null}">
+                    <p class="eyebrow-dark">Raw transcript</p>
+                    <p class="muted-text story-pre" th:text="${story.rawTranscript}">transcript</p>
+                </section>
             </div>
 
-            <!-- Right: edit form -->
-            <section class="prose-card">
-                <h2>Edited version</h2>
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Edited version</p>
+                <h2>Shape the polished story</h2>
                 <form th:action="@{/project/__${project.id}__/story/__${story.id}__/edit}"
                       method="post" th:object="${storyEditForm}" class="form-stack">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -54,18 +54,17 @@
 
                     <label>
                         Editor notes <span class="muted-text">(internal only)</span>
-                        <textarea th:field="*{editorNotes}" rows="3"
+                        <textarea th:field="*{editorNotes}" rows="4"
                                   placeholder="Notes for internal review..."></textarea>
                     </label>
 
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <div class="story-card__actions">
                         <button class="button button-primary" type="submit">Save edit</button>
                         <a class="button button-secondary"
                            th:href="@{/project/__${project.id}__/story}">Cancel</a>
                     </div>
                 </form>
             </section>
-
         </div>
     </main>
     <div th:replace="~{fragments/footer :: footer}"></div>

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/project")
@@ -64,8 +67,9 @@ public class ProjectController {
     // ── View ─────────────────────────────────────────────────────────────────
 
     @GetMapping("/{id}")
+    @Transactional(readOnly = true)
     public String viewProject(@AuthenticationPrincipal Object principal,
-                               @PathVariable Long id,
+                               @PathVariable("id") Long id,
                                Model model) {
         User user = securityUtils.currentUser(principal)
             .orElseThrow(() -> new IllegalStateException("User not found"));
@@ -74,9 +78,9 @@ public class ProjectController {
             .orElseThrow(() -> new IllegalArgumentException("Project not found or access denied"));
 
         model.addAttribute("project", project);
-        model.addAttribute("stories", project.getStories());
-        model.addAttribute("photos", project.getPhotos());
-        model.addAttribute("approvals", project.getApprovals());
+        model.addAttribute("stories", new ArrayList<>(project.getStories()));
+        model.addAttribute("photos", new ArrayList<>(project.getPhotos()));
+        model.addAttribute("approvals", new ArrayList<>(project.getApprovals()));
         return "project/view";
     }
 }

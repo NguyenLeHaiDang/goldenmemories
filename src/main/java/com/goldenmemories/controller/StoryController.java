@@ -41,7 +41,7 @@ public class StoryController {
 
     @GetMapping
     public String list(@AuthenticationPrincipal Object principal,
-                       @PathVariable Long projectId, Model model) {
+                       @PathVariable("projectId") Long projectId, Model model) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
 
@@ -56,7 +56,7 @@ public class StoryController {
 
     @PostMapping("/prompt")
     public String addPrompt(@AuthenticationPrincipal Object principal,
-                             @PathVariable Long projectId,
+                             @PathVariable("projectId") Long projectId,
                              @Valid @ModelAttribute("storyPromptForm") StoryPromptForm form,
                              BindingResult bindingResult,
                              Model model,
@@ -86,8 +86,8 @@ public class StoryController {
 
     @GetMapping("/{storyId}/transcript")
     public String transcriptForm(@AuthenticationPrincipal Object principal,
-                                  @PathVariable Long projectId,
-                                  @PathVariable Long storyId,
+                                  @PathVariable("projectId") Long projectId,
+                                  @PathVariable("storyId") Long storyId,
                                   Model model) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
@@ -105,8 +105,8 @@ public class StoryController {
 
     @PostMapping("/{storyId}/transcript")
     public String submitTranscript(@AuthenticationPrincipal Object principal,
-                                    @PathVariable Long projectId,
-                                    @PathVariable Long storyId,
+                                    @PathVariable("projectId") Long projectId,
+                                    @PathVariable("storyId") Long storyId,
                                     @Valid @ModelAttribute("transcriptForm") TranscriptForm form,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) {
@@ -129,8 +129,8 @@ public class StoryController {
 
     @GetMapping("/{storyId}/edit")
     public String editForm(@AuthenticationPrincipal Object principal,
-                            @PathVariable Long projectId,
-                            @PathVariable Long storyId,
+                            @PathVariable("projectId") Long projectId,
+                            @PathVariable("storyId") Long storyId,
                             Model model) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
@@ -150,8 +150,8 @@ public class StoryController {
 
     @PostMapping("/{storyId}/edit")
     public String saveEdit(@AuthenticationPrincipal Object principal,
-                            @PathVariable Long projectId,
-                            @PathVariable Long storyId,
+                            @PathVariable("projectId") Long projectId,
+                            @PathVariable("storyId") Long storyId,
                             @Valid @ModelAttribute("storyEditForm") StoryEditForm form,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {
@@ -180,8 +180,8 @@ public class StoryController {
 
     @PostMapping("/{storyId}/approve")
     public String approve(@AuthenticationPrincipal Object principal,
-                           @PathVariable Long projectId,
-                           @PathVariable Long storyId,
+                           @PathVariable("projectId") Long projectId,
+                           @PathVariable("storyId") Long storyId,
                            RedirectAttributes redirectAttributes) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
@@ -194,8 +194,8 @@ public class StoryController {
 
     @PostMapping("/{storyId}/revise")
     public String revise(@AuthenticationPrincipal Object principal,
-                          @PathVariable Long projectId,
-                          @PathVariable Long storyId,
+                          @PathVariable("projectId") Long projectId,
+                          @PathVariable("storyId") Long storyId,
                           RedirectAttributes redirectAttributes) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);

@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Transcript | Ký Ức Vàng')}"></head>
+<head th:replace="~{fragments/head :: head('Transcript | Ky Uc Vang')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="auth-layout">
-        <section class="auth-card wide">
-            <p class="eyebrow">
+    <main class="auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Transcript capture</p>
+            <h1>Turn spoken memory into a usable draft.</h1>
+            <p class="hero-lead">
+                This screen keeps the transcription process focused: read the prompt, paste the transcript,
+                and return to the story queue with one clean source of truth.
+            </p>
+            <ul class="auth-copy-list">
+                <li>Keep the transcript faithful to the original voice note.</li>
+                <li>Short pauses and partial sentences are okay for now.</li>
+                <li>After saving, the story moves back into the review flow.</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel wide" data-reveal>
+            <p class="eyebrow-dark">
                 <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Transcript
             </p>
             <h1>Submit transcript</h1>
@@ -17,7 +31,7 @@
             <div class="alert alert-info" style="margin-top: 14px;">
                 <strong>Prompt:</strong>
                 <span th:text="${story.promptQuestion}">question</span>
-                &nbsp;·&nbsp;
+                &nbsp;&middot;&nbsp;
                 <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
             </div>
 

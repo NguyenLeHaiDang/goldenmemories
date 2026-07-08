@@ -44,7 +44,7 @@ public class ApprovalController {
 
     @GetMapping("/submit")
     public String submitForm(@AuthenticationPrincipal Object principal,
-                              @PathVariable Long projectId, Model model) {
+                              @PathVariable("projectId") Long projectId, Model model) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
 
@@ -64,7 +64,7 @@ public class ApprovalController {
 
     @PostMapping("/submit")
     public String submitDraft(@AuthenticationPrincipal Object principal,
-                               @PathVariable Long projectId,
+                               @PathVariable("projectId") Long projectId,
                                @RequestParam String draftVersion,
                                RedirectAttributes redirectAttributes) {
         User user = resolveUser(principal);
@@ -80,7 +80,7 @@ public class ApprovalController {
 
     @GetMapping("/review")
     public String reviewForm(@AuthenticationPrincipal Object principal,
-                              @PathVariable Long projectId, Model model) {
+                              @PathVariable("projectId") Long projectId, Model model) {
         User user = resolveUser(principal);
         Project project = resolveProject(projectId, user);
 
@@ -104,8 +104,8 @@ public class ApprovalController {
 
     @PostMapping("/{approvalId}/decide")
     public String recordDecision(@AuthenticationPrincipal Object principal,
-                                  @PathVariable Long projectId,
-                                  @PathVariable Long approvalId,
+                                  @PathVariable("projectId") Long projectId,
+                                  @PathVariable("approvalId") Long approvalId,
                                   @Valid @ModelAttribute("approvalForm") ApprovalForm form,
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {

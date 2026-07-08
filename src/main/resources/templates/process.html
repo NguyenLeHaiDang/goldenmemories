@@ -4,31 +4,62 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
+
     <main class="content-page">
         <section class="content-hero">
-            <p class="eyebrow">Screen flow</p>
-            <h1>Landing page to publishing workflow</h1>
-            <p class="lead">This page documents the intended MVC product flow so we can build the backend and the front-end screens around the same journey.</p>
+            <p class="eyebrow-dark">Screen flow</p>
+            <h1>From consultation to publishing, one clear journey.</h1>
+            <p class="lead">
+                The screen flow mirrors the implementation plan so the front end and backend can be
+                built against the same state changes and user expectations.
+            </p>
         </section>
-        <section class="flow-grid">
-            <article class="flow-card">
-                <h2>1. Discovery</h2>
-                <p>Users land on the site, learn the value of the service, and request a consultation or choose a package.</p>
-            </article>
-            <article class="flow-card">
-                <h2>2. Account setup</h2>
-                <p>The purchaser creates an account, connects parent details, and receives OTP verification through email.</p>
-            </article>
-            <article class="flow-card">
-                <h2>3. Project workspace</h2>
-                <p>The dashboard hosts progress tracking, media upload, transcription review, security controls, and draft approval.</p>
-            </article>
-            <article class="flow-card">
-                <h2>4. Delivery</h2>
-                <p>When the memoir is approved, the system supports print output, secure cloud archive, and QR-based access.</p>
-            </article>
+
+        <section class="section-pad" data-reveal>
+            <div class="section-head">
+                <p class="section-kicker">Journey</p>
+                <h2>The user moves through four simple phases</h2>
+                <p class="section-summary">
+                    Each phase should hand off to the next one without forcing the user to guess what to do next.
+                </p>
+            </div>
+            <div class="flow-grid">
+                <article class="flow-card">
+                    <div class="flow-card__topline">
+                        <span class="flow-card__num">01</span>
+                        <span class="flow-card__tag">Discovery</span>
+                    </div>
+                    <h3>Explore the offer</h3>
+                    <p>Visitors learn the value of the service and can request a consultation immediately.</p>
+                </article>
+                <article class="flow-card">
+                    <div class="flow-card__topline">
+                        <span class="flow-card__num">02</span>
+                        <span class="flow-card__tag">Identity</span>
+                    </div>
+                    <h3>Register and verify</h3>
+                    <p>The purchaser creates an account, verifies email, and signs in with social login if desired.</p>
+                </article>
+                <article class="flow-card">
+                    <div class="flow-card__topline">
+                        <span class="flow-card__num">03</span>
+                        <span class="flow-card__tag">Workspace</span>
+                    </div>
+                    <h3>Manage the project</h3>
+                    <p>The dashboard, editor, story timeline, and parent profile screen keep the memoir moving.</p>
+                </article>
+                <article class="flow-card">
+                    <div class="flow-card__topline">
+                        <span class="flow-card__num">04</span>
+                        <span class="flow-card__tag">Delivery</span>
+                    </div>
+                    <h3>Approve and publish</h3>
+                    <p>Reviewed drafts are handed off for print, archive, QR access, and final delivery.</p>
+                </article>
+            </div>
         </section>
     </main>
+
     <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>

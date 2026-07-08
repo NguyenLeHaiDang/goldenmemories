@@ -4,20 +4,29 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="auth-layout">
-        <section class="auth-card">
+    <main class="auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Family memo workspace</p>
+            <h1>Sign in and continue the story.</h1>
+            <p class="hero-lead">
+                Use Google, Facebook, or email OTP to return to your protected workspace,
+                review project progress, and keep the memoir flow moving.
+            </p>
+            <ul class="auth-copy-list">
+                <li>One login path for the adult child managing the project.</li>
+                <li>Protected access to dashboard, editor, and approval screens.</li>
+                <li>Google and Facebook OAuth2 buttons stay aligned with the backend flow.</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel" data-reveal>
             <p class="eyebrow">Welcome back</p>
             <h1>Sign in</h1>
 
-            <!-- Success banner after registration+OTP -->
             <div class="alert alert-success" th:if="${registrationSuccess}"
                  th:text="${registrationSuccess}"></div>
-
-            <!-- Error banner from failed login -->
             <div class="alert alert-error" th:if="${loginError}"
                  th:text="${loginError}"></div>
-
-            <!-- Logout confirmation -->
             <div class="alert alert-info" th:if="${logoutMessage}"
                  th:text="${logoutMessage}"></div>
 
@@ -47,13 +56,13 @@
             <div class="divider"><span>or continue with</span></div>
 
             <div class="social-buttons">
-                <a class="button button-secondary" href="/oauth2/authorization/google">
-                    Google
-                </a>
-                <a class="button button-secondary" href="/oauth2/authorization/facebook">
-                    Facebook
-                </a>
+                <a class="button button-secondary" href="/oauth2/authorization/google">Google</a>
+                <a class="button button-secondary" href="/oauth2/authorization/facebook">Facebook</a>
             </div>
+
+            <p class="auth-footnote">
+                If a provider is not configured yet, the email + OTP path keeps the onboarding loop usable.
+            </p>
         </section>
     </main>
     <div th:replace="~{fragments/footer :: footer}"></div>

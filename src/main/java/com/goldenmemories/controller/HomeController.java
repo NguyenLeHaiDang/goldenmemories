@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.goldenmemories.model.ContactForm;
 import com.goldenmemories.model.FeatureCard;
 import com.goldenmemories.model.ScreenFlowStep;
 import com.goldenmemories.model.UseCase;
@@ -15,6 +16,19 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("contactForm", new ContactForm());
+
+        model.addAttribute("screenHighlights", List.of(
+            new FeatureCard("Landing + consultation", "A warm entry point that explains the product and routes families to the right next step."),
+            new FeatureCard("Registration + OTP", "Adult children create an account, verify email, and begin the guided onboarding flow."),
+            new FeatureCard("Parent profile", "Capture the parent name, relation, contact details, and connection status in one place."),
+            new FeatureCard("Project dashboard", "Track progress, package status, and open work items from a protected workspace."),
+            new FeatureCard("Story timeline", "Collect memories in life stages, review transcripts, and refine editorial notes."),
+            new FeatureCard("Media vault", "Upload photos, group them by chapter, and prepare assets for restoration."),
+            new FeatureCard("Approval + security", "Review drafts, approve revisions, and lock sensitive memories behind secure access."),
+            new FeatureCard("Publishing handoff", "Move approved projects into print, archive, and final delivery states.")
+        ));
+
         model.addAttribute("features", List.of(
             new FeatureCard("Hybrid onboarding", "Adult children manage the project while parents tell stories through Zalo-based conversations."),
             new FeatureCard("AI transcription", "Voice notes are converted into text drafts, then refined by editors and review loops."),

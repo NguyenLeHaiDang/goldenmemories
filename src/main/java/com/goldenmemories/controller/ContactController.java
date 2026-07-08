@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goldenmemories.model.ContactForm;
 
@@ -15,9 +16,13 @@ import com.goldenmemories.model.ContactForm;
 public class ContactController {
 
     @GetMapping("/contact")
-    public String contact(Model model) {
+    public String contact(@RequestParam(value = "sent", required = false) String sent, Model model) {
         if (!model.containsAttribute("contactForm")) {
             model.addAttribute("contactForm", new ContactForm());
+        }
+        if (sent != null) {
+            model.addAttribute("contactSuccess",
+                "Thanks, we received your consultation request and will follow up soon.");
         }
         return "contact";
     }

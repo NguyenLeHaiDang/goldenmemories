@@ -4,14 +4,15 @@
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="content-page">
 
-        <!-- Hero -->
-        <section class="content-hero dashboard-hero">
+    <main class="content-page dashboard-layout">
+        <section class="content-hero dashboard-hero" data-reveal>
             <div>
-                <p class="eyebrow">Workspace</p>
+                <p class="eyebrow-dark">Workspace</p>
                 <h1>Welcome, <span th:text="${displayName}">Member</span></h1>
-                <p class="lead">Your central hub for progress, media, stories, draft approval, and publishing.</p>
+                <p class="lead">
+                    Your central hub for memoir progress, parent setup, stories, photos, approvals, and publishing.
+                </p>
             </div>
             <form th:action="@{/logout}" method="post" class="logout-form">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -19,15 +20,15 @@
             </form>
         </section>
 
-        <!-- Flash message -->
-        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
 
-        <!-- ── No project yet ─────────────────────────────────────────────── -->
-        <section class="empty-state" th:if="${!hasProject}">
+        <section class="empty-state" th:if="${!hasProject}" data-reveal>
             <div class="empty-card glass-card">
-                <p class="eyebrow">Get started</p>
+                <p class="eyebrow-dark">Get started</p>
                 <h2>Start your first memoir project</h2>
-                <p>Create a project to begin collecting stories, uploading photos, and building your family memoir.</p>
+                <p>
+                    Create a project to begin collecting stories, uploading photos, and building the family memoir.
+                </p>
                 <div class="empty-actions">
                     <a class="button button-primary" th:href="@{/project/new}">Create a project</a>
                     <a class="button button-secondary" th:href="@{/parent/profile}">Set up parent profile</a>
@@ -35,12 +36,9 @@
             </div>
         </section>
 
-        <!-- ── Active project summary ─────────────────────────────────────── -->
-        <div th:if="${hasProject}">
-
-            <!-- Phase progress bar -->
-            <section class="phase-section">
-                <p class="eyebrow">Project phase</p>
+        <div th:if="${hasProject}" class="dashboard-layout">
+            <section class="phase-section" data-reveal>
+                <p class="eyebrow-dark">Project phase</p>
                 <h2 th:text="${summary.project().title()}">Project title</h2>
                 <div class="phase-bar">
                     <div th:each="phase : ${T(com.goldenmemories.model.Project.Phase).values()}"
@@ -49,8 +47,7 @@
                 </div>
             </section>
 
-            <!-- Stats row -->
-            <section class="stats-row">
+            <section class="stats-row" data-reveal>
                 <div class="stat-card glass-card">
                     <p class="stat-number" th:text="${summary.totalStories()}">0</p>
                     <p class="stat-label">Stories collected</p>
@@ -63,16 +60,13 @@
                     <p class="stat-number" th:text="${summary.totalPhotos()}">0</p>
                     <p class="stat-label">Photos uploaded</p>
                 </div>
-                <div class="stat-card glass-card"
-                     th:classappend="${summary.parentConnected()} ? 'stat-card--ok'">
+                <div class="stat-card glass-card" th:classappend="${summary.parentConnected()} ? 'stat-card--ok'">
                     <p class="stat-number" th:text="${summary.parentConnected()} ? '✓' : '–'">–</p>
                     <p class="stat-label">Parent connected</p>
                 </div>
             </section>
 
-            <!-- Module cards -->
-            <section class="card-grid">
-
+            <section class="card-grid" data-reveal>
                 <a class="info-card info-card--link" th:href="@{/project/__${summary.project().id()}__}">
                     <h3>Project overview</h3>
                     <p>View stories, photos, approvals, and the full project timeline.</p>
@@ -114,11 +108,10 @@
                     <h3>Draft approval</h3>
                     <p>Submit and review memoir drafts. Record decisions and track revision history.</p>
                 </a>
-
             </section>
         </div>
-
     </main>
+
     <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>

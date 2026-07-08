@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Error | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="error-page">
+        <section class="error-shell container" data-reveal>
+            <div class="error-copy">
+                <p class="eyebrow-dark">Something went wrong</p>
+                <h1 th:text="${status != null ? status : 'Error'}">Error</h1>
+                <p class="error-lead" th:text="${error != null ? error : 'We could not complete this request.'}">
+                    We could not complete this request.
+                </p>
+                <p class="error-body">
+                    The app is still available. You can go back to the home page, continue to sign in,
+                    or open the consultation form to keep moving.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" th:href="@{/}">Back to home</a>
+                    <a class="button button-secondary" th:href="@{/login}">Go to login</a>
+                </div>
+
+                <div class="error-links">
+                    <a th:href="@{/contact}">Consultation</a>
+                    <a th:href="@{/product}">Product scope</a>
+                    <a th:href="@{/process}">Screen flow</a>
+                </div>
+            </div>
+
+            <aside class="error-panel">
+                <div class="hero-panel__badge">Error details</div>
+                <h2>What we know</h2>
+                <dl class="error-meta">
+                    <div>
+                        <dt>Status</dt>
+                        <dd th:text="${status != null ? status : 'Unknown'}">Unknown</dd>
+                    </div>
+                    <div>
+                        <dt>Path</dt>
+                        <dd th:text="${path != null ? path : '/'}">/</dd>
+                    </div>
+                    <div>
+                        <dt>Message</dt>
+                        <dd th:text="${message != null and !#strings.isEmpty(message) ? message : 'No additional details were provided.'}">
+                            No additional details were provided.
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Next step</dt>
+                        <dd>Retry the page, then continue through login or consultation.</dd>
+                    </div>
+                </dl>
+            </aside>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

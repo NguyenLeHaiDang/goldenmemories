@@ -1,207 +1,213 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="vi">
-<head th:replace="~{fragments/head :: head('Ký Ức Vàng | Lưu Giữ Câu Chuyện Của Bố Mẹ')}"></head>
+<head th:replace="~{fragments/head :: head('Ký Ức Vàng | Lưu giữ câu chuyện gia đình')}"></head>
 <body>
+<div class="page-shell landing-page">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main>
+        <section class="hero-v3" data-reveal>
+            <div class="hero-v3__glow hero-v3__glow--left"></div>
+            <div class="hero-v3__glow hero-v3__glow--right"></div>
+            <div class="container hero-v3__content">
+                <div class="hero-copy">
+                    <p class="eyebrow-dark">Family memoir platform</p>
+                    <h1>
+                        Lưu giữ câu chuyện của bố mẹ trong một workspace số duy nhất.
+                    </h1>
+                    <p class="hero-lead">
+                        Ký Ức Vàng biến toàn bộ hành trình viết hồi ký thành một sản phẩm MVC rõ ràng:
+                        đăng ký, xác thực OTP, kết nối hồ sơ gia đình, theo dõi tiến độ, biên tập, duyệt bản thảo
+                        và bàn giao bản in.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" th:href="@{/register}">Bắt đầu dự án</a>
+                        <a class="button button-secondary" th:href="@{/process}">Xem luồng màn hình</a>
+                    </div>
 
-<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
-<section class="hero-v2">
-    <div class="hero-v2__overlay"></div>
-    <div class="hero-v2__content">
-        <div class="hero-v2__text">
-            <p class="hero-eyebrow">Nền tảng hồi ký gia đình</p>
-            <h1 class="hero-v2__title">
-                Câu chuyện cuộc đời<br>
-                <span class="hero-v2__title--gold">của Bố &amp; Mẹ</span>
-            </h1>
-            <p class="hero-v2__sub">
-                Ký Ức Vàng giúp bạn lưu giữ giọng nói, hình ảnh và ký ức của cha mẹ thành một cuốn hồi ký in đẹp —
-                trước khi thời gian cuốn trôi tất cả.
-            </p>
-            <div class="hero-v2__actions">
-                <a class="btn btn-gold" th:href="@{/contact}">Tư vấn miễn phí</a>
-                <a class="btn btn-outline" th:href="@{/process}">Xem quy trình</a>
-            </div>
-        </div>
-        <div class="hero-v2__cta-card">
-            <p class="cta-card__eyebrow">Nhận tư vấn miễn phí</p>
-            <h2 class="cta-card__title">Bắt đầu hành trình hồi ký</h2>
-            <p class="cta-card__sub">Chuyên viên sẽ liên hệ với bạn sớm nhất.</p>
-            <form th:action="@{/contact}" method="get" class="cta-card__form">
-                <input type="text" name="fullName" placeholder="Họ và tên" />
-                <input type="text" name="phone" placeholder="Số điện thoại" />
-                <input type="email" name="email" placeholder="Email (nếu có)" />
-                <button class="btn btn-gold" type="submit">Nhận tư vấn miễn phí →</button>
-            </form>
-        </div>
-    </div>
-</section>
+                    <div class="hero-metrics">
+                        <article class="metric-card">
+                            <span class="metric-card__value">4</span>
+                            <span class="metric-card__label">giai đoạn MVP</span>
+                        </article>
+                        <article class="metric-card">
+                            <span class="metric-card__value">2</span>
+                            <span class="metric-card__label">kênh đăng nhập social</span>
+                        </article>
+                        <article class="metric-card">
+                            <span class="metric-card__value">1</span>
+                            <span class="metric-card__label">workspace được bảo vệ</span>
+                        </article>
+                    </div>
+                </div>
 
-<!-- ── SOCIAL PROOF BAR ───────────────────────────────────────────────────── -->
-<section class="trust-bar">
-    <div class="trust-bar__inner">
-        <div class="trust-item">
-            <span class="trust-num">500+</span>
-            <span class="trust-label">Gia đình tin tưởng</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-item">
-            <span class="trust-num">4.9★</span>
-            <span class="trust-label">Đánh giá trung bình</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-item">
-            <span class="trust-num">3 gói</span>
-            <span class="trust-label">Phù hợp mọi nhu cầu</span>
-        </div>
-        <div class="trust-divider"></div>
-        <div class="trust-item">
-            <span class="trust-num">AI</span>
-            <span class="trust-label">Chuyển giọng nói thành văn bản</span>
-        </div>
-    </div>
-</section>
+                <aside class="hero-panel">
+                    <div class="hero-panel__badge">Tư vấn nhanh</div>
+                    <h2>Hãy cho chúng tôi biết gia đình bạn đang muốn lưu giữ điều gì</h2>
+                    <p>
+                        Chỉ cần vài dòng ngắn, chúng tôi sẽ chuyển bạn vào đúng nhánh onboarding và
+                        dùng form này như một điểm vào nhẹ nhàng cho khách truy cập.
+                    </p>
 
-<!-- ── HOW IT WORKS ───────────────────────────────────────────────────────── -->
-<section class="section-pad bg-cream">
-    <div class="container">
-        <div class="section-label">
-            <p class="eyebrow-dark">Quy trình</p>
-            <h2 class="section-title">Từ câu chuyện đến cuốn sách — chỉ 4 bước</h2>
-        </div>
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-num">01</div>
-                <h3>Đăng ký &amp; kết nối</h3>
-                <p>Con cái đăng ký dịch vụ, nhập thông tin bố mẹ và kết nối tài khoản Zalo của bố mẹ với hệ thống.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">02</div>
-                <h3>Bố mẹ kể chuyện qua Zalo</h3>
-                <p>Hệ thống tự động gửi câu hỏi gợi nhớ qua Zalo. Bố mẹ chỉ cần nhấn nút mic và kể — không cần gõ phím.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">03</div>
-                <h3>AI xử lý &amp; biên tập</h3>
-                <p>Giọng nói được chuyển thành văn bản, ảnh cũ được phục hồi. Biên tập viên chỉnh sửa và gửi bản thảo để bạn duyệt.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num">04</div>
-                <h3>Nhận sách &amp; lưu trữ đám mây</h3>
-                <p>Cuốn hồi ký bìa cứng thêu gấm được giao tận nhà. Toàn bộ giọng nói gốc được lưu trên đám mây bảo mật.</p>
-            </div>
-        </div>
-    </div>
-</section>
+                    <form th:action="@{/contact}" method="post" th:object="${contactForm}" class="hero-form">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-<!-- ── FEATURES ───────────────────────────────────────────────────────────── -->
-<section class="section-pad">
-    <div class="container">
-        <div class="section-label">
-            <p class="eyebrow-dark">Tính năng nổi bật</p>
-            <h2 class="section-title">Công nghệ phục vụ ký ức gia đình</h2>
-        </div>
-        <div class="features-grid">
-            <article class="feature-card" th:each="feature : ${features}">
-                <div class="feature-icon">✦</div>
-                <h3 th:text="${feature.title()}">Tính năng</h3>
-                <p th:text="${feature.description()}">Mô tả</p>
-            </article>
-        </div>
-    </div>
-</section>
+                        <label>
+                            <span>Họ và tên</span>
+                            <input type="text" th:field="*{fullName}" placeholder="Nguyễn Văn A" />
+                        </label>
 
-<!-- ── PACKAGES ───────────────────────────────────────────────────────────── -->
-<section class="section-pad bg-cream">
-    <div class="container">
-        <div class="section-label">
-            <p class="eyebrow-dark">Gói dịch vụ</p>
-            <h2 class="section-title">Chọn hành trình phù hợp với gia đình bạn</h2>
-        </div>
-        <div class="packages-grid">
-            <div class="pkg-card">
-                <p class="pkg-tag">Gói Khởi Đầu</p>
-                <h3 class="pkg-name">Express</h3>
-                <p class="pkg-duration">15 ngày</p>
-                <p class="pkg-price">999.000 ₫</p>
-                <ul class="pkg-features">
-                    <li>50–70 câu hỏi qua Zalo</li>
-                    <li>100 trang in màu</li>
-                    <li>Phục hồi tối đa 5 ảnh cũ</li>
-                </ul>
-                <a class="btn btn-outline-dark" th:href="@{/contact}">Đăng ký ngay</a>
-            </div>
-            <div class="pkg-card pkg-card--featured">
-                <p class="pkg-tag pkg-tag--gold">Phổ biến nhất</p>
-                <h3 class="pkg-name">Bonding</h3>
-                <p class="pkg-duration">1 tháng</p>
-                <p class="pkg-price">3.000.000 ₫</p>
-                <ul class="pkg-features">
-                    <li>100–150 câu hỏi</li>
-                    <li>200 trang bìa cứng thêu gấm</li>
-                    <li>Phục hồi tối đa 5 ảnh cũ</li>
-                    <li>File âm thanh gốc</li>
-                    <li>Mã QR bảo mật ẩn</li>
-                </ul>
-                <a class="btn btn-gold" th:href="@{/contact}">Đăng ký ngay</a>
-            </div>
-            <div class="pkg-card">
-                <p class="pkg-tag">Gói Trọn Đời</p>
-                <h3 class="pkg-name">Companion</h3>
-                <p class="pkg-duration">1 năm</p>
-                <p class="pkg-price">36.500.000 ₫</p>
-                <ul class="pkg-features">
-                    <li>Câu hỏi không giới hạn</li>
-                    <li>Trang sách không giới hạn</li>
-                    <li>Phục hồi 20–25 ảnh cũ</li>
-                    <li>Toàn bộ file âm thanh gốc</li>
-                    <li>Bảo tàng ký ức số trên đám mây</li>
-                </ul>
-                <a class="btn btn-outline-dark" th:href="@{/contact}">Đăng ký ngay</a>
-            </div>
-        </div>
-    </div>
-</section>
+                        <label>
+                            <span>Email</span>
+                            <input type="email" th:field="*{email}" placeholder="you@example.com" />
+                        </label>
 
-<!-- ── USE CASES / ROLES ──────────────────────────────────────────────────── -->
-<section class="section-pad">
-    <div class="container split-section">
-        <div class="split-text">
-            <p class="eyebrow-dark">Dành cho ai?</p>
-            <h2 class="section-title">Mỗi thành viên một vai trò</h2>
-            <div class="roles-stack">
-                <div class="role-item" th:each="useCase : ${useCases}">
-                    <h4 th:text="${useCase.actor()}">Vai trò</h4>
-                    <p th:text="${useCase.description()}">Mô tả</p>
+                        <label class="hero-form__full">
+                            <span>Điều bạn muốn lưu giữ</span>
+                            <textarea th:field="*{message}" rows="4"
+                                      placeholder="Ví dụ: viết hồi ký cho bố, kết nối Zalo của mẹ, theo dõi bản thảo..."></textarea>
+                        </label>
+
+                        <button class="button button-primary" type="submit">Nhận tư vấn miễn phí</button>
+                    </form>
+
+                    <div class="hero-panel__meta">
+                        <span>Google OAuth2</span>
+                        <span>Facebook OAuth2</span>
+                        <span>Email OTP</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="signal-strip" data-reveal>
+            <div class="container signal-strip__inner">
+                <div class="signal-pill">Đăng ký</div>
+                <div class="signal-pill">OTP</div>
+                <div class="signal-pill">Hồ sơ bố mẹ</div>
+                <div class="signal-pill">Dashboard</div>
+                <div class="signal-pill">Editor</div>
+                <div class="signal-pill">Phê duyệt</div>
+                <div class="signal-pill">Xuất bản</div>
+            </div>
+        </section>
+
+        <section class="section-pad section-pad--spacious" data-reveal>
+            <div class="container">
+                <div class="section-head">
+                    <p class="section-kicker">Screen flow</p>
+                    <h2>Thiết kế xoay quanh luồng sản phẩm thật</h2>
+                    <p class="section-summary">
+                        Từ trang đầu tiên đến bản in cuối cùng, mọi màn hình đều phục vụ cùng một hành trình:
+                        giúp con cái quản lý dự án, còn bố mẹ chỉ cần kể chuyện một cách tự nhiên.
+                    </p>
+                </div>
+
+                <div class="flow-grid">
+                    <article class="flow-card" th:each="step, iterStat : ${flowSteps}">
+                        <div class="flow-card__topline">
+                            <span class="flow-card__num" th:text="${#numbers.formatInteger(iterStat.count, 2)}">01</span>
+                            <span class="flow-card__tag">Bước <span th:text="${iterStat.count}">1</span></span>
+                        </div>
+                        <h3 th:text="${step.title()}">Screen step</h3>
+                        <p th:text="${step.description()}">Description</p>
+                    </article>
                 </div>
             </div>
-        </div>
-        <div class="split-card glass-card-v2">
-            <p class="eyebrow-dark">Hành trình</p>
-            <h2>Từ trang đầu đến trang cuối</h2>
-            <ol class="journey-list">
-                <li th:each="step : ${flowSteps}">
-                    <strong th:text="${step.title()}">Bước</strong>
-                    <span th:text="${step.description()}">Mô tả</span>
-                </li>
-            </ol>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- ── CTA BANNER ─────────────────────────────────────────────────────────── -->
-<section class="cta-banner">
-    <div class="container cta-banner__inner">
-        <div>
-            <h2>Đừng để thời gian cuốn trôi những câu chuyện của bố mẹ.</h2>
-            <p>Bắt đầu ngay hôm nay — miễn phí tư vấn, không ràng buộc.</p>
-        </div>
-        <a class="btn btn-gold btn-lg" th:href="@{/register}">Tạo dự án ngay</a>
-    </div>
-</section>
+        <section class="section-pad bg-cream" data-reveal>
+            <div class="container">
+                <div class="section-head">
+                    <p class="section-kicker">Product screens</p>
+                    <h2>Những màn hình cốt lõi của MVP</h2>
+                    <p class="section-summary">
+                        Đây là cách chúng ta biến sơ đồ màn hình thành các page thật trong MVC:
+                        càng ít đoán mò, càng dễ build đúng backend.
+                    </p>
+                </div>
 
-<div th:replace="~{fragments/footer :: footer}"></div>
+                <div class="screen-grid">
+                    <article class="screen-card" th:each="screen : ${screenHighlights}">
+                        <div class="screen-card__index"></div>
+                        <h3 th:text="${screen.title()}">Screen</h3>
+                        <p th:text="${screen.description()}">Description</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
+        <section class="section-pad" data-reveal>
+            <div class="container">
+                <div class="section-head">
+                    <p class="section-kicker">Technical core</p>
+                    <h2>Những năng lực công nghệ sẽ đi vào code trước</h2>
+                    <p class="section-summary">
+                        Phần này phản ánh đúng kế hoạch triển khai: auth trước, dữ liệu cốt lõi sau,
+                        rồi mới đến editor, approval và publishing.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature-card" th:each="feature : ${features}">
+                        <div class="feature-icon">✦</div>
+                        <h3 th:text="${feature.title()}">Feature</h3>
+                        <p th:text="${feature.description()}">Description</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-pad bg-cream" data-reveal>
+            <div class="container split-section">
+                <div class="split-text">
+                    <p class="section-kicker">Who uses it</p>
+                    <h2 class="section-title">Mỗi vai trò một nhiệm vụ rõ ràng</h2>
+                    <div class="roles-stack">
+                        <article class="role-item" th:each="useCase : ${useCases}">
+                            <h4 th:text="${useCase.actor()}">Actor</h4>
+                            <p th:text="${useCase.description()}">Description</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="glass-card-v2">
+                    <p class="section-kicker">MVP priority</p>
+                    <h2>Đi theo đúng thứ tự triển khai</h2>
+                    <ol class="journey-list">
+                        <li>
+                            <strong>Identity first</strong>
+                            <span>Google/Facebook login, email OTP, và session protection.</span>
+                        </li>
+                        <li>
+                            <strong>Core data next</strong>
+                            <span>User, parent profile, project, story, photo và approval entities.</span>
+                        </li>
+                        <li>
+                            <strong>Workspace flow</strong>
+                            <span>Dashboard, editor queue, transcript review và draft approval.</span>
+                        </li>
+                        <li>
+                            <strong>Publishing handoff</strong>
+                            <span>Print/export, QR access, archive stubs và completion states.</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-banner" data-reveal>
+            <div class="container cta-banner__inner">
+                <div>
+                    <h2>Đừng để câu chuyện của gia đình bị hoãn lại thêm một mùa nữa.</h2>
+                    <p>Hãy bắt đầu từ một cuộc tư vấn ngắn rồi chuyển thẳng vào dự án thật.</p>
+                </div>
+                <a class="button button-primary button-primary--light" th:href="@{/register}">Tạo dự án ngay</a>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
 </body>
 </html>

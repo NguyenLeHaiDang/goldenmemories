@@ -33,8 +33,8 @@ public class AuthController {
     // ── Login ────────────────────────────────────────────────────────────────
 
     @GetMapping("/login")
-    public String login(@RequestParam(required = false) String error,
-                        @RequestParam(required = false) String logout,
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout,
                         Model model) {
         if (!model.containsAttribute("loginForm")) {
             model.addAttribute("loginForm", new LoginForm());
