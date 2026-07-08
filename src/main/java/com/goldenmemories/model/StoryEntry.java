@@ -74,6 +74,14 @@ public class StoryEntry {
     @Column(length = 2000)
     private String editorNotes;
 
+    // ── Phase 4: QR security ──────────────────────────────────────────────────
+    /** If true this entry is flagged for QR-protected delivery. */
+    @Column(nullable = false)
+    private boolean qrProtected = false;
+
+    /** Human-readable hint shown on the QR label (not a real password yet). */
+    private String qrHint;
+
     @Column(nullable = false)
     private Instant createdAt = Instant.now();
 
@@ -109,4 +117,10 @@ public class StoryEntry {
 
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
+
+    public boolean isQrProtected() { return qrProtected; }
+    public void setQrProtected(boolean qrProtected) { this.qrProtected = qrProtected; }
+
+    public String getQrHint() { return qrHint; }
+    public void setQrHint(String qrHint) { this.qrHint = qrHint; }
 }

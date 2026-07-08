@@ -33,4 +33,7 @@ public interface StoryService {
 
     /** Find a single story by id. */
     Optional<StoryEntry> findById(Long id);
+
+    /** Update QR-protection flag and access hint for a story entry (Phase 4). */
+    StoryEntry updateQrConfig(Long storyId, boolean qrProtected, String qrHint);
 }

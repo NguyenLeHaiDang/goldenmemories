@@ -110,6 +110,22 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Project saveHandoffDetails(Project project, String vendorName, String deliveryAddress, String notes) {
+        project.setPrintVendorName(vendorName);
+        project.setPrintDeliveryAddress(deliveryAddress);
+        project.setPrintNotes(notes);
+        return projectRepository.save(project);
+    }
+
+    @Override
+    public Project saveArchiveDetails(Project project, String archiveUrl, String archiveProvider, String archiveNotes) {
+        project.setArchiveUrl(archiveUrl);
+        project.setArchiveProvider(archiveProvider);
+        project.setArchiveNotes(archiveNotes);
+        return projectRepository.save(project);
+    }
+
+    @Override
     public Project completeProject(Project project) {
         project.setCurrentPhase(Project.Phase.COMPLETED);
         return projectRepository.save(project);

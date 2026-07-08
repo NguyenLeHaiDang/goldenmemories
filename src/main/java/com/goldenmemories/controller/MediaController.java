@@ -94,8 +94,32 @@ public class MediaController {
         Project project = projectService.findByIdAndOwner(projectId, user)
             .orElseThrow(() -> new IllegalArgumentException("Project not found or access denied"));
 
+        List<String> validationErrors = new ArrayList<>();
         if (photoFile.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Please choose a photo before uploading.");
+            validationErrors.add("Please choose a photo before uploading.");
+        } else {
+            String contentType = photoFile.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                validationErrors.add("Only image files (JPEG, PNG, GIF, WEBP, etc.) are allowed.");
+            }
+            if (photoFile.getSize() > 5 * 1024 * 1024) { // 5MB limit
+                validationErrors.add("Photo file size must be under 5 MB.");
+            }
+        }
+
+        if (caption != null && caption.length() > 255) {
+            validationErrors.add("Caption must not exceed 255 characters.");
+        }
+
+        if (chapterTag != null && chapterTag.length() > 100) {
+            validationErrors.add("Chapter tag must not exceed 100 characters.");
+        }
+
+        if (!validationErrors.isEmpty()) {
+            redirectAttributes.addFlashAttribute("validationErrors", validationErrors);
+            redirectAttributes.addFlashAttribute("prevCaption", caption);
+            redirectAttributes.addFlashAttribute("prevChapterTag", chapterTag);
+            redirectAttributes.addFlashAttribute("prevRestorationStatus", restorationStatus);
             return "redirect:/project/" + projectId + "/media";
         }
 
@@ -150,6 +174,20 @@ public class MediaController {
         Project project = projectService.findByIdAndOwner(projectId, user)
             .orElseThrow(() -> new IllegalArgumentException("Project not found or access denied"));
         PhotoAsset photo = loadPhoto(project, photoId);
+
+        List<String> validationErrors = new ArrayList<>();
+        if (caption != null && caption.length() > 255) {
+            validationErrors.add("Caption must not exceed 255 characters.");
+        }
+
+        if (chapterTag != null && chapterTag.length() > 100) {
+            validationErrors.add("Chapter tag must not exceed 100 characters.");
+        }
+
+        if (!validationErrors.isEmpty()) {
+            redirectAttributes.addFlashAttribute("validationErrors", validationErrors);
+            return "redirect:/project/" + projectId + "/media/" + photoId + "/edit";
+        }
 
         projectService.updatePhotoAsset(photo, caption, chapterTag, restorationStatus);
         redirectAttributes.addFlashAttribute("successMessage", "Photo details saved.");

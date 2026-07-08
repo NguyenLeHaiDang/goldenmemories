@@ -1880,3 +1880,112 @@ main { flex: 1; }
     letter-spacing: 0.11em;
     font-weight: 700;
 }
+
+/* ── Media/Photo Preview Thumbnail area ───────────────────────────────────── */
+.photo-card-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .photo-card-content {
+        flex-direction: column;
+    }
+}
+
+.photo-thumbnails {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.photo-thumbnail-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    background: var(--cream);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-thumbnail-wrapper:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-md);
+}
+
+.photo-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background: rgba(44, 26, 14, 0.75);
+    color: var(--white);
+    font-size: 0.68rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+}
+
+.thumbnail-badge.restored {
+    background: rgba(184, 131, 42, 0.9);
+}
+
+.photo-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ── Validation error message styling ──────────────────────────────────────── */
+.invalid-feedback {
+    color: #b32e2e;
+    font-size: 0.82rem;
+    margin-top: 4px;
+    display: block;
+    font-weight: 500;
+}
+
+.form-group.has-error input,
+.form-group.has-error select,
+input.is-invalid,
+select.is-invalid {
+    border-color: #b32e2e !important;
+    background-color: #fffcfc;
+}
+
+.error-summary {
+    background-color: #fff5f5;
+    border: 1px solid #fbc3c3;
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    color: #8b0000;
+}
+
+.error-summary h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #8b0000;
+}
+
+.error-summary ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+

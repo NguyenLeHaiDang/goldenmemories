@@ -36,6 +36,7 @@ public class WebSecurityConfig {
                     "/css/**",
                     "/js/**",
                     "/images/**",
+                    "/uploads/**",
                     "/favicon.ico",
                     "/h2-console/**"
                 ).permitAll()

@@ -84,6 +84,14 @@ public class StoryServiceImpl implements StoryService {
 
     // ── Private helpers ──────────────────────────────────────────────────────
 
+    @Override
+    public StoryEntry updateQrConfig(Long storyId, boolean qrProtected, String qrHint) {
+        StoryEntry entry = getOrThrow(storyId);
+        entry.setQrProtected(qrProtected);
+        entry.setQrHint(qrHint);
+        return storyEntryRepository.save(entry);
+    }
+
     private StoryEntry getOrThrow(Long id) {
         return storyEntryRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Story not found: " + id));

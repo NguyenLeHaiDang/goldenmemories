@@ -73,6 +73,18 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ApprovalRecord> approvals = new ArrayList<>();
 
+    // ── Phase 4: Print handoff ────────────────────────────────────────────────
+    private String printVendorName;
+    private String printDeliveryAddress;
+    @Column(length = 2000)
+    private String printNotes;
+
+    // ── Phase 4: Cloud archive ────────────────────────────────────────────────
+    private String archiveUrl;
+    private String archiveProvider;
+    @Column(length = 2000)
+    private String archiveNotes;
+
     // ── Convenience ──────────────────────────────────────────────────────────
 
     /** Advance to the next phase. No-op if already COMPLETED. */
@@ -111,4 +123,24 @@ public class Project {
     public List<StoryEntry> getStories() { return stories; }
     public List<PhotoAsset> getPhotos()  { return photos; }
     public List<ApprovalRecord> getApprovals() { return approvals; }
+
+    // ── Print handoff getters/setters ─────────────────────────────────────────
+    public String getPrintVendorName() { return printVendorName; }
+    public void setPrintVendorName(String printVendorName) { this.printVendorName = printVendorName; }
+
+    public String getPrintDeliveryAddress() { return printDeliveryAddress; }
+    public void setPrintDeliveryAddress(String printDeliveryAddress) { this.printDeliveryAddress = printDeliveryAddress; }
+
+    public String getPrintNotes() { return printNotes; }
+    public void setPrintNotes(String printNotes) { this.printNotes = printNotes; }
+
+    // ── Archive getters/setters ───────────────────────────────────────────────
+    public String getArchiveUrl() { return archiveUrl; }
+    public void setArchiveUrl(String archiveUrl) { this.archiveUrl = archiveUrl; }
+
+    public String getArchiveProvider() { return archiveProvider; }
+    public void setArchiveProvider(String archiveProvider) { this.archiveProvider = archiveProvider; }
+
+    public String getArchiveNotes() { return archiveNotes; }
+    public void setArchiveNotes(String archiveNotes) { this.archiveNotes = archiveNotes; }
 }

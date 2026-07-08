@@ -35,6 +35,12 @@ public interface ProjectService {
     /** Remove a photo asset from its project. */
     void deletePhotoAsset(PhotoAsset photo);
 
+    /** Save print handoff details on the project. */
+    Project saveHandoffDetails(Project project, String vendorName, String deliveryAddress, String notes);
+
+    /** Save cloud archive details on the project. */
+    Project saveArchiveDetails(Project project, String archiveUrl, String archiveProvider, String archiveNotes);
+
     /** Mark the project as completed after publishing handoff is finished. */
     Project completeProject(Project project);
 

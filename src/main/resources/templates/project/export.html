@@ -68,16 +68,19 @@
                 <article class="stack-card">
                     <h3>Print PDF</h3>
                     <p class="muted-text">Final interior manuscript and layout-ready content.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manuscript}" style="margin-top: 10px; display: inline-block;">Download Manuscript (.md)</a>
                 </article>
 
                 <article class="stack-card">
                     <h3>Image bundle</h3>
                     <p class="muted-text">Photos selected for inclusion, plus restoration-ready originals.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/images}" style="margin-top: 10px; display: inline-block;">Download Images ZIP</a>
                 </article>
 
                 <article class="stack-card">
                     <h3>Archive manifest</h3>
                     <p class="muted-text">Project summary, approval history, and delivery notes.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manifest}" style="margin-top: 10px; display: inline-block;">Download Manifest TXT</a>
                 </article>
             </section>
         </section>
