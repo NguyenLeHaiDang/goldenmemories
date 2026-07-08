@@ -25,6 +25,21 @@
 
         <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
 
+        <section class="card-grid" data-reveal style="margin-bottom: 24px;">
+            <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/story}">
+                <h3>Story workflow</h3>
+                <p>Continue prompt collection, transcript review, editing, and approval.</p>
+            </a>
+            <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/media}">
+                <h3>Media vault</h3>
+                <p>Review uploaded photos, restoration status, and chapter tags.</p>
+            </a>
+            <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/publish}">
+                <h3>Publishing handoff</h3>
+                <p>Check draft approvals, progress, and final completion status.</p>
+            </a>
+        </section>
+
         <div class="two-col" style="align-items: start; gap: 24px;">
             <section data-reveal>
                 <div class="section-heading">

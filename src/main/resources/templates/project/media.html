@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Media Vault | Ky Uc Vang')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page">
+        <section class="content-hero dashboard-hero" data-reveal>
+            <div>
+                <p class="eyebrow-dark">
+                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo; Media vault
+                </p>
+                <h1>Media vault</h1>
+                <p class="lead">
+                    Store, organize, and prepare family photos for restoration before publishing.
+                </p>
+            </div>
+            <div class="stack" style="min-width: min(280px, 100%);">
+                <div class="stack-card">
+                    <p class="story-card__label">Photo states</p>
+                    <p class="muted-text" style="margin: 0;">Track originals, restored assets, and skipped items from the same workspace.</p>
+                </div>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Publishing handoff</a>
+            </div>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
+        <div class="alert alert-error" th:if="${errorMessage}" th:text="${errorMessage}" data-reveal></div>
+
+        <section class="two-col" style="align-items: start; gap: 24px; margin-top: 24px;">
+            <div class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Upload photo</p>
+                <h2>Add an image to the vault</h2>
+                <p>
+                    Upload a family photo, add a short caption, and tag it to the right life stage or chapter.
+                </p>
+
+                <form th:action="@{/project/__${project.id}__/media}" method="post" enctype="multipart/form-data"
+                      class="form-stack" style="margin-top: 18px;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                    <label>
+                        Photo file
+                        <input type="file" name="photoFile" accept="image/*" required />
+                    </label>
+
+                    <label>
+                        Caption
+                        <input type="text" name="caption" placeholder="e.g. Family picnic in 1998" />
+                    </label>
+
+                    <label>
+                        Chapter tag
+                        <input type="text" name="chapterTag" placeholder="e.g. Childhood, Wedding, War years" />
+                    </label>
+
+                    <label>
+                        Restoration status
+                        <select name="restorationStatus">
+                            <option value="ORIGINAL" selected>Original</option>
+                            <option value="PROCESSING">Processing</option>
+                            <option value="RESTORED">Restored</option>
+                            <option value="SKIPPED">Skipped</option>
+                        </select>
+                    </label>
+
+                    <button class="button button-primary" type="submit">Upload to vault</button>
+                </form>
+            </div>
+
+            <div class="stack" data-reveal>
+                <div class="stack-card">
+                    <p class="story-card__label">Photo states</p>
+                    <p class="muted-text" style="margin: 0;">Track originals, restored assets, and skipped items from the same workspace.</p>
+                </div>
+                <div class="stack-card">
+                    <p class="story-card__label">Storage path</p>
+                    <p class="muted-text" style="margin: 0;">
+                        Files are saved locally under <strong>uploads/project-<span th:text="${project.id}">1</span></strong>
+                        for this development build.
+                    </p>
+                </div>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Publishing handoff</a>
+            </div>
+        </section>
+
+        <section class="stats-row" data-reveal>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photos.size()}">0</p>
+                <p class="stat-label">Total photos</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).RESTORED] ?: 0}">0</p>
+                <p class="stat-label">Restored</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).PROCESSING] ?: 0}">0</p>
+                <p class="stat-label">Processing</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).ORIGINAL] ?: 0}">0</p>
+                <p class="stat-label">Originals</p>
+            </div>
+        </section>
+
+        <div class="alert alert-info" data-reveal style="margin-top: 24px;">
+            <strong>Phase 4 starter:</strong>
+            This screen is now the dedicated place for photo preparation before final export and archive handoff.
+        </div>
+
+        <section class="card-grid" data-reveal>
+            <div class="info-card info-card--muted">
+                <h3>Upload queue</h3>
+                <p>Photo upload UI is the next backend slice to add. The data model is already ready.</p>
+            </div>
+            <div class="info-card info-card--muted">
+                <h3>Restoration flow</h3>
+                <p>Images can later move from original to processing to restored once the service lands.</p>
+            </div>
+            <div class="info-card info-card--muted">
+                <h3>Chapter tagging</h3>
+                <p>Use the chapter tag to map each photo to the right memory segment or life stage.</p>
+            </div>
+        </section>
+
+        <section class="stack" style="margin-top: 26px;" data-reveal>
+            <div class="section-heading">
+                <p class="eyebrow-dark">Photo list</p>
+                <h2 th:text="${#lists.isEmpty(photos)} ? 'No photos uploaded yet' : 'Photos ready for memoir layout'">Photos</h2>
+            </div>
+
+            <div th:if="${#lists.isEmpty(photos)}" class="empty-card">
+                <p class="eyebrow-dark">Empty vault</p>
+                <h2 style="margin-top: 8px;">No photos uploaded yet.</h2>
+                <p class="muted-text">This is the right place for the next phase-4 backend slice: a simple upload form and storage path capture.</p>
+            </div>
+
+            <article class="stack-card" th:each="photo : ${photos}">
+                <div class="story-card__top">
+                    <div>
+                        <p class="story-card__label" th:text="${photo.originalFilename}">filename</p>
+                        <h3 th:text="${photo.caption} ?: 'Untitled photo'">Untitled photo</h3>
+                    </div>
+                    <div class="story-card__badges">
+                        <span class="badge" th:text="${photo.restorationStatus}">ORIGINAL</span>
+                        <span class="badge" th:if="${photo.chapterTag}" th:text="${photo.chapterTag}">Chapter</span>
+                    </div>
+                </div>
+                <p class="muted-text">
+                    Stored at <span th:text="${photo.storagePath}">path</span>
+                </p>
+                <p class="muted-text" th:if="${photo.restoredStoragePath != null}">
+                    Restored asset: <span th:text="${photo.restoredStoragePath}">restored path</span>
+                </p>
+                <div class="story-card__actions">
+                    <form class="inline-form photo-status-form"
+                          th:action="@{/project/__${project.id}__/media/__${photo.id}__/status}"
+                          method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <label class="sr-only" th:for="'status-' + ${photo.id}">Restoration status</label>
+                        <select th:id="'status-' + ${photo.id}" name="restorationStatus">
+                            <option th:each="status : ${T(com.goldenmemories.model.PhotoAsset.RestorationStatus).values()}"
+                                    th:value="${status}"
+                                    th:text="${status}"
+                                    th:selected="${status == photo.restorationStatus}">ORIGINAL</option>
+                        </select>
+                        <button class="button button-secondary btn-sm" type="submit">Save status</button>
+                    </form>
+
+                    <a class="button button-secondary btn-sm"
+                       th:href="@{/project/__${project.id}__/media/__${photo.id}__/edit}">Edit details</a>
+
+                    <form class="inline-form"
+                          th:action="@{/project/__${project.id}__/media/__${photo.id}__/delete}"
+                          method="post"
+                          onsubmit="return confirm('Delete this photo from the vault?');">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <button class="button button-secondary btn-sm" type="submit">Delete</button>
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Edit Photo | Ky Uc Vang')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page auth-layout auth-layout--split">
+        <section class="auth-intro" data-reveal>
+            <p class="eyebrow-dark">Media vault</p>
+            <h1>Edit photo details without leaving the workspace.</h1>
+            <p class="hero-lead">
+                Update the caption, chapter tag, and restoration state for this image.
+            </p>
+            <ul class="auth-copy-list">
+                <li th:text="${photo.originalFilename}">Original filename</li>
+                <li th:text="'Stored at ' + ${photo.storagePath}">Storage path</li>
+                <li th:if="${photo.restoredStoragePath != null}" th:text="'Restored asset: ' + ${photo.restoredStoragePath}">Restored asset</li>
+            </ul>
+        </section>
+
+        <section class="auth-card auth-card--panel wide" data-reveal>
+            <p class="eyebrow-dark">Edit photo</p>
+            <h1 th:text="${photo.caption} ?: 'Untitled photo'">Untitled photo</h1>
+
+            <form th:action="@{/project/__${project.id}__/media/__${photo.id}__/edit}" method="post" class="form-stack">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                <label>
+                    Caption
+                    <input type="text" name="caption" th:value="${photo.caption}" placeholder="Short descriptive caption" />
+                </label>
+
+                <label>
+                    Chapter tag
+                    <input type="text" name="chapterTag" th:value="${photo.chapterTag}" placeholder="Childhood, Wedding, War years..." />
+                </label>
+
+                <label>
+                    Restoration status
+                    <select name="restorationStatus">
+                        <option th:each="status : ${T(com.goldenmemories.model.PhotoAsset.RestorationStatus).values()}"
+                                th:value="${status}"
+                                th:text="${status}"
+                                th:selected="${status == photo.restorationStatus}">ORIGINAL</option>
+                    </select>
+                </label>
+
+                <button class="button button-primary" type="submit">Save changes</button>
+            </form>
+
+            <div class="auth-links">
+                <a th:href="@{/project/__${project.id}__/media}">Back to media vault</a>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

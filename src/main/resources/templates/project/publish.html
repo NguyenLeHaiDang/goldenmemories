@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/head :: head('Publishing Handoff | Ky Uc Vang')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page">
+        <section class="content-hero dashboard-hero" data-reveal>
+            <div>
+                <p class="eyebrow-dark">
+                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo; Publishing
+                </p>
+                <h1>Publishing handoff</h1>
+                <p class="lead">
+                    Finalize the memoir package, prepare archive placeholders, and mark the project complete when delivery is done.
+                </p>
+            </div>
+            <div class="stack" style="min-width: min(300px, 100%);">
+                <div class="stack-card">
+                    <p class="story-card__label">Current phase</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${project.currentPhase}">PUBLISHING</h3>
+                    <p class="muted-text" style="margin: 0;">
+                        The approval workflow has handed off to delivery and archive preparation.
+                    </p>
+                </div>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/media}">Media vault</a>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish/export}">Open export handoff</a>
+            </div>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
+
+        <section class="stats-row" data-reveal>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${storyCount}">0</p>
+                <p class="stat-label">Stories included</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photoCount}">0</p>
+                <p class="stat-label">Photos prepared</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${latestApproval != null ? latestApproval.draftVersion : '—'}">—</p>
+                <p class="stat-label">Latest draft</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${latestApproval != null ? latestApproval.decision : 'PENDING'}">PENDING</p>
+                <p class="stat-label">Review state</p>
+            </div>
+        </section>
+
+        <div class="two-col" style="align-items: start; margin-top: 26px;">
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Completion checklist</p>
+                <h2>What still needs to happen?</h2>
+                <ul class="check-list">
+                    <li>Verify the approved draft and final layout.</li>
+                    <li>Confirm photo restoration or archive copies are available.</li>
+                <li>Prepare print/export handoff or cloud storage destination.</li>
+                <li>Mark the project complete once delivery is finished.</li>
+            </ul>
+                <form th:action="@{/project/__${project.id}__/publish/complete}" method="post" style="margin-top: 20px;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button class="button button-primary" type="submit">Mark project complete</button>
+                </form>
+            </section>
+
+            <section class="stack" data-reveal>
+                <div class="section-heading">
+                    <p class="eyebrow-dark">Approval history</p>
+                    <h2>Recent draft decisions</h2>
+                </div>
+
+                <div th:if="${#lists.isEmpty(approvals)}" class="empty-card">
+                    <p>No draft decisions yet.</p>
+                </div>
+
+                <article class="stack-card" th:each="approval : ${approvals}">
+                    <div class="story-card__top">
+                        <div>
+                            <p class="story-card__label" th:text="${approval.draftVersion}">v1</p>
+                            <h3 th:text="${approval.decision}">PENDING</h3>
+                        </div>
+                        <span class="badge" th:text="${approval.decision}">PENDING</span>
+                    </div>
+                    <p class="muted-text" th:if="${approval.comments}" th:text="${approval.comments}">comments</p>
+                    <p class="muted-text" th:unless="${approval.comments}">No reviewer notes yet.</p>
+                </article>
+            </section>
+        </div>
+
+        <section class="card-grid" style="margin-top: 26px;" data-reveal>
+            <div class="info-card info-card--muted">
+                <h3>Print handoff</h3>
+                <p>Use this step for export files, print packaging, and delivery coordination.</p>
+            </div>
+            <div class="info-card info-card--muted">
+                <h3>Cloud archive</h3>
+                <p>Reserved for the final secure archive location once delivery is complete.</p>
+            </div>
+            <div class="info-card info-card--muted">
+                <h3>QR access</h3>
+                <p>Phase 4 keeps QR-protected content as a placeholder until the protected delivery flow is added.</p>
+            </div>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

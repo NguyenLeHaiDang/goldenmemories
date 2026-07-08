@@ -39,10 +39,10 @@
         <div th:if="${hasProject}" class="dashboard-layout">
             <section class="phase-section" data-reveal>
                 <p class="eyebrow-dark">Project phase</p>
-                <h2 th:text="${summary.project().title()}">Project title</h2>
+                <h2 th:text="${summary.project.title}">Project title</h2>
                 <div class="phase-bar">
                     <div th:each="phase : ${T(com.goldenmemories.model.Project.Phase).values()}"
-                         th:classappend="${phase == summary.project().currentPhase()} ? 'phase-step active' : (${phase.ordinal() < summary.project().currentPhase().ordinal()} ? 'phase-step done' : 'phase-step')"
+                         th:classappend="${phase == summary.project.currentPhase} ? 'phase-step active' : (${phase.ordinal() < summary.project.currentPhase.ordinal()} ? 'phase-step done' : 'phase-step')"
                          th:text="${phase.name().replace('_',' ')}">PHASE</div>
                 </div>
             </section>
@@ -67,13 +67,13 @@
             </section>
 
             <section class="card-grid" data-reveal>
-                <a class="info-card info-card--link" th:href="@{/project/__${summary.project().id()}__}">
+                <a class="info-card info-card--link" th:href="@{/project/__${summary.project.id}__}">
                     <h3>Project overview</h3>
                     <p>View stories, photos, approvals, and the full project timeline.</p>
                 </a>
 
                 <a class="info-card info-card--link"
-                   th:href="@{/project/__${summary.project().id()}__/story}">
+                   th:href="@{/project/__${summary.project.id}__/story}">
                     <h3>Story timeline</h3>
                     <p>Manage prompts, review transcripts, edit memoir content, and approve stories.</p>
                 </a>
@@ -88,15 +88,17 @@
                     <p th:unless="${summary.parentProfileSet()}">No parent profile yet. Add contact details to begin story collection.</p>
                 </a>
 
-                <div class="info-card info-card--muted">
-                    <h3>Media vault <span class="badge badge-soon">Phase 2</span></h3>
-                    <p>Upload, sort, and restore historical photos. Available once story collection begins.</p>
-                </div>
+                <a class="info-card info-card--link"
+                   th:href="@{/project/__${summary.project.id}__/media}">
+                    <h3>Media vault <span class="badge badge-live">Phase 4</span></h3>
+                    <p>Upload, sort, and restore historical photos for the publishing handoff.</p>
+                </a>
 
-                <div class="info-card info-card--muted">
-                    <h3>Draft approval <span class="badge badge-soon">Phase 3</span></h3>
-                    <p>Review manuscript drafts before print publishing.</p>
-                </div>
+                <a class="info-card info-card--link"
+                   th:href="@{/project/__${summary.project.id}__/publish}">
+                    <h3>Publishing handoff <span class="badge badge-live">Phase 4</span></h3>
+                    <p>Review approvals, confirm story counts, and mark the memoir ready for completion.</p>
+                </a>
 
                 <a class="info-card info-card--link" th:href="@{/editor/queue}">
                     <h3>Editor queue</h3>
@@ -104,7 +106,7 @@
                 </a>
 
                 <a class="info-card info-card--link"
-                   th:href="@{/project/__${summary.project().id()}__/approval/review}">
+                   th:href="@{/project/__${summary.project.id}__/approval/review}">
                     <h3>Draft approval</h3>
                     <p>Submit and review memoir drafts. Record decisions and track revision history.</p>
                 </a>

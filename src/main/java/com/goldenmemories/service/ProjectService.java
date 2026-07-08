@@ -1,6 +1,7 @@
 package com.goldenmemories.service;
 
 import com.goldenmemories.model.ParentProfile;
+import com.goldenmemories.model.PhotoAsset;
 import com.goldenmemories.model.Project;
 import com.goldenmemories.model.User;
 
@@ -21,6 +22,21 @@ public interface ProjectService {
     /** Save or update the parent profile for a user. */
     ParentProfile saveParentProfile(User owner, String parentName, String relation,
                                     String zaloContact, String additionalPhone, String notes);
+
+    /** Persist a new photo asset for a project. */
+    PhotoAsset addPhotoAsset(Project project, String originalFilename, String storagePath,
+                             String caption, String chapterTag,
+                             PhotoAsset.RestorationStatus restorationStatus);
+
+    /** Update the editable metadata for a photo asset. */
+    PhotoAsset updatePhotoAsset(PhotoAsset photo, String caption, String chapterTag,
+                                PhotoAsset.RestorationStatus restorationStatus);
+
+    /** Remove a photo asset from its project. */
+    void deletePhotoAsset(PhotoAsset photo);
+
+    /** Mark the project as completed after publishing handoff is finished. */
+    Project completeProject(Project project);
 
     /** Retrieve the parent profile for a user, if it exists. */
     Optional<ParentProfile> findParentProfile(User owner);

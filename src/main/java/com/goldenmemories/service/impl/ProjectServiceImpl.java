@@ -1,6 +1,7 @@
 package com.goldenmemories.service.impl;
 
 import com.goldenmemories.model.ParentProfile;
+import com.goldenmemories.model.PhotoAsset;
 import com.goldenmemories.model.Project;
 import com.goldenmemories.model.StoryEntry;
 import com.goldenmemories.model.User;
@@ -68,6 +69,50 @@ public class ProjectServiceImpl implements ProjectService {
         profile.setAdditionalPhone(additionalPhone);
         profile.setNotes(notes);
         return parentProfileRepository.save(profile);
+    }
+
+    @Override
+    public PhotoAsset addPhotoAsset(Project project,
+                                    String originalFilename,
+                                    String storagePath,
+                                    String caption,
+                                    String chapterTag,
+                                    PhotoAsset.RestorationStatus restorationStatus) {
+        PhotoAsset photo = new PhotoAsset();
+        photo.setProject(project);
+        photo.setOriginalFilename(originalFilename);
+        photo.setStoragePath(storagePath);
+        photo.setCaption(caption);
+        photo.setChapterTag(chapterTag);
+        photo.setRestorationStatus(restorationStatus);
+        project.getPhotos().add(photo);
+        return photoAssetRepository.save(photo);
+    }
+
+    @Override
+    public PhotoAsset updatePhotoAsset(PhotoAsset photo,
+                                       String caption,
+                                       String chapterTag,
+                                       PhotoAsset.RestorationStatus restorationStatus) {
+        photo.setCaption(caption);
+        photo.setChapterTag(chapterTag);
+        photo.setRestorationStatus(restorationStatus);
+        return photoAssetRepository.save(photo);
+    }
+
+    @Override
+    public void deletePhotoAsset(PhotoAsset photo) {
+        Project project = photo.getProject();
+        if (project != null) {
+            project.getPhotos().remove(photo);
+        }
+        photoAssetRepository.delete(photo);
+    }
+
+    @Override
+    public Project completeProject(Project project) {
+        project.setCurrentPhase(Project.Phase.COMPLETED);
+        return projectRepository.save(project);
     }
 
     @Override
