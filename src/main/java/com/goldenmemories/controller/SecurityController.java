@@ -1,5 +1,4 @@
-﻿package com.goldenmemories.controller;
-
+package com.goldenmemories.controller;
 import com.goldenmemories.model.Project;
 import com.goldenmemories.model.StoryEntry;
 import com.goldenmemories.model.User;
