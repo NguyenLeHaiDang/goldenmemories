@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Contact | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Liên hệ | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Talk to us</p>
-            <h1>Request a consultation.</h1>
+            <p class="eyebrow-dark">Liên hệ tư vấn</p>
+            <h1>Gửi yêu cầu tư vấn.</h1>
             <p class="hero-lead">
-                Tell us which family story you want to preserve and we’ll route you into the right
-                onboarding path, package, and next step.
+                Hãy cho chúng tôi biết gia đình bạn muốn lưu giữ điều gì, chúng tôi sẽ hướng bạn
+                vào đúng gói dịch vụ, đúng luồng onboarding và bước tiếp theo.
             </p>
             <ul class="auth-copy-list">
-                <li>Best for families that want help choosing a package.</li>
-                <li>Also works as the first step before registration.</li>
-                <li>Fits the same visual style as the homepage hero.</li>
+                <li>Phù hợp cho gia đình cần hỗ trợ chọn gói dịch vụ.</li>
+                <li>Cũng có thể dùng như bước đầu tiên trước khi đăng ký.</li>
+                <li>Giữ cùng phong cách hình ảnh với phần hero trang chủ.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel" data-reveal>
-            <p class="eyebrow">Talk to us</p>
-            <h1>Request a consultation</h1>
+            <p class="eyebrow">Nhận tư vấn</p>
+            <h1>Gửi yêu cầu tư vấn</h1>
             <div class="alert alert-success" th:if="${contactSuccess}" th:text="${contactSuccess}"></div>
             <form th:action="@{/contact}" method="post" th:object="${contactForm}" class="form-stack">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <label>
-                    Full name
+                    Họ và tên
                     <input type="text" th:field="*{fullName}" />
                 </label>
                 <label>
@@ -34,11 +34,11 @@
                     <input type="email" th:field="*{email}" />
                 </label>
                 <label>
-                    Message
+                    Nội dung cần lưu giữ
                     <textarea th:field="*{message}" rows="5"
-                              placeholder="Tell us what you want to build..."></textarea>
+                              placeholder="Ví dụ: viết hồi ký cho bố, kết nối Zalo của mẹ, theo dõi bản thảo..."></textarea>
                 </label>
-                <button class="button button-primary" type="submit">Send message</button>
+                <button class="button button-primary" type="submit">Gửi yêu cầu</button>
             </form>
         </section>
     </main>

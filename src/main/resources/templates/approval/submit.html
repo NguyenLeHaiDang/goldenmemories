@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Submit Draft | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Gửi bản thảo | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout">
         <section class="auth-card wide">
             <p class="eyebrow">
-                <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Submit draft
+                <a th:href="@{/project/__${project.id}__/story}">Câu chuyện</a> &rsaquo; Gửi bản thảo
             </p>
-            <h1>Submit for review</h1>
+            <h1>Gửi để duyệt</h1>
 
             <div class="alert alert-info" style="margin-top: 14px;">
-                <strong th:text="${approvedStoryCount}">0</strong> approved stories will be included in this draft.
+                <strong th:text="${approvedStoryCount}">0</strong> câu chuyện đã duyệt sẽ được đưa vào bản thảo này.
             </div>
 
             <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
@@ -21,31 +21,30 @@
                   method="post" class="form-stack" style="margin-top: 16px;">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <label>
-                    Draft version
+                    Phiên bản bản thảo
                     <input type="text" name="draftVersion" th:value="${nextVersion}"
-                           placeholder="e.g. v1" />
+                           placeholder="Ví dụ: v1" />
                 </label>
-                <button class="button button-primary" type="submit">Submit draft</button>
+                <button class="button button-primary" type="submit">Gửi bản thảo</button>
             </form>
 
-            <!-- Previous submissions -->
             <div th:if="${!#lists.isEmpty(approvalHistory)}" style="margin-top: 28px;">
-                <h2>Previous submissions</h2>
+                <h2>Các lần gửi trước</h2>
                 <div class="stack">
                     <div class="stack-card" th:each="approval : ${approvalHistory}">
-                        <h3>Draft <span th:text="${approval.draftVersion}">v1</span></h3>
+                        <h3>Bản nháp <span th:text="${approval.draftVersion}">v1</span></h3>
                         <p>
                             <span th:class="'badge badge-decision-' + ${approval.decision.name().toLowerCase()}"
-                                  th:text="${approval.decision}">PENDING</span>
+                                  th:text="${approval.decision}">Đang chờ</span>
                         </p>
                         <p th:if="${approval.comments}" class="muted-text"
-                           th:text="${approval.comments}">comments</p>
+                           th:text="${approval.comments}">Ghi chú</p>
                     </div>
                 </div>
             </div>
 
             <div class="auth-links">
-                <a th:href="@{/project/__${project.id}__/story}">Back to stories</a>
+                <a th:href="@{/project/__${project.id}__/story}">Quay lại danh sách câu chuyện</a>
             </div>
         </section>
     </main>

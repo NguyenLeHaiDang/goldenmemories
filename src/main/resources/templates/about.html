@@ -1,43 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('About | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Về chúng tôi | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <main class="content-page">
         <section class="content-hero">
-            <p class="eyebrow-dark">About the build</p>
-            <h1>Built as an MVC family-memory platform.</h1>
+            <p class="eyebrow-dark">Giới thiệu xây dựng</p>
+            <h1>Được xây như một nền tảng MVC cho hồi ký gia đình.</h1>
             <p class="lead">
-                The technical plan focuses on identity, project state, story collection, editing, and
-                publishing. Business storytelling stays out of the implementation path.
+                Kế hoạch kỹ thuật tập trung vào danh tính, trạng thái dự án, thu thập câu chuyện, chỉnh sửa và
+                xuất bản. Phần kể chuyện kinh doanh không đi vào luồng triển khai.
             </p>
         </section>
 
         <section class="two-col">
             <article class="prose-card">
-                <p class="section-kicker">Architecture</p>
-                <h2>How the app is structured</h2>
+                <p class="section-kicker">Kiến trúc</p>
+                <h2>Cách ứng dụng được tổ chức</h2>
                 <p>
-                    Spring Boot controllers route each screen, service layers manage project state,
-                    Thymeleaf renders the views, and static CSS/JS controls the user experience.
+                    Controller Spring Boot điều hướng từng màn hình, service quản lý trạng thái dự án,
+                    Thymeleaf render view, còn CSS/JS tĩnh điều khiển trải nghiệm người dùng.
                 </p>
                 <p>
-                    That keeps the project easy to reason about as we add persistence, authentication,
-                    workflow, and publishing screens in sequence.
+                    Nhờ vậy dự án dễ theo dõi khi ta thêm lưu trữ, xác thực, luồng công việc và màn hình xuất bản theo thứ tự.
                 </p>
             </article>
 
             <article class="prose-card accent">
-                <p class="section-kicker">Implementation phases</p>
-                <h2>What comes next in the roadmap</h2>
+                <p class="section-kicker">Các giai đoạn triển khai</p>
+                <h2>Phần tiếp theo trên lộ trình</h2>
                 <ul class="check-list">
-                    <li>Identity and onboarding</li>
-                    <li>Core entities and dashboard state</li>
-                    <li>Story editor and approval workflow</li>
-                    <li>Publishing handoff and archive stubs</li>
-                    <li>Enhancements like AI and reminders later</li>
+                    <li>Định danh và onboarding</li>
+                    <li>Thực thể cốt lõi và trạng thái bảng điều khiển</li>
+                    <li>Biên tập câu chuyện và luồng phê duyệt</li>
+                    <li>Bàn giao xuất bản và khung lưu trữ</li>
+                    <li>Các nâng cấp như AI và nhắc việc ở giai đoạn sau</li>
                 </ul>
             </article>
         </section>

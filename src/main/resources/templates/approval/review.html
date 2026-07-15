@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Review Draft | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Xem bản thảo | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -8,27 +8,26 @@
 
         <section class="content-hero">
             <p class="eyebrow">
-                <a th:href="@{/dashboard}">Dashboard</a> &rsaquo;
-                <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo;
-                Draft review
+                <a th:href="@{/dashboard}">Bảng điều khiển</a> &rsaquo;
+                <a th:href="@{/project/__${project.id}__}">Dự án</a> &rsaquo;
+                Duyệt bản thảo
             </p>
-            <h1>Draft review</h1>
-            <p class="lead" th:text="${project.title}">Project title</p>
+            <h1>Duyệt bản thảo</h1>
+            <p class="lead" th:text="${project.title}">Tiêu đề dự án</p>
         </section>
 
         <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
         <div class="two-col" style="align-items: start; gap: 24px;">
 
-            <!-- Pending approval action -->
             <div class="stack">
                 <div th:if="${latestApproval != null and latestApproval.decision.name() == 'PENDING'}"
                      class="prose-card">
                     <h2>
-                        Pending: Draft
+                        Đang chờ: bản nháp
                         <span th:text="${latestApproval.draftVersion}">v1</span>
                     </h2>
-                    <p class="muted-text">Record your decision on this draft below.</p>
+                    <p class="muted-text">Ghi quyết định của bạn cho bản nháp này bên dưới.</p>
 
                     <form th:action="@{/project/__${project.id}__/approval/__${latestApproval.id}__/decide}"
                           method="post" th:object="${approvalForm}" class="form-stack"
@@ -36,7 +35,7 @@
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                         <fieldset class="package-fieldset">
-                            <legend>Decision</legend>
+                            <legend>Quyết định</legend>
                             <div class="stack" style="gap: 8px;">
                                 <label th:each="d : ${decisions}" class="decision-option">
                                     <input type="radio" th:field="*{decision}" th:value="${d}" />
@@ -48,41 +47,40 @@
                         </fieldset>
 
                         <label>
-                            Comments
+                            Ghi chú
                             <textarea th:field="*{comments}" rows="4"
-                                      placeholder="Feedback for the editorial team..."></textarea>
+                                      placeholder="Góp ý cho đội biên tập..."></textarea>
                         </label>
 
-                        <button class="button button-primary" type="submit">Record decision</button>
+                        <button class="button button-primary" type="submit">Ghi nhận quyết định</button>
                     </form>
                 </div>
 
                 <div th:if="${latestApproval == null}" class="prose-card">
-                    <p>No draft has been submitted yet.</p>
+                    <p>Chưa có bản thảo nào được gửi.</p>
                     <a class="button button-primary" style="margin-top: 12px;"
-                       th:href="@{/project/__${project.id}__/approval/submit}">Submit first draft</a>
+                       th:href="@{/project/__${project.id}__/approval/submit}">Gửi bản thảo đầu tiên</a>
                 </div>
 
                 <div th:if="${latestApproval != null and latestApproval.decision.name() != 'PENDING'}"
                      class="prose-card">
-                    <h2>Latest draft: <span th:text="${latestApproval.draftVersion}">v1</span></h2>
+                    <h2>Bản nháp mới nhất: <span th:text="${latestApproval.draftVersion}">v1</span></h2>
                     <p>
                         <span th:class="'badge badge-decision-' + ${latestApproval.decision.name().toLowerCase()}"
                               th:text="${latestApproval.decision}">DECISION</span>
                     </p>
                     <p th:if="${latestApproval.comments}" class="muted-text"
-                       th:text="${latestApproval.comments}">comments</p>
+                       th:text="${latestApproval.comments}">Ghi chú</p>
                     <a class="button button-secondary" style="margin-top: 14px;"
-                       th:href="@{/project/__${project.id}__/approval/submit}">Submit new draft</a>
+                       th:href="@{/project/__${project.id}__/approval/submit}">Gửi bản nháp mới</a>
                 </div>
             </div>
 
-            <!-- Approved stories preview -->
             <div class="stack">
                 <div class="prose-card">
-                    <h2>Approved stories</h2>
+                    <h2>Các câu chuyện đã duyệt</h2>
                     <div th:if="${#lists.isEmpty(stories)}" class="muted-text">
-                        No stories approved yet.
+                        Chưa có câu chuyện nào được duyệt.
                     </div>
                     <div class="stack" th:unless="${#lists.isEmpty(stories)}" style="margin-top: 14px; gap: 10px;">
                         <div th:each="story : ${stories}"
@@ -92,21 +90,20 @@
                             <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
                             <p class="muted-text" style="margin-top: 8px;"
                                th:if="${story.editedContent != null}"
-                               th:text="${#strings.abbreviate(story.editedContent, 200)}">excerpt</p>
+                               th:text="${#strings.abbreviate(story.editedContent, 200)}">Đoạn trích</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Approval history -->
                 <div class="prose-card" th:if="${!#lists.isEmpty(approvalHistory)}">
-                    <h2>Approval history</h2>
+                    <h2>Lịch sử phê duyệt</h2>
                     <div class="stack" style="margin-top: 12px; gap: 8px;">
                         <div class="stack-card" th:each="record : ${approvalHistory}">
-                            <strong>Draft <span th:text="${record.draftVersion}">v1</span></strong>
+                            <strong>Bản nháp <span th:text="${record.draftVersion}">v1</span></strong>
                             <span th:class="'badge badge-decision-' + ${record.decision.name().toLowerCase()}"
                                   th:text="${record.decision}">DECISION</span>
                             <p th:if="${record.comments}" class="muted-text"
-                               th:text="${record.comments}">comments</p>
+                               th:text="${record.comments}">Ghi chú</p>
                         </div>
                     </div>
                 </div>

@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Register | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Đăng ký | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Start a project</p>
-            <h1>Create the family account.</h1>
+            <p class="eyebrow-dark">Bắt đầu dự án</p>
+            <h1>Tạo tài khoản gia đình.</h1>
             <p class="hero-lead">
-                Sign up once, verify by email, then move directly into parent setup and the project dashboard.
+                Đăng ký một lần, xác thực qua email, sau đó đi thẳng vào bước thiết lập phụ huynh và bảng điều khiển.
             </p>
             <ul class="auth-copy-list">
-                <li>Adult children manage the account and project progress.</li>
-                <li>Email verification keeps the onboarding trail clear and secure.</li>
-                <li>The next step after signup is the OTP screen, then the workspace.</li>
+                <li>Người con sẽ quản lý tài khoản và tiến độ dự án.</li>
+                <li>Xác thực email giúp luồng onboarding rõ ràng và an toàn.</li>
+                <li>Sau khi đăng ký sẽ đến màn hình OTP, rồi vào không gian làm việc.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel" data-reveal>
-            <p class="eyebrow">Create account</p>
-            <h1>Register</h1>
+            <p class="eyebrow">Tạo tài khoản</p>
+            <h1>Đăng ký</h1>
 
             <form th:action="@{/register}" method="post" th:object="${registerForm}" class="form-stack">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label>
-                    Full name
-                    <input type="text" th:field="*{fullName}" placeholder="Your full name"
+                    Họ và tên
+                    <input type="text" th:field="*{fullName}" placeholder="Họ và tên của bạn"
                            th:classappend="${#fields.hasErrors('fullName')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('fullName')}"
                           th:errors="*{fullName}"></span>
@@ -35,33 +35,33 @@
 
                 <label>
                     Email
-                    <input type="email" th:field="*{email}" placeholder="you@example.com"
+                    <input type="email" th:field="*{email}" placeholder="ban@example.com"
                            th:classappend="${#fields.hasErrors('email')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('email')}"
                           th:errors="*{email}"></span>
                 </label>
 
                 <label>
-                    Phone
-                    <input type="text" th:field="*{phone}" placeholder="Phone number"
+                    Số điện thoại
+                    <input type="text" th:field="*{phone}" placeholder="Số điện thoại"
                            th:classappend="${#fields.hasErrors('phone')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('phone')}"
                           th:errors="*{phone}"></span>
                 </label>
 
                 <label>
-                    Password
-                    <input type="password" th:field="*{password}" placeholder="At least 8 characters"
+                    Mật khẩu
+                    <input type="password" th:field="*{password}" placeholder="Tối thiểu 8 ký tự"
                            th:classappend="${#fields.hasErrors('password')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('password')}"
                           th:errors="*{password}"></span>
                 </label>
 
-                <button class="button button-primary" type="submit">Send verification code</button>
+                <button class="button button-primary" type="submit">Gửi mã xác thực</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/login}">Already have an account? Sign in</a>
+                <a th:href="@{/login}">Đã có tài khoản? Đăng nhập</a>
             </div>
         </section>
     </main>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Project | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Dự án | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -9,15 +9,15 @@
         <section class="content-hero dashboard-hero" data-reveal>
             <div>
                 <p class="eyebrow-dark">
-                    <a th:href="@{/dashboard}">Dashboard</a> &rsaquo; Project
+                    <a th:href="@{/dashboard}">Bảng điều khiển</a> &rsaquo; Dự án
                 </p>
-                <h1 th:text="${project.title}">Project title</h1>
+                <h1 th:text="${project.title}">Tiêu đề dự án</h1>
                 <p class="lead">
-                    Package:
+                    Gói:
                     <strong th:text="${project.selectedPackage}">STANDARD</strong>
-                    &nbsp;·&nbsp; Phase:
+                    &nbsp;·&nbsp; Giai đoạn:
                     <strong th:text="${project.currentPhase.name().replace('_',' ')}">ONBOARDING</strong>
-                    &nbsp;·&nbsp; Created:
+                    &nbsp;·&nbsp; Ngày tạo:
                     <strong th:text="${project.createdAt}">date</strong>
                 </p>
             </div>
@@ -27,40 +27,40 @@
 
         <section class="card-grid" data-reveal style="margin-bottom: 24px;">
             <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/story}">
-                <h3>Story workflow</h3>
-                <p>Continue prompt collection, transcript review, editing, and approval.</p>
+                <h3>Luồng câu chuyện</h3>
+                <p>Tiếp tục thu thập câu hỏi, xem transcript, biên tập và phê duyệt nội dung.</p>
             </a>
             <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/media}">
-                <h3>Media vault</h3>
-                <p>Review uploaded photos, restoration status, and chapter tags.</p>
+                <h3>Kho ảnh</h3>
+                <p>Xem ảnh đã tải lên, trạng thái phục hồi và thẻ chương mục.</p>
             </a>
             <a class="info-card info-card--link" th:href="@{/project/__${project.id}__/publish}">
-                <h3>Publishing handoff</h3>
-                <p>Check draft approvals, progress, and final completion status.</p>
+                <h3>Bàn giao xuất bản</h3>
+                <p>Kiểm tra bản thảo, theo dõi tiến độ và trạng thái hoàn tất.</p>
             </a>
         </section>
 
         <div class="two-col" style="align-items: start; gap: 24px;">
             <section data-reveal>
                 <div class="section-heading">
-                    <p class="eyebrow-dark">Stories</p>
-                    <h2>Collected memories</h2>
+                    <p class="eyebrow-dark">Câu chuyện</p>
+                    <h2>Ký ức đã thu thập</h2>
                 </div>
                 <div th:if="${#lists.isEmpty(stories)}" class="prose-card">
-                    <p>No stories collected yet. Stories will appear here once the parent begins answering prompts.</p>
+                    <p>Chưa có câu chuyện nào. Nội dung sẽ xuất hiện ở đây khi phụ huynh bắt đầu trả lời câu hỏi.</p>
                 </div>
                 <div class="stack" th:unless="${#lists.isEmpty(stories)}">
                     <article class="stack-card" th:each="story : ${stories}">
                         <h3 th:text="${story.promptQuestion}">Prompt</h3>
                         <p>
-                            <span class="badge" th:text="${story.lifeStage}">STAGE</span>
-                            <span class="badge" th:text="${story.status}">STATUS</span>
+                            <span class="badge" th:text="${story.lifeStage}">Giai đoạn</span>
+                            <span class="badge" th:text="${story.status}">Trạng thái</span>
                         </p>
                         <p th:if="${story.editedContent != null}"
-                           th:text="${#strings.abbreviate(story.editedContent, 160)}">excerpt</p>
+                           th:text="${#strings.abbreviate(story.editedContent, 160)}">Đoạn trích</p>
                         <p th:if="${story.editedContent == null and story.rawTranscript != null}"
                            class="muted-text"
-                           th:text="${#strings.abbreviate(story.rawTranscript, 160)}">transcript</p>
+                           th:text="${#strings.abbreviate(story.rawTranscript, 160)}">Bản chép</p>
                     </article>
                 </div>
             </section>
@@ -68,11 +68,11 @@
             <div class="stack">
                 <section data-reveal>
                     <div class="section-heading">
-                        <p class="eyebrow-dark">Photos</p>
-                        <h2>Media vault</h2>
+                        <p class="eyebrow-dark">Ảnh</p>
+                        <h2>Kho ảnh</h2>
                     </div>
                     <div class="prose-card" th:if="${#lists.isEmpty(photos)}">
-                        <p>No photos uploaded yet.</p>
+                        <p>Chưa có ảnh nào được tải lên.</p>
                     </div>
                     <div class="stack" th:unless="${#lists.isEmpty(photos)}">
                         <article class="stack-card" th:each="photo : ${photos}">
@@ -82,24 +82,24 @@
                                 <span th:if="${photo.chapterTag}" class="badge"
                                       th:text="${photo.chapterTag}">chapter</span>
                             </p>
-                            <p th:if="${photo.caption}" th:text="${photo.caption}" class="muted-text">caption</p>
+                            <p th:if="${photo.caption}" th:text="${photo.caption}" class="muted-text">Chú thích</p>
                         </article>
                     </div>
                 </section>
 
                 <section data-reveal>
                     <div class="section-heading">
-                        <p class="eyebrow-dark">Draft review</p>
-                        <h2>Approval history</h2>
+                        <p class="eyebrow-dark">Duyệt bản nháp</p>
+                        <h2>Lịch sử phê duyệt</h2>
                     </div>
                     <div class="prose-card" th:if="${#lists.isEmpty(approvals)}">
-                        <p>No draft submissions yet.</p>
+                        <p>Chưa có bản nháp nào được gửi.</p>
                     </div>
                     <div class="stack" th:unless="${#lists.isEmpty(approvals)}">
                         <article class="stack-card" th:each="approval : ${approvals}">
-                            <h3>Draft <span th:text="${approval.draftVersion}">v1</span></h3>
-                            <p><span class="badge" th:text="${approval.decision}">PENDING</span></p>
-                            <p th:if="${approval.comments}" th:text="${approval.comments}" class="muted-text">comments</p>
+                            <h3>Bản nháp <span th:text="${approval.draftVersion}">v1</span></h3>
+                            <p><span class="badge" th:text="${approval.decision}">Đang chờ</span></p>
+                            <p th:if="${approval.comments}" th:text="${approval.comments}" class="muted-text">Ghi chú</p>
                         </article>
                     </div>
                 </section>

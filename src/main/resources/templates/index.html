@@ -11,14 +11,14 @@
             <div class="hero-v3__glow hero-v3__glow--right"></div>
             <div class="container hero-v3__content">
                 <div class="hero-copy">
-                    <p class="eyebrow-dark">Family memoir platform</p>
+                    <p class="eyebrow-dark">Nền tảng lưu giữ hồi ký gia đình</p>
                     <h1>
-                        Lưu giữ câu chuyện của bố mẹ trong một workspace số duy nhất.
+                        Lưu giữ câu chuyện của bố mẹ trong một không gian số duy nhất.
                     </h1>
                     <p class="hero-lead">
                         Ký Ức Vàng biến toàn bộ hành trình viết hồi ký thành một sản phẩm MVC rõ ràng:
-                        đăng ký, xác thực OTP, kết nối hồ sơ gia đình, theo dõi tiến độ, biên tập, duyệt bản thảo
-                        và bàn giao bản in.
+                        đăng ký, xác thực OTP, kết nối hồ sơ gia đình, theo dõi tiến độ, biên tập,
+                        duyệt bản thảo và bàn giao bản in.
                     </p>
                     <div class="hero-actions">
                         <a class="button button-primary" th:href="@{/register}">Bắt đầu dự án</a>
@@ -36,7 +36,7 @@
                         </article>
                         <article class="metric-card">
                             <span class="metric-card__value">1</span>
-                            <span class="metric-card__label">workspace được bảo vệ</span>
+                            <span class="metric-card__label">không gian làm việc được bảo vệ</span>
                         </article>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
 
                         <label>
                             <span>Email</span>
-                            <input type="email" th:field="*{email}" placeholder="you@example.com" />
+                            <input type="email" th:field="*{email}" placeholder="ban@example.com" />
                         </label>
 
                         <label class="hero-form__full">
@@ -85,7 +85,7 @@
                 <div class="signal-pill">Đăng ký</div>
                 <div class="signal-pill">OTP</div>
                 <div class="signal-pill">Hồ sơ bố mẹ</div>
-                <div class="signal-pill">Dashboard</div>
+                <div class="signal-pill">Bảng điều khiển</div>
                 <div class="signal-pill">Editor</div>
                 <div class="signal-pill">Phê duyệt</div>
                 <div class="signal-pill">Xuất bản</div>
@@ -95,7 +95,7 @@
         <section class="section-pad section-pad--spacious" data-reveal>
             <div class="container">
                 <div class="section-head">
-                    <p class="section-kicker">Screen flow</p>
+                    <p class="section-kicker">Luồng màn hình</p>
                     <h2>Thiết kế xoay quanh luồng sản phẩm thật</h2>
                     <p class="section-summary">
                         Từ trang đầu tiên đến bản in cuối cùng, mọi màn hình đều phục vụ cùng một hành trình:
@@ -119,11 +119,11 @@
         <section class="section-pad bg-cream" data-reveal>
             <div class="container">
                 <div class="section-head">
-                    <p class="section-kicker">Product screens</p>
+                    <p class="section-kicker">Các màn hình sản phẩm</p>
                     <h2>Những màn hình cốt lõi của MVP</h2>
                     <p class="section-summary">
-                        Đây là cách chúng ta biến sơ đồ màn hình thành các page thật trong MVC:
-                        càng ít đoán mò, càng dễ build đúng backend.
+                        Đây là cách chúng ta biến sơ đồ màn hình thành các trang thật trong MVC:
+                        càng ít đoán, càng dễ build đúng backend.
                     </p>
                 </div>
 
@@ -140,7 +140,7 @@
         <section class="section-pad" data-reveal>
             <div class="container">
                 <div class="section-head">
-                    <p class="section-kicker">Technical core</p>
+                    <p class="section-kicker">Lõi kỹ thuật</p>
                     <h2>Những năng lực công nghệ sẽ đi vào code trước</h2>
                     <p class="section-summary">
                         Phần này phản ánh đúng kế hoạch triển khai: auth trước, dữ liệu cốt lõi sau,
@@ -161,7 +161,7 @@
         <section class="section-pad bg-cream" data-reveal>
             <div class="container split-section">
                 <div class="split-text">
-                    <p class="section-kicker">Who uses it</p>
+                    <p class="section-kicker">Ai sẽ sử dụng</p>
                     <h2 class="section-title">Mỗi vai trò một nhiệm vụ rõ ràng</h2>
                     <div class="roles-stack">
                         <article class="role-item" th:each="useCase : ${useCases}">
@@ -172,24 +172,24 @@
                 </div>
 
                 <div class="glass-card-v2">
-                    <p class="section-kicker">MVP priority</p>
+                    <p class="section-kicker">Ưu tiên MVP</p>
                     <h2>Đi theo đúng thứ tự triển khai</h2>
                     <ol class="journey-list">
                         <li>
-                            <strong>Identity first</strong>
-                            <span>Google/Facebook login, email OTP, và session protection.</span>
+                            <strong>Định danh trước</strong>
+                            <span>Google/Facebook login, email OTP và bảo vệ phiên đăng nhập.</span>
                         </li>
                         <li>
-                            <strong>Core data next</strong>
+                            <strong>Dữ liệu cốt lõi sau</strong>
                             <span>User, parent profile, project, story, photo và approval entities.</span>
                         </li>
                         <li>
-                            <strong>Workspace flow</strong>
-                            <span>Dashboard, editor queue, transcript review và draft approval.</span>
+                            <strong>Luồng làm việc</strong>
+                            <span>Bảng điều khiển, hàng chờ biên tập, xem bản chép lời và duyệt bản thảo.</span>
                         </li>
                         <li>
-                            <strong>Publishing handoff</strong>
-                            <span>Print/export, QR access, archive stubs và completion states.</span>
+                            <strong>Bàn giao xuất bản</strong>
+                            <span>Print/export, QR access, archive stubs và trạng thái hoàn tất.</span>
                         </li>
                     </ol>
                 </div>

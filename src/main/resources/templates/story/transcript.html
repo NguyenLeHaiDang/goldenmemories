@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Transcript | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Chép lời | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Transcript capture</p>
-            <h1>Turn spoken memory into a usable draft.</h1>
+            <p class="eyebrow-dark">Ghi bản chép lời</p>
+            <h1>Chuyển ký ức bằng lời nói thành bản nháp có thể dùng được.</h1>
             <p class="hero-lead">
-                This screen keeps the transcription process focused: read the prompt, paste the transcript,
-                and return to the story queue with one clean source of truth.
+                Màn hình này giúp quá trình chép lời tập trung hơn: đọc câu hỏi, dán bản chép lời,
+                rồi quay lại hàng chờ câu chuyện với một nguồn dữ liệu duy nhất.
             </p>
             <ul class="auth-copy-list">
-                <li>Keep the transcript faithful to the original voice note.</li>
-                <li>Short pauses and partial sentences are okay for now.</li>
-                <li>After saving, the story moves back into the review flow.</li>
+                <li>Giữ bản chép lời trung thực với bản ghi âm gốc.</li>
+                <li>Các khoảng dừng ngắn hay câu chưa trọn vẹn vẫn chấp nhận được ở giai đoạn này.</li>
+                <li>Sau khi lưu, câu chuyện sẽ quay lại luồng xem xét.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel wide" data-reveal>
             <p class="eyebrow-dark">
-                <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Transcript
+                <a th:href="@{/project/__${project.id}__/story}">Câu chuyện</a> &rsaquo; Chép lời
             </p>
-            <h1>Submit transcript</h1>
+            <h1>Gửi bản chép lời</h1>
             <p class="lead" style="margin-top: 6px;">
-                Enter the voice note transcription for this prompt.
+                Nhập bản chép cho câu hỏi này.
             </p>
 
             <div class="alert alert-info" style="margin-top: 14px;">
-                <strong>Prompt:</strong>
+                <strong>Câu hỏi:</strong>
                 <span th:text="${story.promptQuestion}">question</span>
                 &nbsp;&middot;&nbsp;
-                <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
+                <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">Giai đoạn</span>
             </div>
 
             <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
@@ -42,19 +42,19 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label>
-                    Raw transcript
+                    Bản chép thô
                     <textarea th:field="*{rawTranscript}" rows="12"
-                              placeholder="Type or paste the transcript here..."
+                              placeholder="Nhập hoặc dán bản chép lời vào đây..."
                               th:classappend="${#fields.hasErrors('rawTranscript')} ? 'input-error'"></textarea>
                     <span class="field-error" th:if="${#fields.hasErrors('rawTranscript')}"
                           th:errors="*{rawTranscript}"></span>
                 </label>
 
-                <button class="button button-primary" type="submit">Save transcript</button>
+                <button class="button button-primary" type="submit">Lưu bản chép lời</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/project/__${project.id}__/story}">Back to stories</a>
+                <a th:href="@{/project/__${project.id}__/story}">Quay lại danh sách câu chuyện</a>
             </div>
         </section>
     </main>

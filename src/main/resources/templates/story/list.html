@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Stories | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Câu chuyện | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -9,27 +9,26 @@
         <section class="content-hero dashboard-hero" data-reveal>
             <div>
                 <p class="eyebrow-dark">
-                    <a th:href="@{/dashboard}">Dashboard</a> &rsaquo;
-                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo;
-                    Stories
+                    <a th:href="@{/dashboard}">Bảng điều khiển</a> &rsaquo;
+                    <a th:href="@{/project/__${project.id}__}">Dự án</a> &rsaquo;
+                    Câu chuyện
                 </p>
-                <h1 th:text="${project.title}">Project</h1>
+                <h1 th:text="${project.title}">Dự án</h1>
                 <p class="lead">
-                    Shape the memory journey for this project by adding prompts, capturing transcripts,
-                    and moving each story through review.
+                    Tạo hành trình ký ức cho dự án này bằng cách thêm câu hỏi, ghi bản chép lời và đưa từng câu chuyện qua bước duyệt.
                 </p>
             </div>
             <div class="stack" style="min-width: min(320px, 100%);">
                 <div class="stack-card">
-                    <p class="eyebrow-dark">Story queue</p>
-                    <h3 style="margin-bottom: 6px;">Project progress</h3>
+                    <p class="eyebrow-dark">Hàng chờ câu chuyện</p>
+                    <h3 style="margin-bottom: 6px;">Tiến độ dự án</h3>
                     <p class="muted-text" style="margin: 0;">
                         <span class="badge" th:text="${#lists.size(stories)}">0</span>
-                        prompts in the workspace
+                        câu hỏi đang nằm trong workspace
                     </p>
                 </div>
                 <a class="button button-secondary"
-                   th:href="@{/project/__${project.id}__/approval/submit}">Submit draft</a>
+                   th:href="@{/project/__${project.id}__/approval/submit}">Gửi bản thảo</a>
             </div>
         </section>
 
@@ -37,93 +36,93 @@
 
         <div class="two-col story-workspace" style="align-items: start;">
             <section class="prose-card story-composer" data-reveal>
-                <p class="eyebrow-dark">Add prompt</p>
-                <h2>Create a new story thread</h2>
+                <p class="eyebrow-dark">Thêm câu hỏi</p>
+                <h2>Tạo một mạch chuyện mới</h2>
                 <p class="muted-text">
-                    Keep prompts short, clear, and emotionally specific so the parent can answer in their own words.
+                    Giữ câu hỏi ngắn, rõ và đủ cảm xúc để phụ huynh có thể trả lời bằng chính giọng của họ.
                 </p>
                 <form th:action="@{/project/__${project.id}__/story/prompt}" method="post"
                       th:object="${storyPromptForm}" class="form-stack">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <label>
-                        Prompt question
+                        Câu hỏi gợi mở
                         <input type="text" th:field="*{promptQuestion}"
-                               placeholder="e.g. What is your earliest childhood memory?"
+                               placeholder="Ví dụ: Ký ức thời thơ ấu đầu tiên của bạn là gì?"
                                th:classappend="${#fields.hasErrors('promptQuestion')} ? 'input-error'" />
                         <span class="field-error" th:if="${#fields.hasErrors('promptQuestion')}"
                               th:errors="*{promptQuestion}"></span>
                     </label>
                     <label>
-                        Life stage
+                        Giai đoạn đời
                         <select th:field="*{lifeStage}"
                                 th:classappend="${#fields.hasErrors('lifeStage')} ? 'input-error'">
-                            <option value="">Select one</option>
+                            <option value="">Chọn một mục</option>
                             <option th:each="stage : ${lifeStages}"
                                     th:value="${stage}"
-                                    th:text="${stage.name().replace('_',' ')}">STAGE</option>
+                                    th:text="${stage.name().replace('_',' ')}">Giai đoạn</option>
                         </select>
                         <span class="field-error" th:if="${#fields.hasErrors('lifeStage')}"
                               th:errors="*{lifeStage}"></span>
                     </label>
-                    <button class="button button-primary" type="submit">Add prompt</button>
+                    <button class="button button-primary" type="submit">Thêm câu hỏi</button>
                 </form>
             </section>
 
             <section class="stack" data-reveal>
                 <div class="section-heading">
-                    <p class="eyebrow-dark">Story list</p>
-                    <h2>All prompts in this project</h2>
+                    <p class="eyebrow-dark">Danh sách câu chuyện</p>
+                    <h2>Tất cả câu hỏi trong dự án này</h2>
                 </div>
 
                 <div th:if="${#lists.isEmpty(stories)}" class="empty-card">
-                    <p class="eyebrow-dark">Nothing yet</p>
-                    <h2 style="margin-top: 8px;">Add the first prompt to begin the archive.</h2>
+                    <p class="eyebrow-dark">Chưa có gì</p>
+                    <h2 style="margin-top: 8px;">Thêm câu hỏi đầu tiên để bắt đầu lưu trữ.</h2>
                     <p class="muted-text">
-                        Each prompt becomes a branch in the memoir workflow, ready for transcription and editing.
+                        Mỗi câu hỏi sẽ trở thành một nhánh trong luồng hồi ký, sẵn sàng cho chép lời và biên tập.
                     </p>
                 </div>
 
                 <article class="stack-card story-card" th:each="story : ${stories}">
                     <div class="story-card__top">
                         <div>
-                            <p class="story-card__label">Prompt</p>
+                            <p class="story-card__label">Câu hỏi</p>
                             <h3 th:text="${story.promptQuestion}">Prompt</h3>
                         </div>
                         <div class="story-card__badges">
-                            <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
-                            <span class="badge" th:text="${story.status}">STATUS</span>
+                            <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">Giai đoạn</span>
+                            <span class="badge" th:text="${story.status}">Trạng thái</span>
                         </div>
                     </div>
                     <p class="muted-text" th:if="${story.rawTranscript != null}">
-                        <strong>Transcript:</strong>
-                        <span th:text="${#strings.abbreviate(story.rawTranscript, 180)}">excerpt</span>
+                        <strong>Bản chép:</strong>
+                        <span th:text="${#strings.abbreviate(story.rawTranscript, 180)}">Đoạn trích</span>
                     </p>
                     <p class="muted-text" th:if="${story.rawTranscript == null}">
-                        Waiting for transcript capture.
+                        Đang chờ ghi bản chép lời.
                     </p>
                     <div class="story-card__actions">
                         <a th:if="${story.status.name() == 'PENDING' or story.status.name() == 'RECEIVED'}"
                            class="button button-secondary btn-sm"
                            th:href="@{/project/__${project.id}__/story/__${story.id}__/transcript}">
-                            Transcript
+                            Chép lời
                         </a>
                         <a th:if="${story.status.name() == 'TRANSCRIBED' or story.status.name() == 'EDITED'}"
                            class="button button-secondary btn-sm"
                            th:href="@{/project/__${project.id}__/story/__${story.id}__/edit}">
-                            Edit
+                            Biên tập
                         </a>
                         <form th:if="${story.status.name() == 'EDITED'}" class="inline-form"
                               th:action="@{/project/__${project.id}__/story/__${story.id}__/approve}"
                               method="post">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                            <button class="button button-primary btn-sm" type="submit">Approve</button>
+                            <button class="button button-primary btn-sm" type="submit">Duyệt</button>
                         </form>
                         <form th:if="${story.status.name() == 'EDITED' or story.status.name() == 'APPROVED'}"
                               class="inline-form"
                               th:action="@{/project/__${project.id}__/story/__${story.id}__/revise}"
                               method="post">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                            <button class="button button-secondary btn-sm" type="submit">Revise</button>
+                            <button class="button button-secondary btn-sm" type="submit">Chỉnh sửa lại</button>
                         </form>
                     </div>
                 </article>

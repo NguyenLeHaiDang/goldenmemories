@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Login | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Đăng nhập | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Family memo workspace</p>
-            <h1>Sign in and continue the story.</h1>
+            <p class="eyebrow-dark">Không gian lưu giữ gia đình</p>
+            <h1>Đăng nhập để tiếp tục hành trình lưu giữ.</h1>
             <p class="hero-lead">
-                Use Google, Facebook, or email OTP to return to your protected workspace,
-                review project progress, and keep the memoir flow moving.
+                Dùng Google, Facebook hoặc mã OTP email để trở lại không gian làm việc,
+                xem tiến độ dự án và tiếp tục mạch hồi ký.
             </p>
             <ul class="auth-copy-list">
-                <li>One login path for the adult child managing the project.</li>
-                <li>Protected access to dashboard, editor, and approval screens.</li>
-                <li>Google and Facebook OAuth2 buttons stay aligned with the backend flow.</li>
+                <li>Một lối đăng nhập cho người con đang quản lý dự án.</li>
+                <li>Truy cập an toàn vào bảng điều khiển, màn hình biên tập và phê duyệt.</li>
+                <li>Nút Google và Facebook OAuth2 khớp với luồng backend đã cấu hình.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel" data-reveal>
-            <p class="eyebrow">Welcome back</p>
-            <h1>Sign in</h1>
+            <p class="eyebrow">Chào mừng trở lại</p>
+            <h1>Đăng nhập</h1>
 
             <div class="alert alert-success" th:if="${registrationSuccess}"
                  th:text="${registrationSuccess}"></div>
@@ -35,25 +35,25 @@
 
                 <label>
                     Email
-                    <input type="email" th:field="*{email}" placeholder="you@example.com"
+                    <input type="email" th:field="*{email}" placeholder="ban@example.com"
                            autocomplete="email" />
                 </label>
 
                 <label>
-                    Password
-                    <input type="password" th:field="*{password}" placeholder="Your password"
+                    Mật khẩu
+                    <input type="password" th:field="*{password}" placeholder="Mật khẩu của bạn"
                            autocomplete="current-password" />
                 </label>
 
-                <button class="button button-primary" type="submit">Sign in</button>
+                <button class="button button-primary" type="submit">Đăng nhập</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/register}">Create an account</a>
-                <a th:href="@{/otp}">Verify email code</a>
+                <a th:href="@{/register}">Tạo tài khoản</a>
+                <a th:href="@{/otp}">Xác thực mã email</a>
             </div>
 
-            <div class="divider"><span>or continue with</span></div>
+            <div class="divider"><span>hoặc tiếp tục bằng</span></div>
 
             <div class="social-buttons">
                 <a class="button button-secondary" href="/oauth2/authorization/google">Google</a>
@@ -61,7 +61,7 @@
             </div>
 
             <p class="auth-footnote">
-                If a provider is not configured yet, the email + OTP path keeps the onboarding loop usable.
+                Nếu nhà cung cấp chưa cấu hình xong, đường dẫn email + OTP vẫn giữ cho luồng onboarding hoạt động.
             </p>
         </section>
     </main>

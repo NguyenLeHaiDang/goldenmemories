@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Export Handoff | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Xuất gói | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -9,102 +9,102 @@
         <section class="content-hero dashboard-hero" data-reveal>
             <div>
                 <p class="eyebrow-dark">
-                    <a th:href="@{/project/__${project.id}__/publish}">Publishing</a> &rsaquo; Export handoff
+                    <a th:href="@{/project/__${project.id}__/publish}">Xuất bản</a> &rsaquo; Xuất gói
                 </p>
-                <h1>Export handoff</h1>
+                <h1>Xuất gói bàn giao</h1>
                 <p class="lead">
-                    Prepare the final memoir package for print, archive, and protected delivery.
+                    Chuẩn bị gói hồi ký cuối cùng cho bản in, kho lưu trữ và luồng giao được bảo vệ.
                 </p>
             </div>
             <div class="stack" style="min-width: min(300px, 100%);">
                 <div class="stack-card">
-                    <p class="story-card__label">Ready for export</p>
-                    <h3 style="margin-bottom: 6px;" th:text="${readyForExport} ? 'Yes' : 'Not yet'">Yes</h3>
+                    <p class="story-card__label">Sẵn sàng xuất gói</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${readyForExport} ? 'Có' : 'Chưa'">Có</h3>
                     <p class="muted-text" style="margin: 0;">
-                        This is the staging area for the final package before a print or cloud handoff.
+                        Đây là khu vực chuẩn bị trước khi chuyển sang bản in hoặc bàn giao đám mây.
                     </p>
                 </div>
-                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Back to publishing</a>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Quay lại xuất bản</a>
             </div>
         </section>
 
         <section class="stats-row" data-reveal>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${storyCount}">0</p>
-                <p class="stat-label">Stories in package</p>
+                <p class="stat-label">Câu chuyện trong gói</p>
             </div>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${photoCount}">0</p>
-                <p class="stat-label">Photos included</p>
+                <p class="stat-label">Ảnh đi kèm</p>
             </div>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${latestApproval != null ? latestApproval.draftVersion : '—'}">—</p>
-                <p class="stat-label">Latest draft</p>
+                <p class="stat-label">Bản thảo mới nhất</p>
             </div>
             <div class="stat-card glass-card">
-                <p class="stat-number" th:text="${latestApproval != null ? latestApproval.decision : 'PENDING'}">PENDING</p>
-                <p class="stat-label">Approval state</p>
+                <p class="stat-number" th:text="${latestApproval != null ? latestApproval.decision : 'Đang chờ'}">Đang chờ</p>
+                <p class="stat-label">Trạng thái duyệt</p>
             </div>
         </section>
 
         <section class="two-col" style="align-items: start; margin-top: 26px;">
             <section class="prose-card" data-reveal>
-                <p class="eyebrow-dark">Export checklist</p>
-                <h2>What the final bundle needs</h2>
+                <p class="eyebrow-dark">Danh sách xuất gói</p>
+                <h2>Gói cuối cùng cần những gì?</h2>
                 <ul class="check-list">
-                    <li>Approved draft and final memoir text.</li>
-                    <li>Restored photos or original archive copies.</li>
-                    <li>Cover and interior print assets.</li>
-                    <li>Secure archive destination and handoff notes.</li>
+                    <li>Bản thảo đã duyệt và nội dung hồi ký cuối cùng.</li>
+                    <li>Ảnh đã phục hồi hoặc bản gốc để lưu trữ.</li>
+                    <li>Tài sản in ấn cho bìa và ruột sách.</li>
+                    <li>Đích lưu trữ an toàn và ghi chú bàn giao.</li>
                 </ul>
             </section>
 
             <section class="stack" data-reveal>
                 <div class="section-heading">
-                    <p class="eyebrow-dark">Package items</p>
-                    <h2>Export components</h2>
+                    <p class="eyebrow-dark">Thành phần gói</p>
+                    <h2>Các phần xuất ra</h2>
                 </div>
 
                 <article class="stack-card">
-                    <h3>Print PDF</h3>
-                    <p class="muted-text">Final interior manuscript and layout-ready content.</p>
-                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manuscript}" style="margin-top: 10px; display: inline-block;">Download Manuscript (.md)</a>
+                    <h3>PDF bản in</h3>
+                    <p class="muted-text">Nội dung bản thảo cuối và bố cục sẵn sàng cho in ấn.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manuscript}" style="margin-top: 10px; display: inline-block;">Tải bản thảo (.md)</a>
                 </article>
 
                 <article class="stack-card">
-                    <h3>Image bundle</h3>
-                    <p class="muted-text">Photos selected for inclusion, plus restoration-ready originals.</p>
-                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/images}" style="margin-top: 10px; display: inline-block;">Download Images ZIP</a>
+                    <h3>Bộ ảnh</h3>
+                    <p class="muted-text">Ảnh được chọn để đưa vào hồi ký, kèm ảnh gốc sẵn sàng phục hồi.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/images}" style="margin-top: 10px; display: inline-block;">Tải ảnh ZIP</a>
                 </article>
 
                 <article class="stack-card">
-                    <h3>Archive manifest</h3>
-                    <p class="muted-text">Project summary, approval history, and delivery notes.</p>
-                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manifest}" style="margin-top: 10px; display: inline-block;">Download Manifest TXT</a>
+                    <h3>Manifest lưu trữ</h3>
+                    <p class="muted-text">Tóm tắt dự án, lịch sử phê duyệt và ghi chú bàn giao.</p>
+                    <a class="button button-primary btn-sm" th:href="@{/project/__${project.id}__/publish/export/manifest}" style="margin-top: 10px; display: inline-block;">Tải manifest TXT</a>
                 </article>
             </section>
         </section>
 
         <section class="card-grid" style="margin-top: 26px;" data-reveal>
             <div class="info-card info-card--muted">
-                <h3>Print handoff</h3>
-                <p>Use this zone for the final print vendor transfer and packaging checklist.</p>
+                <h3>Bàn giao bản in</h3>
+                <p>Khu này dành cho việc chuyển file cho đơn vị in và checklist đóng gói cuối cùng.</p>
             </div>
             <div class="info-card info-card--muted">
-                <h3>Cloud archive</h3>
-                <p>Reserved for the secured storage destination once delivery is done.</p>
+                <h3>Lưu trữ đám mây</h3>
+                <p>Dành cho điểm lưu trữ an toàn sau khi quá trình giao hoàn tất.</p>
             </div>
             <div class="info-card info-card--muted">
-                <h3>QR delivery</h3>
-                <p>Placeholder for protected memo access and future family sharing links.</p>
+                <h3>Giao QR</h3>
+                <p>Phần giữ chỗ cho truy cập hồi ký được bảo vệ và liên kết chia sẻ cho gia đình sau này.</p>
             </div>
         </section>
 
         <div class="two-col" style="align-items: start; margin-top: 26px;">
-            <a class="button button-secondary" th:href="@{/project/__${project.id}__/media}">Review photos</a>
+            <a class="button button-secondary" th:href="@{/project/__${project.id}__/media}">Xem lại ảnh</a>
             <form th:action="@{/project/__${project.id}__/publish/complete}" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                <button class="button button-primary" type="submit">Mark project complete</button>
+                <button class="button button-primary" type="submit">Đánh dấu hoàn thành</button>
             </form>
         </div>
     </main>

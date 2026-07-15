@@ -1,6 +1,6 @@
-﻿<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('QR Security Panel | Ky Uc Vang')}"></head>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Bảo mật QR | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -9,24 +9,24 @@
         <section class="content-hero dashboard-hero" data-reveal>
             <div>
                 <p class="eyebrow-dark">
-                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo;
-                    <a th:href="@{/project/__${project.id}__/publish}">Publishing</a> &rsaquo; QR Security
+                    <a th:href="@{/project/__${project.id}__}">Dự án</a> &rsaquo;
+                    <a th:href="@{/project/__${project.id}__/publish}">Xuất bản</a> &rsaquo; Bảo mật QR
                 </p>
-                <h1>QR access security</h1>
+                <h1>Bảo mật truy cập QR</h1>
                 <p class="lead">
-                    Mark sensitive story entries as QR-protected and set an access hint that will
-                    appear on the QR label. Full encryption is delivered in a later phase.
+                    Đánh dấu những mục chuyện cần bảo vệ bằng QR và đặt một gợi ý truy cập sẽ
+                    hiển thị trên nhãn QR. Mã hóa đầy đủ sẽ được bổ sung ở giai đoạn sau.
                 </p>
             </div>
             <div class="stack" style="min-width: min(300px, 100%);">
                 <div class="stack-card">
-                    <p class="story-card__label">Protected entries</p>
+                    <p class="story-card__label">Mục được bảo vệ</p>
                     <h3 style="margin-bottom: 6px;"
                         th:text="${#lists.size(stories.?[qrProtected == true])}">0</h3>
-                    <p class="muted-text" style="margin: 0;">of <span th:text="${#lists.size(stories)}">0</span> total stories</p>
+                    <p class="muted-text" style="margin: 0;">trên tổng <span th:text="${#lists.size(stories)}">0</span> câu chuyện</p>
                 </div>
                 <a class="button button-secondary"
-                   th:href="@{/project/__${project.id}__/publish}">Back to publishing</a>
+                   th:href="@{/project/__${project.id}__/publish}">Quay lại xuất bản</a>
             </div>
         </section>
 
@@ -34,13 +34,13 @@
 
         <section data-reveal style="margin-top: 26px;">
             <div class="section-heading">
-                <p class="eyebrow-dark">Story entries</p>
-                <h2>Configure QR protection per story</h2>
+                <p class="eyebrow-dark">Các mục chuyện</p>
+                <h2>Cấu hình bảo vệ QR cho từng câu chuyện</h2>
             </div>
 
             <div th:if="${#lists.isEmpty(stories)}" class="empty-card" style="margin-top: 16px;">
-                <p>No story entries yet. Add stories first before configuring security.</p>
-                <a class="button button-secondary" th:href="@{/project/__${project.id}__/stories}">Go to story vault</a>
+                <p>Chưa có câu chuyện nào. Hãy thêm nội dung trước khi cấu hình bảo mật.</p>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/stories}">Đến kho chuyện</a>
             </div>
 
             <div class="stack" style="margin-top: 16px;">
@@ -52,7 +52,7 @@
                         </div>
                         <span class="badge"
                               th:classappend="${story.qrProtected} ? 'badge--gold' : ''"
-                              th:text="${story.qrProtected} ? 'QR Protected' : story.status">PENDING</span>
+                              th:text="${story.qrProtected} ? 'Đã bảo vệ QR' : story.status">Đang chờ</span>
                     </div>
 
                     <form th:action="@{/project/__${project.id}__/security/story/__${story.id}__}"
@@ -71,36 +71,35 @@
                                        th:checked="${story.qrProtected}"
                                        class="toggle-checkbox" />
                                 <span class="toggle-track"></span>
-                                <span>Enable QR protection for this entry</span>
+                                <span>Bật bảo vệ QR cho mục này</span>
                             </label>
                         </div>
 
                         <div class="form-group" style="margin-top: 12px;">
                             <label th:for="'hint-' + ${story.id}" class="form-label">
-                                Access hint <span class="muted-text">(shown on QR label)</span>
+                                Gợi ý truy cập <span class="muted-text">(hiển thị trên nhãn QR)</span>
                             </label>
                             <input type="text"
                                    th:id="'hint-' + ${story.id}"
                                    name="qrHint"
                                    th:value="${story.qrHint}"
                                    class="form-input"
-                                   placeholder="e.g. Family only — ask Grandma for the code"
+                                   placeholder="Ví dụ: chỉ gia đình - hỏi bà để lấy mã"
                                    maxlength="150" />
                         </div>
 
                         <button type="submit" class="button button-primary"
-                                style="margin-top: 12px;">Save settings</button>
+                                style="margin-top: 12px;">Lưu cài đặt</button>
                     </form>
                 </article>
             </div>
         </section>
 
         <section class="info-card info-card--muted" style="margin-top: 26px;" data-reveal>
-            <h3>&#x1F512; What happens next?</h3>
+            <h3>&#x1F512; Tiếp theo sẽ diễn ra gì?</h3>
             <p>
-                In a future phase, QR-protected entries will generate encrypted QR codes delivered
-                on a separate card with the printed memoir. Recipients scan the QR code and enter
-                the password to reveal the hidden content digitally.
+                Ở giai đoạn sau, các mục được bảo vệ sẽ tạo ra mã QR mã hóa và được gửi kèm
+                theo bản in hồi ký. Người nhận quét mã QR và nhập mật khẩu để xem phần nội dung ẩn.
             </p>
         </section>
     </main>

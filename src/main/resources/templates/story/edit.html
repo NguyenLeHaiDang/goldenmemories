@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Edit Story | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Biên tập câu chuyện | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -8,10 +8,10 @@
 
         <section class="content-hero" data-reveal>
             <p class="eyebrow-dark">
-                <a th:href="@{/project/__${project.id}__/story}">Stories</a> &rsaquo; Edit
+                <a th:href="@{/project/__${project.id}__/story}">Câu chuyện</a> &rsaquo; Biên tập
             </p>
-            <h1>Edit story</h1>
-            <p class="lead">Polish the transcript into a clean narrative while keeping the parent's voice intact.</p>
+            <h1>Biên tập câu chuyện</h1>
+            <p class="lead">Chỉnh nội dung thành một bản kể mạch lạc nhưng vẫn giữ nguyên giọng của phụ huynh.</p>
         </section>
 
         <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
@@ -19,49 +19,49 @@
         <div class="two-col story-editor-grid" style="align-items: start;">
             <div class="stack" data-reveal>
                 <section class="prose-card">
-                    <p class="eyebrow-dark">Source</p>
+                    <p class="eyebrow-dark">Nguồn</p>
                     <h2 th:text="${story.promptQuestion}">Prompt</h2>
                     <p>
-                        <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">STAGE</span>
-                        <span class="badge" th:text="${story.status}">STATUS</span>
+                        <span class="badge" th:text="${story.lifeStage.name().replace('_',' ')}">Giai đoạn</span>
+                        <span class="badge" th:text="${story.status}">Trạng thái</span>
                     </p>
                     <p class="muted-text">
-                        Use the transcript below as your source and trim repetition, while preserving the emotional truth.
+                        Hãy dùng bản chép lời bên dưới làm nguồn và rút gọn phần lặp lại, nhưng vẫn giữ đúng cảm xúc thật.
                     </p>
                 </section>
 
                 <section class="prose-card" th:if="${story.rawTranscript != null}">
-                    <p class="eyebrow-dark">Raw transcript</p>
-                    <p class="muted-text story-pre" th:text="${story.rawTranscript}">transcript</p>
+                    <p class="eyebrow-dark">Bản chép gốc</p>
+                    <p class="muted-text story-pre" th:text="${story.rawTranscript}">Bản chép</p>
                 </section>
             </div>
 
             <section class="prose-card" data-reveal>
-                <p class="eyebrow-dark">Edited version</p>
-                <h2>Shape the polished story</h2>
+                <p class="eyebrow-dark">Bản chỉnh sửa</p>
+                <h2>Hoàn thiện câu chuyện</h2>
                 <form th:action="@{/project/__${project.id}__/story/__${story.id}__/edit}"
                       method="post" th:object="${storyEditForm}" class="form-stack">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                     <label>
-                        Polished content
+                        Nội dung đã biên tập
                         <textarea th:field="*{editedContent}" rows="14"
-                                  placeholder="Edit and polish the story here..."
+                                  placeholder="Biên tập và làm mượt câu chuyện tại đây..."
                                   th:classappend="${#fields.hasErrors('editedContent')} ? 'input-error'"></textarea>
                         <span class="field-error" th:if="${#fields.hasErrors('editedContent')}"
                               th:errors="*{editedContent}"></span>
                     </label>
 
                     <label>
-                        Editor notes <span class="muted-text">(internal only)</span>
+                        Ghi chú biên tập <span class="muted-text">(nội bộ)</span>
                         <textarea th:field="*{editorNotes}" rows="4"
-                                  placeholder="Notes for internal review..."></textarea>
+                                  placeholder="Ghi chú dành cho đội ngũ nội bộ..."></textarea>
                     </label>
 
                     <div class="story-card__actions">
-                        <button class="button button-primary" type="submit">Save edit</button>
+                        <button class="button button-primary" type="submit">Lưu bản biên tập</button>
                         <a class="button button-secondary"
-                           th:href="@{/project/__${project.id}__/story}">Cancel</a>
+                           th:href="@{/project/__${project.id}__/story}">Hủy</a>
                     </div>
                 </form>
             </section>

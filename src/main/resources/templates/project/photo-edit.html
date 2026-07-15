@@ -1,45 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Edit Photo | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Sửa ảnh | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
     <main class="content-page auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Media vault</p>
-            <h1>Edit photo details without leaving the workspace.</h1>
+            <p class="eyebrow-dark">Kho ảnh</p>
+            <h1>Sửa chi tiết ảnh mà không rời khỏi không gian làm việc.</h1>
             <p class="hero-lead">
-                Update the caption, chapter tag, and restoration state for this image.
+                Cập nhật chú thích, thẻ chương mục và trạng thái phục hồi cho hình ảnh này.
             </p>
             <ul class="auth-copy-list">
-                <li th:text="${photo.originalFilename}">Original filename</li>
-                <li th:text="'Stored at ' + ${photo.storagePath}">Storage path</li>
-                <li th:if="${photo.restoredStoragePath != null}" th:text="'Restored asset: ' + ${photo.restoredStoragePath}">Restored asset</li>
+                <li th:text="${photo.originalFilename}">Tên tệp gốc</li>
+                <li th:text="'Được lưu tại ' + ${photo.storagePath}">Đường lưu trữ</li>
+                <li th:if="${photo.restoredStoragePath != null}" th:text="'Bản phục hồi: ' + ${photo.restoredStoragePath}">Bản phục hồi</li>
             </ul>
 
-            <!-- Image previews -->
             <div class="photo-thumbnails" style="margin-top: 24px;">
                 <div class="photo-thumbnail-wrapper" style="width: 160px; height: 160px;">
-                    <span class="thumbnail-badge">Original</span>
+                    <span class="thumbnail-badge">Ảnh gốc</span>
                     <img class="photo-thumbnail" th:src="@{/{path}(path=${photo.storagePath})}" alt="Original photo" />
                 </div>
                 <div class="photo-thumbnail-wrapper" th:if="${photo.restoredStoragePath != null}" style="width: 160px; height: 160px;">
-                    <span class="thumbnail-badge restored">Restored</span>
+                    <span class="thumbnail-badge restored">Đã phục hồi</span>
                     <img class="photo-thumbnail" th:src="@{/{path}(path=${photo.restoredStoragePath})}" alt="Restored photo" />
                 </div>
             </div>
         </section>
 
         <section class="auth-card auth-card--panel wide" data-reveal>
-            <p class="eyebrow-dark">Edit photo</p>
-            <h1 th:text="${photo.caption} ?: 'Untitled photo'">Untitled photo</h1>
+            <p class="eyebrow-dark">Chỉnh sửa ảnh</p>
+            <h1 th:text="${photo.caption} ?: 'Ảnh chưa đặt tên'">Ảnh chưa đặt tên</h1>
 
-            <!-- Validation Error Summary -->
             <div class="error-summary" th:if="${validationErrors}" style="margin-top: 18px; width: 100%;">
-                <h3>Please correct the errors below:</h3>
+                <h3>Vui lòng sửa các lỗi bên dưới:</h3>
                 <ul>
-                    <li th:each="err : ${validationErrors}" th:text="${err}">Error details</li>
+                    <li th:each="err : ${validationErrors}" th:text="${err}">Chi tiết lỗi</li>
                 </ul>
             </div>
 
@@ -47,19 +45,19 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label>
-                    Caption
-                    <input type="text" name="caption" th:value="${photo.caption}" placeholder="Short descriptive caption"
+                    Chú thích
+                    <input type="text" name="caption" th:value="${photo.caption}" placeholder="Mô tả ngắn cho bức ảnh"
                            th:classappend="${validationErrors != null && #lists.toList(validationErrors).toString().contains('Caption')} ? 'is-invalid' : ''" />
                 </label>
 
                 <label>
-                    Chapter tag
-                    <input type="text" name="chapterTag" th:value="${photo.chapterTag}" placeholder="Childhood, Wedding, War years..."
+                    Thẻ chương mục
+                    <input type="text" name="chapterTag" th:value="${photo.chapterTag}" placeholder="Tuổi thơ, Đám cưới, Thời chiến..."
                            th:classappend="${validationErrors != null && #lists.toList(validationErrors).toString().contains('Chapter')} ? 'is-invalid' : ''" />
                 </label>
 
                 <label>
-                    Restoration status
+                    Trạng thái phục hồi
                     <select name="restorationStatus">
                         <option th:each="status : ${T(com.goldenmemories.model.PhotoAsset.RestorationStatus).values()}"
                                 th:value="${status}"
@@ -68,11 +66,11 @@
                     </select>
                 </label>
 
-                <button class="button button-primary" type="submit">Save changes</button>
+                <button class="button button-primary" type="submit">Lưu thay đổi</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/project/__${project.id}__/media}">Back to media vault</a>
+                <a th:href="@{/project/__${project.id}__/media}">Quay lại kho ảnh</a>
             </div>
         </section>
     </main>

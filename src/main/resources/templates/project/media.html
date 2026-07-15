@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Media Vault | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Kho ảnh | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -9,19 +9,19 @@
         <section class="content-hero dashboard-hero" data-reveal>
             <div>
                 <p class="eyebrow-dark">
-                    <a th:href="@{/project/__${project.id}__}">Project</a> &rsaquo; Media vault
+                    <a th:href="@{/project/__${project.id}__}">Dự án</a> &rsaquo; Kho ảnh
                 </p>
-                <h1>Media vault</h1>
+                <h1>Kho ảnh</h1>
                 <p class="lead">
-                    Store, organize, and prepare family photos for restoration before publishing.
+                    Lưu trữ, sắp xếp và chuẩn bị ảnh gia đình trước khi xuất bản.
                 </p>
             </div>
             <div class="stack" style="min-width: min(280px, 100%);">
                 <div class="stack-card">
-                    <p class="story-card__label">Photo states</p>
-                    <p class="muted-text" style="margin: 0;">Track originals, restored assets, and skipped items from the same workspace.</p>
+                    <p class="story-card__label">Trạng thái ảnh</p>
+                    <p class="muted-text" style="margin: 0;">Theo dõi ảnh gốc, ảnh đã phục hồi và ảnh bỏ qua ngay trong cùng một workspace.</p>
                 </div>
-                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Publishing handoff</a>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Bàn giao xuất bản</a>
             </div>
         </section>
 
@@ -30,17 +30,16 @@
 
         <section class="two-col" style="align-items: start; gap: 24px; margin-top: 24px;">
             <div class="prose-card" data-reveal>
-                <p class="eyebrow-dark">Upload photo</p>
-                <h2>Add an image to the vault</h2>
+                <p class="eyebrow-dark">Tải ảnh lên</p>
+                <h2>Thêm hình vào kho</h2>
                 <p>
-                    Upload a family photo, add a short caption, and tag it to the right life stage or chapter.
+                    Tải một bức ảnh gia đình, thêm mô tả ngắn và gắn nó vào đúng giai đoạn hoặc chương mục.
                 </p>
 
-                <!-- Validation Error Summary -->
                 <div class="error-summary" th:if="${validationErrors}" style="margin-top: 18px;">
-                    <h3>Please correct the errors below:</h3>
+                    <h3>Vui lòng sửa các lỗi bên dưới:</h3>
                     <ul>
-                        <li th:each="err : ${validationErrors}" th:text="${err}">Error details</li>
+                        <li th:each="err : ${validationErrors}" th:text="${err}">Chi tiết lỗi</li>
                     </ul>
                 </div>
 
@@ -49,113 +48,113 @@
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                     <label>
-                        Photo file
+                        Tệp ảnh
                         <input type="file" name="photoFile" accept="image/*" required
                                th:classappend="${validationErrors != null && #lists.toList(validationErrors).toString().contains('photo')} ? 'is-invalid' : ''" />
                     </label>
 
                     <label>
-                        Caption
-                        <input type="text" name="caption" th:value="${prevCaption}" placeholder="e.g. Family picnic in 1998"
+                        Chú thích
+                        <input type="text" name="caption" th:value="${prevCaption}" placeholder="Ví dụ: buổi sum họp gia đình năm 1998"
                                th:classappend="${validationErrors != null && #lists.toList(validationErrors).toString().contains('Caption')} ? 'is-invalid' : ''" />
                     </label>
 
                     <label>
-                        Chapter tag
-                        <input type="text" name="chapterTag" th:value="${prevChapterTag}" placeholder="e.g. Childhood, Wedding, War years"
+                        Thẻ chương mục
+                        <input type="text" name="chapterTag" th:value="${prevChapterTag}" placeholder="Ví dụ: Tuổi thơ, Đám cưới, Thời chiến"
                                th:classappend="${validationErrors != null && #lists.toList(validationErrors).toString().contains('Chapter')} ? 'is-invalid' : ''" />
                     </label>
 
                     <label>
-                        Restoration status
+                        Trạng thái phục hồi
                         <select name="restorationStatus">
-                            <option value="ORIGINAL" th:selected="${prevRestorationStatus == null || prevRestorationStatus.toString() == 'ORIGINAL'}">Original</option>
-                            <option value="PROCESSING" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'PROCESSING'}">Processing</option>
-                            <option value="RESTORED" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'RESTORED'}">Restored</option>
-                            <option value="SKIPPED" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'SKIPPED'}">Skipped</option>
+                            <option value="ORIGINAL" th:selected="${prevRestorationStatus == null || prevRestorationStatus.toString() == 'ORIGINAL'}">Ảnh gốc</option>
+                            <option value="PROCESSING" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'PROCESSING'}">Đang xử lý</option>
+                            <option value="RESTORED" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'RESTORED'}">Đã phục hồi</option>
+                            <option value="SKIPPED" th:selected="${prevRestorationStatus != null && prevRestorationStatus.toString() == 'SKIPPED'}">Bỏ qua</option>
                         </select>
                     </label>
 
-                    <button class="button button-primary" type="submit">Upload to vault</button>
+                    <button class="button button-primary" type="submit">Tải lên kho ảnh</button>
                 </form>
             </div>
 
             <div class="stack" data-reveal>
                 <div class="stack-card">
-                    <p class="story-card__label">Photo states</p>
-                    <p class="muted-text" style="margin: 0;">Track originals, restored assets, and skipped items from the same workspace.</p>
+                    <p class="story-card__label">Trạng thái ảnh</p>
+                    <p class="muted-text" style="margin: 0;">Theo dõi ảnh gốc, ảnh đã phục hồi và ảnh bỏ qua ngay trong cùng một workspace.</p>
                 </div>
                 <div class="stack-card">
-                    <p class="story-card__label">Storage path</p>
+                    <p class="story-card__label">Đường lưu trữ</p>
                     <p class="muted-text" style="margin: 0;">
-                        Files are saved locally under <strong>uploads/project-<span th:text="${project.id}">1</span></strong>
-                        for this development build.
+                        Tệp được lưu cục bộ trong <strong>uploads/project-<span th:text="${project.id}">1</span></strong>
+                        cho bản phát triển này.
                     </p>
                 </div>
-                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Publishing handoff</a>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Bàn giao xuất bản</a>
             </div>
         </section>
 
         <section class="stats-row" data-reveal>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${photos.size()}">0</p>
-                <p class="stat-label">Total photos</p>
+                <p class="stat-label">Tổng số ảnh</p>
             </div>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).RESTORED] ?: 0}">0</p>
-                <p class="stat-label">Restored</p>
+                <p class="stat-label">Đã phục hồi</p>
             </div>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).PROCESSING] ?: 0}">0</p>
-                <p class="stat-label">Processing</p>
+                <p class="stat-label">Đang xử lý</p>
             </div>
             <div class="stat-card glass-card">
                 <p class="stat-number" th:text="${photoCounts[T(com.goldenmemories.model.PhotoAsset.RestorationStatus).ORIGINAL] ?: 0}">0</p>
-                <p class="stat-label">Originals</p>
+                <p class="stat-label">Ảnh gốc</p>
             </div>
         </section>
 
         <div class="alert alert-info" data-reveal style="margin-top: 24px;">
-            <strong>Phase 4 starter:</strong>
-            This screen is now the dedicated place for photo preparation before final export and archive handoff.
+            <strong>Bước khởi đầu của giai đoạn 4:</strong>
+            Màn hình này là nơi chuyên để chuẩn bị ảnh trước khi xuất bản và bàn giao lưu trữ cuối cùng.
         </div>
 
         <section class="card-grid" data-reveal>
             <div class="info-card info-card--muted">
-                <h3>Upload queue</h3>
-                <p>Photo upload UI is the next backend slice to add. The data model is already ready.</p>
+                <h3>Hàng chờ tải lên</h3>
+                <p>Giao diện tải ảnh là lát cắt backend tiếp theo cần thêm. Mô hình dữ liệu đã sẵn sàng.</p>
             </div>
             <div class="info-card info-card--muted">
-                <h3>Restoration flow</h3>
-                <p>Images can later move from original to processing to restored once the service lands.</p>
+                <h3>Luồng phục hồi</h3>
+                <p>Ảnh có thể đi từ gốc sang đang xử lý rồi đến đã phục hồi khi dịch vụ sẵn sàng.</p>
             </div>
             <div class="info-card info-card--muted">
-                <h3>Chapter tagging</h3>
-                <p>Use the chapter tag to map each photo to the right memory segment or life stage.</p>
+                <h3>Gắn chương mục</h3>
+                <p>Dùng thẻ chương mục để ghép từng ảnh vào đúng mảng ký ức hoặc giai đoạn đời.</p>
             </div>
         </section>
 
         <section class="stack" style="margin-top: 26px;" data-reveal>
             <div class="section-heading">
-                <p class="eyebrow-dark">Photo list</p>
-                <h2 th:text="${#lists.isEmpty(photos)} ? 'No photos uploaded yet' : 'Photos ready for memoir layout'">Photos</h2>
+                <p class="eyebrow-dark">Danh sách ảnh</p>
+                <h2 th:text="${#lists.isEmpty(photos)} ? 'Chưa có ảnh nào được tải lên' : 'Ảnh sẵn sàng cho bố cục hồi ký'">Photos</h2>
             </div>
 
             <div th:if="${#lists.isEmpty(photos)}" class="empty-card">
-                <p class="eyebrow-dark">Empty vault</p>
-                <h2 style="margin-top: 8px;">No photos uploaded yet.</h2>
-                <p class="muted-text">This is the right place for the next phase-4 backend slice: a simple upload form and storage path capture.</p>
+                <p class="eyebrow-dark">Kho trống</p>
+                <h2 style="margin-top: 8px;">Chưa có ảnh nào được tải lên.</h2>
+                <p class="muted-text">Đây là nơi phù hợp cho lát cắt backend tiếp theo của giai đoạn 4: form upload đơn giản và lưu đường dẫn ảnh.</p>
             </div>
 
             <article class="stack-card" th:each="photo : ${photos}">
                 <div class="photo-card-content">
                     <div class="photo-thumbnails">
                         <div class="photo-thumbnail-wrapper">
-                            <span class="thumbnail-badge">Original</span>
+                            <span class="thumbnail-badge">Ảnh gốc</span>
                             <img class="photo-thumbnail" th:src="@{/{path}(path=${photo.storagePath})}" alt="Original photo" />
                         </div>
                         <div class="photo-thumbnail-wrapper" th:if="${photo.restoredStoragePath != null}">
-                            <span class="thumbnail-badge restored">Restored</span>
+                            <span class="thumbnail-badge restored">Đã phục hồi</span>
                             <img class="photo-thumbnail" th:src="@{/{path}(path=${photo.restoredStoragePath})}" alt="Restored photo" />
                         </div>
                     </div>
@@ -163,7 +162,7 @@
                         <div class="story-card__top" style="padding: 0; margin-bottom: 8px;">
                             <div>
                                 <p class="story-card__label" th:text="${photo.originalFilename}">filename</p>
-                                <h3 th:text="${photo.caption} ?: 'Untitled photo'" style="margin: 4px 0 0;">Untitled photo</h3>
+                                <h3 th:text="${photo.caption} ?: 'Ảnh chưa đặt tên'" style="margin: 4px 0 0;">Ảnh chưa đặt tên</h3>
                             </div>
                             <div class="story-card__badges">
                                 <span class="badge" th:text="${photo.restorationStatus}">ORIGINAL</span>
@@ -171,35 +170,35 @@
                             </div>
                         </div>
                         <p class="muted-text" style="margin: 0 0 4px;">
-                            Stored at <span th:text="${photo.storagePath}">path</span>
+                            Được lưu tại <span th:text="${photo.storagePath}">path</span>
                         </p>
                         <p class="muted-text" th:if="${photo.restoredStoragePath != null}" style="margin: 0 0 8px;">
-                            Restored asset: <span th:text="${photo.restoredStoragePath}">restored path</span>
+                            Bản phục hồi: <span th:text="${photo.restoredStoragePath}">restored path</span>
                         </p>
                         <div class="story-card__actions" style="margin-top: auto; padding-top: 8px;">
                             <form class="inline-form photo-status-form"
                                   th:action="@{/project/__${project.id}__/media/__${photo.id}__/status}"
                                   method="post">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                <label class="sr-only" th:for="'status-' + ${photo.id}">Restoration status</label>
+                                <label class="sr-only" th:for="'status-' + ${photo.id}">Trạng thái phục hồi</label>
                                 <select th:id="'status-' + ${photo.id}" name="restorationStatus" style="padding: 4px 8px; font-size: 0.85rem;">
                                     <option th:each="status : ${T(com.goldenmemories.model.PhotoAsset.RestorationStatus).values()}"
                                             th:value="${status}"
                                             th:text="${status}"
                                             th:selected="${status == photo.restorationStatus}">ORIGINAL</option>
                                 </select>
-                                <button class="button button-secondary btn-sm" type="submit">Save status</button>
+                                <button class="button button-secondary btn-sm" type="submit">Lưu trạng thái</button>
                             </form>
 
                             <a class="button button-secondary btn-sm"
-                               th:href="@{/project/__${project.id}__/media/__${photo.id}__/edit}">Edit details</a>
+                               th:href="@{/project/__${project.id}__/media/__${photo.id}__/edit}">Sửa chi tiết</a>
 
                             <form class="inline-form"
                                   th:action="@{/project/__${project.id}__/media/__${photo.id}__/delete}"
                                   method="post"
-                                  onsubmit="return confirm('Delete this photo from the vault?');">
+                                  onsubmit="return confirm('Xóa ảnh này khỏi kho?');">
                                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                                <button class="button button-secondary btn-sm" type="submit">Delete</button>
+                                <button class="button button-secondary btn-sm" type="submit">Xóa</button>
                             </form>
                         </div>
                     </div>

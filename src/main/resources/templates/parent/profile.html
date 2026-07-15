@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Parent Profile | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Hồ sơ phụ huynh | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
             <p class="eyebrow-dark">
-                <a th:href="@{/dashboard}">Dashboard</a> &rsaquo; Parent profile
+                <a th:href="@{/dashboard}">Bảng điều khiển</a> &rsaquo; Hồ sơ phụ huynh
             </p>
-            <h1 th:text="${hasProfile} ? 'Keep the family contact record up to date.' : 'Set up the parent profile.'">
-                Parent profile
+            <h1 th:text="${hasProfile} ? 'Cập nhật thông tin liên hệ gia đình.' : 'Thiết lập hồ sơ phụ huynh.'">
+                Hồ sơ phụ huynh
             </h1>
             <p class="hero-lead">
-                This is the person whose memories you are preserving. Their contact details guide the prompt and reminder flow.
+                Đây là người có những ký ức mà bạn đang gìn giữ. Thông tin liên hệ của họ sẽ dẫn dắt luồng câu hỏi và nhắc việc.
             </p>
             <ul class="auth-copy-list">
-                <li>Use the parent profile to keep the Zalo contact and backup phone in one place.</li>
-                <li>Notes can capture the best call window, tone, or language preferences.</li>
-                <li>The dashboard can point back here whenever a project needs contact details.</li>
+                <li>Dùng hồ sơ phụ huynh để lưu Zalo và số điện thoại dự phòng ở một nơi.</li>
+                <li>Ghi chú có thể bao gồm khung giờ gọi phù hợp, giọng điệu hoặc sở thích ngôn ngữ.</li>
+                <li>Bảng điều khiển có thể quay lại đây bất cứ khi nào dự án cần thông tin liên hệ.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel wide" data-reveal>
-            <p class="eyebrow-dark">Family record</p>
-            <h1 th:text="${hasProfile} ? 'Edit parent profile' : 'Set up parent profile'">Parent profile</h1>
+            <p class="eyebrow-dark">Hồ sơ gia đình</p>
+            <h1 th:text="${hasProfile} ? 'Sửa hồ sơ phụ huynh' : 'Thiết lập hồ sơ phụ huynh'">Hồ sơ phụ huynh</h1>
             <p class="lead" style="margin-top: 6px;">
-                This is the person whose memories you are preserving. Their Zalo contact is used to send story prompts.
+                Đây là người có những ký ức mà bạn đang gìn giữ. Zalo của họ sẽ được dùng để gửi các câu hỏi gợi mở.
             </p>
 
             <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
 
             <div class="profile-summary" th:if="${hasProfile}">
-                <p class="story-card__label">Current profile</p>
+                <p class="story-card__label">Hồ sơ hiện tại</p>
                 <div class="profile-summary__grid">
                     <div>
-                        <span class="profile-summary__label">Name</span>
+                        <span class="profile-summary__label">Tên</span>
                         <strong th:text="${parentProfileForm.parentName}">Parent name</strong>
                     </div>
                     <div>
-                        <span class="profile-summary__label">Relation</span>
+                        <span class="profile-summary__label">Quan hệ</span>
                         <strong th:text="${parentProfileForm.relation}">Relation</strong>
                     </div>
                 </div>
@@ -50,42 +50,42 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label>
-                    Parent's full name
-                    <input type="text" th:field="*{parentName}" placeholder="e.g. Nguyen Thi Hoa"
+                    Họ và tên phụ huynh
+                    <input type="text" th:field="*{parentName}" placeholder="Ví dụ: Nguyễn Thị Hoa"
                            th:classappend="${#fields.hasErrors('parentName')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('parentName')}"
                           th:errors="*{parentName}"></span>
                 </label>
 
                 <label>
-                    Relation
-                    <input type="text" th:field="*{relation}" placeholder="e.g. Mother, Father, Grandmother"
+                    Mối quan hệ
+                    <input type="text" th:field="*{relation}" placeholder="Ví dụ: Mẹ, Bố, Bà"
                            th:classappend="${#fields.hasErrors('relation')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('relation')}"
                           th:errors="*{relation}"></span>
                 </label>
 
                 <label>
-                    Zalo contact
-                    <input type="text" th:field="*{zaloContact}" placeholder="Zalo phone number or ID" />
+                    Zalo liên hệ
+                    <input type="text" th:field="*{zaloContact}" placeholder="Số điện thoại hoặc ID Zalo" />
                 </label>
 
                 <label>
-                    Additional phone
-                    <input type="text" th:field="*{additionalPhone}" placeholder="Optional backup number" />
+                    Số điện thoại phụ
+                    <input type="text" th:field="*{additionalPhone}" placeholder="Số dự phòng nếu cần" />
                 </label>
 
                 <label>
-                    Notes
+                    Ghi chú
                     <textarea th:field="*{notes}" rows="4"
-                              placeholder="Language preference, health notes, best contact time..."></textarea>
+                              placeholder="Sở thích ngôn ngữ, tình trạng sức khỏe, khung giờ gọi phù hợp..."></textarea>
                 </label>
 
-                <button class="button button-primary" type="submit">Save profile</button>
+                <button class="button button-primary" type="submit">Lưu hồ sơ</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/dashboard}">Back to dashboard</a>
+                <a th:href="@{/dashboard}">Quay lại bảng điều khiển</a>
             </div>
         </section>
     </main>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('Error | Ký Ức Vàng')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Lỗi | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -8,49 +8,49 @@
     <main class="error-page">
         <section class="error-shell container" data-reveal>
             <div class="error-copy">
-                <p class="eyebrow-dark">Something went wrong</p>
-                <h1 th:text="${status != null ? status : 'Error'}">Error</h1>
-                <p class="error-lead" th:text="${error != null ? error : 'We could not complete this request.'}">
-                    We could not complete this request.
+                <p class="eyebrow-dark">Đã xảy ra lỗi</p>
+                <h1 th:text="${status != null ? status : 'Lỗi'}">Lỗi</h1>
+                <p class="error-lead" th:text="${error != null ? error : 'Chúng tôi chưa thể hoàn tất yêu cầu này.'}">
+                    Chúng tôi chưa thể hoàn tất yêu cầu này.
                 </p>
                 <p class="error-body">
-                    The app is still available. You can go back to the home page, continue to sign in,
-                    or open the consultation form to keep moving.
+                    Hệ thống vẫn đang hoạt động. Bạn có thể quay về trang chủ, tiếp tục đăng nhập,
+                    hoặc mở form tư vấn để đi tiếp.
                 </p>
 
                 <div class="hero-actions">
-                    <a class="button button-primary" th:href="@{/}">Back to home</a>
-                    <a class="button button-secondary" th:href="@{/login}">Go to login</a>
+                    <a class="button button-primary" th:href="@{/}">Về trang chủ</a>
+                    <a class="button button-secondary" th:href="@{/login}">Đến trang đăng nhập</a>
                 </div>
 
                 <div class="error-links">
-                    <a th:href="@{/contact}">Consultation</a>
-                    <a th:href="@{/product}">Product scope</a>
-                    <a th:href="@{/process}">Screen flow</a>
+                    <a th:href="@{/contact}">Nhận tư vấn</a>
+                    <a th:href="@{/product}">Phạm vi sản phẩm</a>
+                    <a th:href="@{/process}">Luồng màn hình</a>
                 </div>
             </div>
 
             <aside class="error-panel">
-                <div class="hero-panel__badge">Error details</div>
-                <h2>What we know</h2>
+                <div class="hero-panel__badge">Chi tiết lỗi</div>
+                <h2>Những gì hệ thống ghi nhận</h2>
                 <dl class="error-meta">
                     <div>
-                        <dt>Status</dt>
+                        <dt>Mã trạng thái</dt>
                         <dd th:text="${status != null ? status : 'Unknown'}">Unknown</dd>
                     </div>
                     <div>
-                        <dt>Path</dt>
+                        <dt>Đường dẫn</dt>
                         <dd th:text="${path != null ? path : '/'}">/</dd>
                     </div>
                     <div>
-                        <dt>Message</dt>
-                        <dd th:text="${message != null and !#strings.isEmpty(message) ? message : 'No additional details were provided.'}">
-                            No additional details were provided.
+                        <dt>Thông báo</dt>
+                        <dd th:text="${message != null and !#strings.isEmpty(message) ? message : 'Chưa có thêm chi tiết nào được cung cấp.'}">
+                            Chưa có thêm chi tiết nào được cung cấp.
                         </dd>
                     </div>
                     <div>
-                        <dt>Next step</dt>
-                        <dd>Retry the page, then continue through login or consultation.</dd>
+                        <dt>Bước tiếp theo</dt>
+                        <dd>Thử tải lại trang, sau đó tiếp tục đăng nhập hoặc gửi yêu cầu tư vấn.</dd>
                     </div>
                 </dl>
             </aside>

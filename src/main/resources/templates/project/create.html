@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/head :: head('New Project | Ky Uc Vang')}"></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Dự án mới | Ký Ức Vàng')}"></head>
 <body>
 <div class="page-shell">
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <main class="auth-layout auth-layout--split">
         <section class="auth-intro" data-reveal>
-            <p class="eyebrow-dark">Start a memoir</p>
-            <h1>Create the workspace for one family story.</h1>
+            <p class="eyebrow-dark">Bắt đầu hồi ký</p>
+            <h1>Tạo không gian làm việc cho một câu chuyện gia đình.</h1>
             <p class="hero-lead">
-                Choose a package, add the project title, and open the full memoir flow from onboarding to final review.
+                Chọn gói dịch vụ, đặt tên dự án và mở toàn bộ luồng hồi ký từ onboarding đến duyệt cuối cùng.
             </p>
             <ul class="auth-copy-list">
-                <li>The project becomes the container for prompts, transcripts, edits, and approvals.</li>
-                <li>Standard is the default recommended path for a complete printed memoir.</li>
-                <li>You can expand the archive later with photos and additional story branches.</li>
+                <li>Dự án sẽ là nơi chứa câu hỏi gợi mở, bản chép, chỉnh sửa và phê duyệt.</li>
+                <li>Gói Standard là lộ trình khuyến nghị cho một cuốn hồi ký in đầy đủ.</li>
+                <li>Bạn có thể mở rộng kho lưu trữ bằng ảnh và các nhánh câu chuyện sau này.</li>
             </ul>
         </section>
 
         <section class="auth-card auth-card--panel wide" data-reveal>
-            <p class="eyebrow-dark">Project setup</p>
-            <h1>Create a project</h1>
+            <p class="eyebrow-dark">Thiết lập dự án</p>
+            <h1>Tạo dự án</h1>
 
             <form th:action="@{/project/new}" method="post"
                   th:object="${projectForm}" class="form-stack">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label>
-                    Project title
+                    Tên dự án
                     <input type="text" th:field="*{title}"
-                           placeholder="e.g. Mother's Life Story"
+                           placeholder="Ví dụ: Câu chuyện cuộc đời của mẹ"
                            th:classappend="${#fields.hasErrors('title')} ? 'input-error'" />
                     <span class="field-error" th:if="${#fields.hasErrors('title')}"
                           th:errors="*{title}"></span>
                 </label>
 
                 <fieldset class="package-fieldset">
-                    <legend>Choose a package</legend>
+                    <legend>Chọn gói dịch vụ</legend>
                     <div class="package-grid">
                         <label th:each="pkg : ${packages}"
                                class="package-option"
                                th:classappend="${pkg.name() == 'STANDARD'} ? 'package-option--featured'">
                             <input type="radio" th:field="*{selectedPackage}" th:value="${pkg}" />
-                            <span class="package-name" th:text="${pkg.name()}">PACKAGE</span>
+                            <span class="package-name" th:text="${pkg.name()}">Gói</span>
                             <span class="package-desc" th:switch="${pkg.name()}">
-                                <span th:case="'BASIC'">Core story collection and a softcover memoir.</span>
-                                <span th:case="'STANDARD'">Full editing, photo restoration, and hardcover print.</span>
-                                <span th:case="'PREMIUM'">Everything plus QR archive and priority delivery.</span>
+                                <span th:case="'BASIC'">Thu thập câu chuyện cốt lõi và bản hồi ký bìa mềm.</span>
+                                <span th:case="'STANDARD'">Biên tập đầy đủ, phục hồi ảnh và in bìa cứng.</span>
+                                <span th:case="'PREMIUM'">Bao gồm thêm kho QR và ưu tiên bàn giao.</span>
                             </span>
                         </label>
                     </div>
@@ -54,11 +54,11 @@
                           th:errors="*{selectedPackage}"></span>
                 </fieldset>
 
-                <button class="button button-primary" type="submit">Create project</button>
+                <button class="button button-primary" type="submit">Tạo dự án</button>
             </form>
 
             <div class="auth-links">
-                <a th:href="@{/dashboard}">Back to dashboard</a>
+                <a th:href="@{/dashboard}">Quay lại bảng điều khiển</a>
             </div>
         </section>
     </main>
