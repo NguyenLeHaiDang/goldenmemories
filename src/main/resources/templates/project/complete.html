@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Tổng kết dự án | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page">
+        <section class="content-hero dashboard-hero" data-reveal>
+            <div>
+                <p class="eyebrow-dark">
+                    <a th:href="@{/project/__${project.id}__}">Dự án</a> &rsaquo; Tổng kết
+                </p>
+                <h1>Dự án đã hoàn tất</h1>
+                <p class="lead">
+                    Cuốn hồi ký <span th:text="${project.title}">Tiêu đề</span> đã được duyệt, hoàn thiện và bàn giao.
+                    Từ đây, gia đình có thể xem lại kết quả cuối cùng, tải dữ liệu cần thiết hoặc quay về bảng điều khiển.
+                </p>
+            </div>
+            <div class="stack" style="min-width: min(300px, 100%);">
+                <div class="stack-card">
+                    <p class="story-card__label">Trạng thái</p>
+                    <h3 style="margin-bottom: 6px; color: var(--gold-dark);">Đã hoàn thành</h3>
+                    <p class="muted-text" style="margin: 0;">
+                        Hồ sơ dự án đã được khóa lại để lưu trữ an toàn.
+                    </p>
+                </div>
+                <a class="button button-primary" th:href="@{/dashboard}">Quay lại bảng điều khiển</a>
+            </div>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
+
+        <section class="stats-row" data-reveal style="margin-bottom: 26px;">
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${storyCount}">0</p>
+                <p class="stat-label">Câu chuyện đã thu thập</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${photoCount}">0</p>
+                <p class="stat-label">Ảnh đã lưu giữ</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${qrProtectedCount}">0</p>
+                <p class="stat-label">Mục có QR bảo mật</p>
+            </div>
+            <div class="stat-card glass-card">
+                <p class="stat-number" th:text="${latestApproval != null ? latestApproval.draftVersion : 'v1'}">v1</p>
+                <p class="stat-label">Bản duyệt gần nhất</p>
+            </div>
+        </section>
+
+        <div class="two-col" style="align-items: start; margin-bottom: 26px;">
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Bàn giao bản in</p>
+                <h2>Thông tin nhà in và giao nhận</h2>
+                <div style="margin-top: 16px; display: grid; gap: 12px;">
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Đối tác in:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.printVendorName != null and !project.printVendorName.isEmpty() ? project.printVendorName : 'Chưa cập nhật'}">Nhà in</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Địa chỉ giao nhận:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.printDeliveryAddress != null and !project.printDeliveryAddress.isEmpty() ? project.printDeliveryAddress : 'Chưa cập nhật'}">Địa chỉ</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Ghi chú thêm:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.printNotes != null and !project.printNotes.isEmpty() ? project.printNotes : 'Không có ghi chú'}">Ghi chú</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Lưu trữ đám mây</p>
+                <h2>Đích lưu trữ an toàn</h2>
+                <div style="margin-top: 16px; display: grid; gap: 12px;">
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Nhà cung cấp:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.archiveProvider != null and !project.archiveProvider.isEmpty() ? project.archiveProvider : 'Chưa cập nhật'}">Drive</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Đường dẫn lưu trữ:</strong>
+                        <p style="margin: 4px 0 0;" th:if="${project.archiveUrl != null and !project.archiveUrl.isEmpty()}">
+                            <a th:href="${project.archiveUrl}" target="_blank" style="color: var(--gold); text-decoration: underline;" th:text="${project.archiveUrl}">Link</a>
+                        </p>
+                        <p style="margin: 4px 0 0;" th:unless="${project.archiveUrl != null and !project.archiveUrl.isEmpty()}">Chưa cập nhật</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Ghi chú lưu trữ:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.archiveNotes != null and !project.archiveNotes.isEmpty() ? project.archiveNotes : 'Không có ghi chú'}">Ghi chú</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="prose-card" style="margin-bottom: 26px;" data-reveal>
+            <p class="eyebrow-dark">QR bảo mật</p>
+            <h2>Các mục câu chuyện đang được bảo vệ</h2>
+            <div style="margin-top: 16px; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border); color: var(--brown-dark); font-weight: 700; font-size: 0.9rem;">
+                            <th style="padding: 12px 8px;">Giai đoạn</th>
+                            <th style="padding: 12px 8px;">Câu hỏi</th>
+                            <th style="padding: 12px 8px;">Trạng thái</th>
+                            <th style="padding: 12px 8px;">Gợi ý truy cập</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="story : ${stories}" style="border-bottom: 1px solid var(--border); font-size: 0.92rem;">
+                            <td style="padding: 12px 8px; font-weight: 700; color: var(--brown-mid);" th:text="${story.lifeStage.name().replace('_',' ')}">Giai đoạn</td>
+                            <td style="padding: 12px 8px; color: var(--text);" th:text="${story.promptQuestion}">Câu hỏi</td>
+                            <td style="padding: 12px 8px;">
+                                <span class="badge" th:classappend="${story.qrProtected} ? 'badge--gold' : ''" th:text="${story.qrProtected ? 'Đã bảo mật' : 'Công khai'}">Công khai</span>
+                            </td>
+                            <td style="padding: 12px 8px; font-style: italic; color: var(--muted);" th:text="${story.qrProtected ? (story.qrHint != null and !story.qrHint.isEmpty() ? story.qrHint : 'Chưa có gợi ý') : '—'}">Gợi ý</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="prose-card accent" data-reveal>
+            <p class="eyebrow-dark">Tải xuống</p>
+            <h2>Nhận lại toàn bộ dữ liệu của dự án</h2>
+            <p class="muted-text" style="margin-bottom: 20px;">
+                Bạn có thể tải các tệp tổng hợp của dự án để lưu giữ riêng hoặc chuyển cho đơn vị in ấn khác khi cần.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                <a class="button button-primary" th:href="@{/project/__${project.id}__/publish/export/manuscript}">
+                    <span>Tải bản thảo Markdown</span>
+                </a>
+                <a class="button button-primary" th:href="@{/project/__${project.id}__/publish/export/images}">
+                    <span>Tải bộ ảnh ZIP</span>
+                </a>
+                <a class="button button-primary" th:href="@{/project/__${project.id}__/publish/export/manifest}">
+                    <span>Tải manifest lưu trữ</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

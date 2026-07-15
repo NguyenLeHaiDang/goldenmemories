@@ -63,6 +63,7 @@ public class PublishingController {
         model.addAttribute("latestApproval", approvalService.latestApproval(project).orElse(null));
         model.addAttribute("photoCount", project.getPhotos().size());
         model.addAttribute("storyCount", project.getStories().size());
+        model.addAttribute("qrProtectedCount", project.getStories().stream().filter(StoryEntry::isQrProtected).count());
         return "project/publish";
     }
 
@@ -120,6 +121,8 @@ public class PublishingController {
         model.addAttribute("project", project);
         model.addAttribute("photoCount", project.getPhotos().size());
         model.addAttribute("storyCount", project.getStories().size());
+        model.addAttribute("stories", project.getStories());
+        model.addAttribute("qrProtectedCount", project.getStories().stream().filter(StoryEntry::isQrProtected).count());
         model.addAttribute("latestApproval", approvalService.latestApproval(project).orElse(null));
         return "project/complete";
     }

@@ -1608,6 +1608,7 @@ main { flex: 1; }
 .badge-warn { background: rgba(192, 57, 43, 0.12); color: #9d2e24; }
 .badge-soon { background: rgba(18, 79, 128, 0.1); color: #124f80; }
 .badge-live { background: rgba(193, 136, 44, 0.16); color: #8b5c12; }
+.badge--gold { background: linear-gradient(135deg, var(--gold-dark), var(--gold-light)); color: var(--white); }
 
 .section-heading {
     padding: 18px 20px;
