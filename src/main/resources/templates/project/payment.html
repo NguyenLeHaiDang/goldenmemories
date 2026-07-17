@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Thanh toán dự án | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page">
+        <section class="content-hero dashboard-hero" data-reveal>
+            <div>
+                <p class="eyebrow-dark">
+                    <a th:href="@{/project/__${project.id}__/publish}">Xuất bản</a> &rsaquo; Thanh toán
+                </p>
+                <h1>Thanh toán qua VNPay</h1>
+                <p class="lead">
+                    Đây là bước chốt chi phí cho gói <span th:text="${project.selectedPackage}">STANDARD</span>.
+                    Sau khi hoàn tất thanh toán, hệ thống sẽ ghi nhận trạng thái và bạn có thể tiếp tục sang bước hoàn thành dự án.
+                </p>
+            </div>
+            <div class="stack" style="min-width: min(320px, 100%);">
+                <div class="stack-card">
+                    <p class="story-card__label">Tạm tính</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${amountLabel}">4.900.000 đ</h3>
+                    <p class="muted-text" style="margin: 0;">Mức giá hiển thị theo gói hiện tại của dự án.</p>
+                </div>
+                <div class="stack-card">
+                    <p class="story-card__label">Trạng thái</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${project.paymentConfirmed ? 'Đã thanh toán' : 'Chờ xác nhận'}">Chờ xác nhận</h3>
+                    <p class="muted-text" style="margin: 0;"
+                       th:text="${project.paymentConfirmed ? 'Thanh toán đã được ghi nhận.' : 'Nhấn nút bên dưới để chuyển sang cổng thanh toán VNPay.'}">
+                        Nhấn nút bên dưới để chuyển sang cổng thanh toán VNPay.
+                    </p>
+                </div>
+                <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish}">Quay lại xuất bản</a>
+            </div>
+        </section>
+
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}" data-reveal></div>
+        <div class="alert alert-info" th:if="${warningMessage}" th:text="${warningMessage}" data-reveal></div>
+
+        <section class="two-col" style="align-items: start; margin-top: 26px;">
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Thông tin đơn hàng</p>
+                <h2>VNPay sẽ xử lý khoản thanh toán này</h2>
+                <ul class="check-list">
+                    <li>Số lượng câu chuyện đã thu thập: <strong th:text="${storyCount}">0</strong></li>
+                    <li>Số ảnh đã chuẩn bị: <strong th:text="${photoCount}">0</strong></li>
+                    <li>Bản thảo mới nhất: <strong th:text="${latestApproval != null ? latestApproval.draftVersion : 'Chưa có'}">Chưa có</strong></li>
+                    <li>Giao dịch thành công sẽ được xác minh bằng chữ ký VNPay và đối chiếu số tiền.</li>
+                </ul>
+
+                <div class="stack-card" style="margin-top: 18px;">
+                    <p class="story-card__label">Lưu ý</p>
+                    <p class="muted-text" style="margin: 0;">
+                        Nếu bạn đang chạy thử trên máy cá nhân, hãy cấu hình `app.vnpay.public-base-url` bằng một địa chỉ public như ngrok để VNPay có thể gọi lại Return và IPN.
+                    </p>
+                </div>
+            </section>
+
+            <section class="auth-card auth-card--panel" data-reveal>
+                <p class="eyebrow">Xác nhận thanh toán</p>
+                <h1>Gửi lệnh thanh toán</h1>
+
+                <div class="alert alert-info" th:if="${!vnpayConfigured}">
+                    VNPay chưa được cấu hình đầy đủ trong `application.properties`.
+                </div>
+
+                <form th:action="@{/project/__${project.id}__/publish/payment/vnpay}" method="post" class="form-stack">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                    <label>
+                        Chọn phương thức tại VNPay
+                        <select name="bankCode">
+                            <option th:each="code : ${bankCodes}"
+                                    th:value="${code}"
+                                    th:text="${code == '' ? 'Để VNPay tự chọn phương thức' : code}">
+                                Để VNPay tự chọn phương thức
+                            </option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Ghi chú thanh toán
+                        <input type="text" name="paymentNote"
+                               placeholder="Ví dụ: Thanh toán gói STANDARD cho dự án gia đình" />
+                    </label>
+
+                    <button class="button button-primary" type="submit" th:disabled="${!vnpayConfigured}">
+                        Thanh toán ngay
+                    </button>
+                </form>
+
+                <div class="auth-links">
+                    <a th:href="@{/project/__${project.id}__/publish}">Quay lại trang xuất bản</a>
+                    <a th:if="${project.paymentConfirmed}" th:href="@{/project/__${project.id}__/publish/export}">Tiếp tục sang xuất gói</a>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

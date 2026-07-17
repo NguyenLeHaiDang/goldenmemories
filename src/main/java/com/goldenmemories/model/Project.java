@@ -85,6 +85,17 @@ public class Project {
     @Column(length = 2000)
     private String archiveNotes;
 
+    // Payment state for the publishing handoff
+    @Column(nullable = false)
+    private boolean paymentConfirmed = false;
+    private String paymentGateway;
+    private String paymentMethod;
+    private String paymentReference;
+    private String paymentTransactionNo;
+    private String paymentResponseCode;
+    private String paymentBankCode;
+    private Instant paymentConfirmedAt;
+
     // ── Convenience ──────────────────────────────────────────────────────────
 
     /** Advance to the next phase. No-op if already COMPLETED. */
@@ -143,4 +154,28 @@ public class Project {
 
     public String getArchiveNotes() { return archiveNotes; }
     public void setArchiveNotes(String archiveNotes) { this.archiveNotes = archiveNotes; }
+
+    public boolean isPaymentConfirmed() { return paymentConfirmed; }
+    public void setPaymentConfirmed(boolean paymentConfirmed) { this.paymentConfirmed = paymentConfirmed; }
+
+    public String getPaymentGateway() { return paymentGateway; }
+    public void setPaymentGateway(String paymentGateway) { this.paymentGateway = paymentGateway; }
+
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public String getPaymentReference() { return paymentReference; }
+    public void setPaymentReference(String paymentReference) { this.paymentReference = paymentReference; }
+
+    public String getPaymentTransactionNo() { return paymentTransactionNo; }
+    public void setPaymentTransactionNo(String paymentTransactionNo) { this.paymentTransactionNo = paymentTransactionNo; }
+
+    public String getPaymentResponseCode() { return paymentResponseCode; }
+    public void setPaymentResponseCode(String paymentResponseCode) { this.paymentResponseCode = paymentResponseCode; }
+
+    public String getPaymentBankCode() { return paymentBankCode; }
+    public void setPaymentBankCode(String paymentBankCode) { this.paymentBankCode = paymentBankCode; }
+
+    public Instant getPaymentConfirmedAt() { return paymentConfirmedAt; }
+    public void setPaymentConfirmedAt(Instant paymentConfirmedAt) { this.paymentConfirmedAt = paymentConfirmedAt; }
 }

@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                     "/otp",
                     "/oauth2/**",
                     "/login/oauth2/**",
+                    "/project/*/publish/payment/**",
                     "/error",
                     "/css/**",
                     "/js/**",

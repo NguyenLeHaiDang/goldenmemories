@@ -91,6 +91,37 @@
                     </div>
                 </div>
             </section>
+
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Thanh toán</p>
+                <h2>Trạng thái ghi nhận</h2>
+                <div style="margin-top: 16px; display: grid; gap: 12px;">
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Trạng thái:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentConfirmed ? 'Đã thanh toán' : 'Chưa thanh toán'}">Đã thanh toán</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Cổng thanh toán:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentGateway != null and !project.paymentGateway.isEmpty() ? project.paymentGateway : 'Chưa cập nhật'}">VNPay</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Phương thức:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentMethod != null and !project.paymentMethod.isEmpty() ? project.paymentMethod : 'Chưa cập nhật'}">Chuyển khoản</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Mã giao dịch:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentReference != null and !project.paymentReference.isEmpty() ? project.paymentReference : 'Không có'}">Không có</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Mã giao dịch VNPay:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentTransactionNo != null and !project.paymentTransactionNo.isEmpty() ? project.paymentTransactionNo : 'Không có'}">Không có</p>
+                    </div>
+                    <div>
+                        <strong style="color: var(--brown-dark); font-size: 0.9rem;">Trạng thái trả về:</strong>
+                        <p style="margin: 4px 0 0;" th:text="${project.paymentResponseCode != null and !project.paymentResponseCode.isEmpty() ? project.paymentResponseCode : 'Không có'}">00</p>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <section class="prose-card" style="margin-bottom: 26px;" data-reveal>

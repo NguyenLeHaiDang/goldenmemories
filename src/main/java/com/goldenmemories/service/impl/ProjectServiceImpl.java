@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.Instant;
 
 @Service
 @Transactional
@@ -55,6 +56,12 @@ public class ProjectServiceImpl implements ProjectService {
     public Optional<Project> findByIdAndOwner(Long projectId, User owner) {
         return projectRepository.findById(projectId)
             .filter(p -> p.getOwner().getId().equals(owner.getId()));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Project> findById(Long projectId) {
+        return projectRepository.findById(projectId);
     }
 
     @Override
@@ -122,6 +129,24 @@ public class ProjectServiceImpl implements ProjectService {
         project.setArchiveUrl(archiveUrl);
         project.setArchiveProvider(archiveProvider);
         project.setArchiveNotes(archiveNotes);
+        return projectRepository.save(project);
+    }
+
+    @Override
+    public Project recordPayment(Project project,
+                                String paymentGateway,
+                                String paymentReference,
+                                String paymentTransactionNo,
+                                String paymentResponseCode,
+                                String paymentBankCode) {
+        project.setPaymentConfirmed(true);
+        project.setPaymentGateway(paymentGateway);
+        project.setPaymentMethod(paymentGateway);
+        project.setPaymentReference(paymentReference);
+        project.setPaymentTransactionNo(paymentTransactionNo);
+        project.setPaymentResponseCode(paymentResponseCode);
+        project.setPaymentBankCode(paymentBankCode);
+        project.setPaymentConfirmedAt(Instant.now());
         return projectRepository.save(project);
     }
 

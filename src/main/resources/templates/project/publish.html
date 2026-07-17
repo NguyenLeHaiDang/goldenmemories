@@ -24,8 +24,17 @@
                         Luồng phê duyệt đã chuyển sang bước bàn giao và chuẩn bị lưu trữ.
                     </p>
                 </div>
+                <div class="stack-card">
+                    <p class="story-card__label">Thanh toán</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${project.paymentConfirmed ? 'Đã ghi nhận' : 'Chờ thanh toán'}">Chờ thanh toán</h3>
+                    <p class="muted-text" style="margin: 0;"
+                       th:text="${project.paymentConfirmed ? 'Bước thanh toán đã hoàn tất và có thể tiếp tục sang hoàn tất dự án.' : 'Hoàn tất thanh toán trước khi chốt dự án và bàn giao.'}">
+                        Hoàn tất thanh toán trước khi chốt dự án và bàn giao.
+                    </p>
+                </div>
                 <a class="button button-secondary" th:href="@{/project/__${project.id}__/media}">Kho ảnh</a>
                 <a class="button button-secondary" th:href="@{/project/__${project.id}__/publish/export}">Mở màn hình xuất gói</a>
+                <a class="button button-secondary" th:if="${!project.paymentConfirmed}" th:href="@{/project/__${project.id}__/publish/payment}">Thanh toán dự án</a>
             </div>
         </section>
 
@@ -60,10 +69,13 @@
                     <li>Chuẩn bị bàn giao in hoặc đích lưu trữ đám mây.</li>
                     <li>Đánh dấu dự án hoàn thành sau khi giao xong.</li>
                 </ul>
-                <form th:if="${project.currentPhase.name() != 'COMPLETED'}" th:action="@{/project/__${project.id}__/publish/complete}" method="post" style="margin-top: 20px;">
+                <form th:if="${project.paymentConfirmed and project.currentPhase.name() != 'COMPLETED'}" th:action="@{/project/__${project.id}__/publish/complete}" method="post" style="margin-top: 20px;">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <button class="button button-primary" type="submit">Đánh dấu hoàn thành</button>
                 </form>
+                <div th:if="${!project.paymentConfirmed and project.currentPhase.name() != 'COMPLETED'}" style="margin-top: 20px;">
+                    <a class="button button-primary" th:href="@{/project/__${project.id}__/publish/payment}">Đi tới thanh toán</a>
+                </div>
                 <div th:if="${project.currentPhase.name() == 'COMPLETED'}" style="margin-top: 20px;">
                     <a class="button button-primary" th:href="@{/project/__${project.id}__/publish/complete}">Xem tổng kết dự án</a>
                 </div>
@@ -100,17 +112,17 @@
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <label>
                         Tên nhà in
-                        <input type="text" name="printVendorName" th:value="${project.printVendorName}" placeholder="Ví dụ: Nhà in Kim Đồng" th:disabled="${project.currentPhase.name() == 'COMPLETED'}" />
+                        <input type="text" name="printVendorName" th:value="${project.printVendorName}" placeholder="Ví dụ: Nhà in Kim Đồng" />
                     </label>
                     <label>
                         Địa chỉ nhận hàng
-                        <input type="text" name="printDeliveryAddress" th:value="${project.printDeliveryAddress}" placeholder="Địa chỉ giao sách" th:disabled="${project.currentPhase.name() == 'COMPLETED'}" />
+                        <input type="text" name="printDeliveryAddress" th:value="${project.printDeliveryAddress}" placeholder="Địa chỉ giao sách" />
                     </label>
                     <label>
                         Ghi chú giao nhận
-                        <textarea name="printNotes" th:text="${project.printNotes}" placeholder="Ghi chú in & giao nhận..." rows="3" th:disabled="${project.currentPhase.name() == 'COMPLETED'}"></textarea>
+                        <textarea name="printNotes" th:text="${project.printNotes}" placeholder="Ghi chú in & giao nhận..." rows="3"></textarea>
                     </label>
-                    <button th:if="${project.currentPhase.name() != 'COMPLETED'}" type="submit" class="button button-primary" style="margin-top: 8px; width: 100%;">Lưu thông tin in</button>
+                    <button type="submit" class="button button-primary" style="margin-top: 8px; width: 100%;">Lưu thông tin in</button>
                 </form>
             </div>
 
@@ -120,17 +132,17 @@
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <label>
                         Nhà cung cấp
-                        <input type="text" name="archiveProvider" th:value="${project.archiveProvider}" placeholder="Ví dụ: Google Drive, Dropbox" th:disabled="${project.currentPhase.name() == 'COMPLETED'}" />
+                        <input type="text" name="archiveProvider" th:value="${project.archiveProvider}" placeholder="Ví dụ: Google Drive, Dropbox" />
                     </label>
                     <label>
                         Đường dẫn thư mục
-                        <input type="url" name="archiveUrl" th:value="${project.archiveUrl}" placeholder="https://drive.google.com/..." th:disabled="${project.currentPhase.name() == 'COMPLETED'}" />
+                        <input type="url" name="archiveUrl" th:value="${project.archiveUrl}" placeholder="https://drive.google.com/..." />
                     </label>
                     <label>
                         Ghi chú lưu trữ
-                        <textarea name="archiveNotes" th:text="${project.archiveNotes}" placeholder="Ghi chú lưu trữ..." rows="3" th:disabled="${project.currentPhase.name() == 'COMPLETED'}"></textarea>
+                        <textarea name="archiveNotes" th:text="${project.archiveNotes}" placeholder="Ghi chú lưu trữ..." rows="3"></textarea>
                     </label>
-                    <button th:if="${project.currentPhase.name() != 'COMPLETED'}" type="submit" class="button button-primary" style="margin-top: 8px; width: 100%;">Lưu lưu trữ</button>
+                    <button type="submit" class="button button-primary" style="margin-top: 8px; width: 100%;">Lưu lưu trữ</button>
                 </form>
             </div>
 

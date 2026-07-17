@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head th:replace="~{fragments/head :: head('Kết quả thanh toán | Ký Ức Vàng')}"></head>
+<body>
+<div class="page-shell">
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <main class="content-page">
+        <section class="content-hero dashboard-hero" data-reveal>
+            <div>
+                <p class="eyebrow-dark">VNPay</p>
+                <h1 th:text="${success ? 'Thanh toán thành công' : 'Thanh toán chưa hoàn tất'}">Thanh toán thành công</h1>
+                <p class="lead" th:text="${message}">
+                    Thanh toán VNPay đã được xác nhận.
+                </p>
+            </div>
+            <div class="stack" style="min-width: min(320px, 100%);">
+                <div class="stack-card">
+                    <p class="story-card__label">Mã tham chiếu</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${txnRef != null and !txnRef.isEmpty() ? txnRef : 'Chưa có'}">Chưa có</h3>
+                    <p class="muted-text" style="margin: 0;">VNPay TxnRef</p>
+                </div>
+                <div class="stack-card">
+                    <p class="story-card__label">Số tiền</p>
+                    <h3 style="margin-bottom: 6px;" th:text="${amountLabel}">4.900.000 đ</h3>
+                    <p class="muted-text" style="margin: 0;">Đối chiếu theo số tiền VNPay trả về.</p>
+                </div>
+                <a class="button button-primary" th:href="@{/project/__${projectId}__/publish}">Về trang xuất bản</a>
+            </div>
+        </section>
+
+        <section class="two-col" style="align-items: start; margin-top: 26px;">
+            <section class="prose-card" data-reveal>
+                <p class="eyebrow-dark">Chi tiết giao dịch</p>
+                <h2>Những gì hệ thống đã ghi nhận</h2>
+                <ul class="check-list">
+                    <li>Mã trạng thái: <strong th:text="${returnStatus}">00</strong></li>
+                    <li>Thông báo: <strong th:text="${responseMessage}">Giao dịch thành công.</strong></li>
+                    <li>Mã giao dịch VNPay: <strong th:text="${transactionNo != null and !transactionNo.isEmpty() ? transactionNo : 'Chưa có'}">Chưa có</strong></li>
+                    <li>Ngân hàng / phương thức: <strong th:text="${bankCode != null and !bankCode.isEmpty() ? bankCode : 'Chưa có'}">Chưa có</strong></li>
+                </ul>
+            </section>
+
+            <section class="auth-card auth-card--panel" data-reveal>
+                <p class="eyebrow">Bước tiếp theo</p>
+                <h1>Tiếp tục luồng xuất bản</h1>
+                <p class="hero-lead">
+                    Khi bạn quay lại màn hình xuất bản, nút hoàn tất sẽ xuất hiện và bạn có thể chốt dự án.
+                </p>
+                <div class="auth-links">
+                    <a th:href="@{/project/__${projectId}__/publish}">Mở trang xuất bản</a>
+                    <a th:if="${project != null}" th:href="@{/project/__${projectId}__/publish/complete}">Xem tổng kết dự án</a>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+</body>
+</html>

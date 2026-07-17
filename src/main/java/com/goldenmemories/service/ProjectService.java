@@ -19,6 +19,9 @@ public interface ProjectService {
     /** Find a project by id, only if it belongs to the given owner. */
     Optional<Project> findByIdAndOwner(Long projectId, User owner);
 
+    /** Find a project by id without owner scoping. Use carefully for signed callbacks. */
+    Optional<Project> findById(Long projectId);
+
     /** Save or update the parent profile for a user. */
     ParentProfile saveParentProfile(User owner, String parentName, String relation,
                                     String zaloContact, String additionalPhone, String notes);
@@ -40,6 +43,14 @@ public interface ProjectService {
 
     /** Save cloud archive details on the project. */
     Project saveArchiveDetails(Project project, String archiveUrl, String archiveProvider, String archiveNotes);
+
+    /** Record a confirmed payment result from the gateway. */
+    Project recordPayment(Project project,
+                          String paymentGateway,
+                          String paymentReference,
+                          String paymentTransactionNo,
+                          String paymentResponseCode,
+                          String paymentBankCode);
 
     /** Mark the project as completed after publishing handoff is finished. */
     Project completeProject(Project project);

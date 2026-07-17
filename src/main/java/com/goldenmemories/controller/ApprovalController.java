@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Controller
 @RequestMapping("/project/{projectId}/approval")
@@ -134,11 +138,13 @@ public class ApprovalController {
 
     private User resolveUser(Object principal) {
         return securityUtils.currentUser(principal)
-            .orElseThrow(() -> new IllegalStateException("User not found"));
+            .orElseThrow(() -> new ResponseStatusException(UNAUTHORIZED,
+                "Bạn cần đăng nhập lại để tiếp tục."));
     }
 
     private Project resolveProject(Long projectId, User user) {
         return projectService.findByIdAndOwner(projectId, user)
-            .orElseThrow(() -> new IllegalArgumentException("Project not found or access denied"));
+            .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
+                "Dự án không tồn tại hoặc bạn không có quyền truy cập."));
     }
 }
